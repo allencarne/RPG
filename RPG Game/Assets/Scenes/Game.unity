@@ -365,9 +365,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: -90
   firePoint: {fileID: 2065340723}
-  punchPrefab: {fileID: 7206372814929114242, guid: 21c5eb3414754644e8cec0d89a20b1cc, type: 3}
-  punchForce: 0.5
-  startShootCoolDown: 0.5
+  slashPrefab: {fileID: 7206372814929114242, guid: 21c5eb3414754644e8cec0d89a20b1cc, type: 3}
+  animator: {fileID: 2069123884}
+  slashForce: 0.5
+  startAttackCoolDown: 0.5
 --- !u!1 &2065340722
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,11 +399,6 @@ Transform:
   m_Father: {fileID: 1163463867}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2069123883 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &2069123884 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7388813305273751383, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
@@ -413,16 +409,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7388813305273751382, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
   m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2069123889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069123883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de57487b74c494146b2f0dccdb4f1d9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 2069123884}
