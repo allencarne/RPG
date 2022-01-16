@@ -368,7 +368,7 @@ MonoBehaviour:
   slashPrefab: {fileID: 7206372814929114242, guid: 21c5eb3414754644e8cec0d89a20b1cc, type: 3}
   animator: {fileID: 2069123884}
   slashForce: 0.5
-  startAttackCoolDown: 0.5
+  startAttackCoolDown: 1
 --- !u!1 &2065340722
 GameObject:
   m_ObjectHideFlags: 0

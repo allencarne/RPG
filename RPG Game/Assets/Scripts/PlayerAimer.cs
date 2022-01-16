@@ -28,6 +28,8 @@ public class PlayerAimer : MonoBehaviour
             {
                 Attack();
                 attackCoolDown = startAttackCoolDown;
+                animator.SetFloat("Aim Horizontal", difference.x);
+                animator.SetFloat("Aim Vertical", difference.y);
             }
         }
         else
@@ -38,8 +40,8 @@ public class PlayerAimer : MonoBehaviour
 
     void Attack()
     {
-        GameObject punch = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = punch.GetComponent<Rigidbody2D>();
+        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
         animator.SetTrigger("Attack");
     }
