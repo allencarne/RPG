@@ -40,7 +40,7 @@ public class PlayerAimer : MonoBehaviour
 
     void Attack()
     {
-        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation); ;
         Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
         animator.SetTrigger("Attack");
