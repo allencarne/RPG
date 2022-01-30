@@ -123,6 +123,25 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &403048844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 223093394745644878, guid: 719dea309e33f7245a986b5c4fac20f9, type: 3}
+  m_PrefabInstance: {fileID: 5619644504155038274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &403048848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403048844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fe1622f1a9f2e4eaf440f30db27d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 5000
+  offset: -11
 --- !u!1001 &479851453
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -135,8 +154,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7388813305273751381, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_SortingLayer
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388813305273751381, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388813305273751381, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1834480013
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388813305273751381, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7388813305273751382, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_RootOrder
@@ -671,8 +702,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1717561531
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -2619,6 +2650,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0053669964, y: -0.37633756}
   m_Size: {x: 0.43808967, y: 0.3286694}
   m_Direction: 1
+--- !u!114 &1854658176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1854658171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fe1622f1a9f2e4eaf440f30db27d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 5000
+  offset: -10
 --- !u!1 &2065340722
 GameObject:
   m_ObjectHideFlags: 0
