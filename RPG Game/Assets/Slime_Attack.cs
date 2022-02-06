@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class Slime_Attack : StateMachineBehaviour
 {
+    Transform player;
     Rigidbody2D rb;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetFloat("Horizontal", rb.position.x);
-        animator.SetFloat("Vertical", rb.position.y);
+        animator.SetFloat("Horizontal",(player.position.x - rb.position.x));
+        animator.SetFloat("Vertical", (player.position.y - rb.position.y));
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
