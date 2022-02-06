@@ -98,10 +98,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: -90
   firePoint: {fileID: 2065340723}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  animator: {fileID: 7388813305273751383}
-  slashForce: 0.5
-  startAttackCoolDown: 1
 --- !u!1 &2065340722
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +142,7 @@ GameObject:
   - component: {fileID: 7388813305273751379}
   - component: {fileID: 7388813305273751383}
   - component: {fileID: 1854658175}
+  - component: {fileID: 1854658176}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -290,3 +287,17 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0053669964, y: -0.37633756}
   m_Size: {x: 0.43808967, y: 0.3286694}
   m_Direction: 1
+--- !u!114 &1854658176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388813305273751378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50fe1622f1a9f2e4eaf440f30db27d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 5000
+  offset: -10
