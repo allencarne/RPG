@@ -317,11 +317,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &749237391 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2065340723, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &971206695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2667,33 +2662,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1854658171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1854658172 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751383, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1854658175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854658171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe65962c81c24074fb66218dfea72df5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 749237391}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  animator: {fileID: 1854658172}
-  slashForce: 1
-  startAttackCoolDown: 1
 --- !u!1 &1988189985
 GameObject:
   m_ObjectHideFlags: 0
