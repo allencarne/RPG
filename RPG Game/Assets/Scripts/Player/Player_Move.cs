@@ -39,18 +39,12 @@ public class Player_Move : StateMachineBehaviour
         {
             animator.SetBool("isMoving", false);
         }
-
-        // Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("Attack");
-        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.ResetTrigger("Attack");
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
