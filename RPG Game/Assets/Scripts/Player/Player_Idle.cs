@@ -13,16 +13,16 @@ public class Player_Idle : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // Attack
+        if (Input.GetMouseButton(0))
+        {
+            animator.SetTrigger("Attack");
+        }
+
         // if a key is pressed set isMoving to true
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isMoving", true);
-        }
-
-        // Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            animator.SetTrigger("Attack");
         }
     }
 

@@ -13,8 +13,8 @@ public class Slash : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        Destroy(effect, 0.3f);
-        Destroy(gameObject);
+        //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+        //Destroy(effect, 0.3f);
+        //Destroy(gameObject);
     }
 }

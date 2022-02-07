@@ -13,7 +13,6 @@ public class PlayerCombat : MonoBehaviour
     //private float attackCoolDown;
     //public float startAttackCoolDown;
 
-    // Update is called once per frame
     void Update()
     {
 
