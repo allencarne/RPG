@@ -34,16 +34,23 @@ public class Player_Move : StateMachineBehaviour
         }
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        if (!Input.GetKey(KeyCode.W) && (!Input.GetKey(KeyCode.A)) && (!Input.GetKey(KeyCode.S)) && (!Input.GetKey(KeyCode.D)))
+        // If no key is pressed set isMoving to false
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             animator.SetBool("isMoving", false);
+        }
+
+        // Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            animator.SetTrigger("Attack");
         }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        animator.ResetTrigger("Attack");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
