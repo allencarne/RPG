@@ -15,7 +15,7 @@ public class Slash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             Debug.Log("Hit");
             other.GetComponent<Enemy>().TakeDamage(attackDamage);

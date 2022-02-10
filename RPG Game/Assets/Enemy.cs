@@ -35,13 +35,12 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy Died");
-
         // Die animation
         animator.SetBool("isDead", true);
 
         // Disable the enemy
         GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+        Destroy(gameObject, 2f);
+        //this.enabled = false;
     }
 }
