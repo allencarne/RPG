@@ -11,11 +11,12 @@ public class Slash : MonoBehaviour
         //Destroy(gameObject, 0.5f);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
         //Destroy(effect, 0.3f);
         //Destroy(gameObject);
+        Debug.Log("Hit");
     }
 
     public void DestroyAfterAnimation()

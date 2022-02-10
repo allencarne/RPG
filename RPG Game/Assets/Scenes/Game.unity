@@ -2645,6 +2645,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: m_AngularDrag
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_RootOrder
       value: 5
