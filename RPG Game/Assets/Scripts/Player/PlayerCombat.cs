@@ -9,6 +9,7 @@ public class PlayerCombat : MonoBehaviour
     public Animator animator;
 
     public float slashForce;
+    public float attackRange;
 
     //private float attackCoolDown;
     //public float startAttackCoolDown;
@@ -22,6 +23,8 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack");
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
+
+            // If mouse is inside attack range - attack - else - move player in attack direction
         }
     }
 

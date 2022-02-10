@@ -8,18 +8,22 @@ public class Slash : MonoBehaviour
 
     public int attackDamage = 1;
 
-    void Update()
-    {
-        //Destroy(gameObject, 0.5f);
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
         {
-            Debug.Log("Hit");
+            // Hit Effect
+            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Destroy(effect, .3f);
+
+            // Deal Damage
             other.GetComponent<Enemy>().TakeDamage(attackDamage);
 
+            // Apply Knockback
+            Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
+            Vector2 difference = enemy.transform.position - transform.position;
+            difference = difference.normalized * 3;
+            enemy.AddForce(difference, ForceMode2D.Impulse);
         }
     }
 
