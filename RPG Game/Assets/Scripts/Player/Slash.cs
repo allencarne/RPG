@@ -6,6 +6,8 @@ public class Slash : MonoBehaviour
 {
     public GameObject hitEffect;
 
+    public int attackDamage = 1;
+
     void Update()
     {
         //Destroy(gameObject, 0.5f);
@@ -13,10 +15,12 @@ public class Slash : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
-        //Destroy(effect, 0.3f);
-        //Destroy(gameObject);
-        Debug.Log("Hit");
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Hit");
+            other.GetComponent<Enemy>().TakeDamage(attackDamage);
+
+        }
     }
 
     public void DestroyAfterAnimation()

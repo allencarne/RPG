@@ -317,6 +317,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &658640461 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+  m_PrefabInstance: {fileID: 5373405154017961793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &658640464 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5373405154731565597, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+  m_PrefabInstance: {fileID: 5373405154017961793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &658640467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658640461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7a5a89fbc842147be24ea3d41035ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 658640464}
+  maxHealth: 3
 --- !u!1 &971206695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,20 +2666,8 @@ PrefabInstance:
       value: OldSlime
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: m_LinearDrag
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: m_AngularDrag
-      value: 2
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_RootOrder
