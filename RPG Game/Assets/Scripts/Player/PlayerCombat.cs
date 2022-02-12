@@ -19,6 +19,7 @@ public class PlayerCombat : MonoBehaviour
     void Update()
     {
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
         // Attack
         if (Input.GetMouseButtonDown(0))
         {
