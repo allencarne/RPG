@@ -141,6 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 1283847226239369567, guid: ec5906272687106429814c6bdfcd97a5, type: 3}
   attackDamage: 1
+  knockBackForce: 3
 --- !u!114 &2780061949572125383
 MonoBehaviour:
   m_ObjectHideFlags: 0

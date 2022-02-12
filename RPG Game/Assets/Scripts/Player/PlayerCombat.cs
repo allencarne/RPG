@@ -7,9 +7,11 @@ public class PlayerCombat : MonoBehaviour
     public Transform firePoint;
     public GameObject slashPrefab;
     public Animator animator;
+    public Rigidbody2D rb;
 
     public float slashForce;
     public float attackRange;
+    public float attackMoveDistance;
 
     //private float attackCoolDown;
     //public float startAttackCoolDown;
@@ -23,6 +25,10 @@ public class PlayerCombat : MonoBehaviour
             animator.SetTrigger("Attack");
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
+
+            // Move in attack direction
+            difference = difference.normalized * attackMoveDistance;
+            rb.AddForce(difference, ForceMode2D.Impulse);
         }
 
         // If mouse is inside attack range - attack - else - move player in attack direction

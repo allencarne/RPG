@@ -7,6 +7,7 @@ public class Slash : MonoBehaviour
     public GameObject hitEffect;
 
     public int attackDamage = 1;
+    [SerializeField] private float knockBackForce;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,7 +23,7 @@ public class Slash : MonoBehaviour
             // Apply Knockback
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Vector2 difference = enemy.transform.position - transform.position;
-            difference = difference.normalized * 3;
+            difference = difference.normalized * knockBackForce;
             enemy.AddForce(difference, ForceMode2D.Impulse);
         }
     }
