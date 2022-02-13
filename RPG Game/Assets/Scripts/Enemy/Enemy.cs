@@ -44,8 +44,9 @@ public class Enemy : MonoBehaviour
         animator.SetBool("isDead", true);
 
         // Disable the enemy
+        healthBar.gameObject.SetActive(false);
         GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 5f);
         //this.enabled = false;
     }
 }
