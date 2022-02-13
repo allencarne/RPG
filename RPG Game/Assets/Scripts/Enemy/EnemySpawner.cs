@@ -9,12 +9,23 @@ public class EnemySpawner : MonoBehaviour
     public Vector3 spawnBox;
     private float xPos;
     private float yPos;
+    public int enemyCount;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
+        StartCoroutine(EnemySpawn());
+    }
+
+    IEnumerator EnemySpawn()
+    {
+        while (enemyCount < 10)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(0.01f);
+            enemyCount += 1;
+        }
     }
 
     private void SpawnEnemy()
