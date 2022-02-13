@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy()
+    public void SpawnEnemy()
     {
         xPos = Random.Range(-spawnBox.x, spawnBox.x);
         yPos = Random.Range(-spawnBox.y, spawnBox.y);

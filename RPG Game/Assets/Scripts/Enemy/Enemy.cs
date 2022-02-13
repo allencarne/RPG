@@ -7,14 +7,15 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public int maxHealth = 100;
     private int currentHealth;
-
     public HealthBar healthBar;
+    public EnemySpawner enemySpawner;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -48,5 +49,8 @@ public class Enemy : MonoBehaviour
         GetComponent<Collider2D>().enabled = false;
         Destroy(gameObject, 5f);
         //this.enabled = false;
+
+        // Spawn another enemy
+        enemySpawner.SpawnEnemy();
     }
 }
