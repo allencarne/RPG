@@ -6,6 +6,10 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemySpawner;
+    public Vector3 spawnBox;
+    private float xPos;
+    private float yPos;
+
 
     // Start is called before the first frame update
     void Start()
@@ -13,20 +17,17 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemy();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SpawnEnemy()
     {
-        Instantiate(enemyPrefab, enemySpawner.transform.position, Quaternion.identity);
+        xPos = Random.Range(-spawnBox.x, spawnBox.x);
+        yPos = Random.Range(-spawnBox.y, spawnBox.y);
+
+        Instantiate(enemyPrefab, new Vector3(xPos, yPos, 0) + transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, new Vector3(5,5,0));
+        Gizmos.DrawWireCube(transform.position, spawnBox);
     }
 }
