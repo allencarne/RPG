@@ -14,7 +14,7 @@ public class Slash : MonoBehaviour
         if (other.tag == "Enemy")
         {
             // Hit Effect
-            GameObject effect = Instantiate(hitEffect, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(hitEffect, other.transform.position, Quaternion.identity);
             Destroy(effect, .3f);
 
             // Deal Damage
