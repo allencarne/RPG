@@ -522,6 +522,7 @@ MonoBehaviour:
   animator: {fileID: 5373405154731565597}
   maxHealth: 3
   healthBar: {fileID: 265861970}
+  enemySpawner: {fileID: 0}
 --- !u!114 &262390743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,3 +535,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 739ea5b4b5b101545b636c362b1c3a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyHitIndicator: {fileID: 7317179029955783172, guid: 6812f9774bf39d845a7d2acaae33bec2, type: 3}
+  rb: {fileID: 5373405154731565598}

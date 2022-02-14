@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 1854658176}
   - component: {fileID: 4642913491849814023}
   - component: {fileID: 219745874479565941}
+  - component: {fileID: 533100505}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -235,7 +236,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &7388813305273751383
 Animator:
@@ -288,7 +289,7 @@ MonoBehaviour:
   rb: {fileID: 7388813305273751380}
   slashForce: 0
   attackRange: 0
-  attackMoveDistance: 3
+  attackMoveDistance: 20
 --- !u!58 &219745874479565941
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -305,3 +306,16 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.43773064}
   serializedVersion: 2
   m_Radius: 0.108169585
+--- !u!114 &533100505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388813305273751378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bb8834078667a4488620113c2ba0271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
