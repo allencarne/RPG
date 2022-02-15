@@ -30,6 +30,9 @@ public class PlayerCombat : MonoBehaviour
             // Move in attack direction
             difference = difference.normalized * attackMoveDistance;
             rb.AddForce(difference, ForceMode2D.Impulse);
+
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
         }
 
         // If mouse is inside attack range - attack - else - move player in attack direction
