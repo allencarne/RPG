@@ -58,7 +58,7 @@ public class LevelSystem : MonoBehaviour
         {
             delayTimer += Time.deltaTime;
             backExperienceBar.fillAmount = experienceFraction;
-            if (delayTimer > 3)
+            if (delayTimer > 0.5)
             {
                 lerpTimer += Time.deltaTime;
                 float percentComplete = lerpTimer / 4f;
