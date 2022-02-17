@@ -1,28 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public Animator animator;
-    public int maxHealth = 100;
-    private int currentHealth;
-    public HealthBar healthBar;
     public EnemySpawner enemySpawner;
+    public Animator animator;
+    public Image frontHealthBar;
+    public Image backHealthBar;
+    public Canvas enemyUI;
+    
+    public float maxHealth = 100;
+    public float chipSpeed = 2f;
+
+    private float lerpTimer;
+    private float currentHealth;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Set Current Health to Max Health at the start of the game
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+
+        // Locate Enemy spawner Class
         enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
-    public void TakeDamage(int damage)
+    private void Update()
+    {
+        // Prevents healthbar from being below or 0 or above max health
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+
+        UpateHealthUI();
+    }
+
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
-
-        healthBar.SetHealth(currentHealth);
+        lerpTimer = 0f;
 
         // Player hurt animation
         animator.SetTrigger("Hurt");
@@ -38,13 +54,43 @@ public class Enemy : MonoBehaviour
         // Die animation
         animator.SetBool("isDead", true);
 
-        // Disable the enemy
-        healthBar.gameObject.SetActive(false);
+        // Turn off Healthbar
+        enemyUI.gameObject.SetActive(false);
+
+        // Turn off Enemy Collider
         GetComponent<Collider2D>().enabled = false;
+
+        // Destroy Enemy after a delay
         Destroy(gameObject, 5f);
-        //this.enabled = false;
 
         // Spawn another enemy
         enemySpawner.SpawnEnemy();
+    }
+
+    void UpateHealthUI()
+    {
+        float fillFront = frontHealthBar.fillAmount;
+        float fillBack = backHealthBar.fillAmount;
+        float healthFraction = currentHealth / maxHealth;
+
+        if (fillBack > healthFraction)
+        {
+            frontHealthBar.fillAmount = healthFraction;
+            backHealthBar.color = Color.white;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
+        }
+
+        if (fillFront < healthFraction)
+        {
+            backHealthBar.color = Color.green;
+            backHealthBar.fillAmount = healthFraction;
+            lerpTimer += Time.deltaTime;
+            float percentComplete = lerpTimer / chipSpeed;
+            percentComplete = percentComplete * percentComplete;
+            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
+        }
     }
 }
