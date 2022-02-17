@@ -128,16 +128,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
   m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &85770854 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751383, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &85770855 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751380, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &85770857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,15 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ee1f4b17c5f65499b6475d266a03d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  movement: {x: 0, y: 0}
-  firePoint: {fileID: 532987352}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  animator: {fileID: 85770854}
-  rb: {fileID: 85770855}
-  slashForce: 0
-  attackRange: 0
-  attackMoveDistance: 0
 --- !u!1 &126501143
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +368,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7388813305273751380, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388813305273751380, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_LinearDrag
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7388813305273751382, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -572,11 +561,6 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
---- !u!4 &532987352 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2065340723, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &584547538
 GameObject:
   m_ObjectHideFlags: 0

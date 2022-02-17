@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set Current Player Health to Max Health
         currentHealth = maxHealth;
     }
      void Update()

@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class Player_Attack : StateMachineBehaviour
 {
+    Rigidbody2D rb;
+    Transform transform;
+
+    public float attackMoveDistance;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // Get Rigidbody of Player
+        rb = animator.GetComponent<Rigidbody2D>();
+
+        // Get Transform of Player
+        transform = animator.GetComponent<Rigidbody2D>().transform;
+
         // Change attack speed of animation
         //animator.speed = 2.0f;
     }
@@ -14,7 +25,14 @@ public class Player_Attack : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        // Create a Vector from Camera position subtracted by player position
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // Normalize movement vector and times it by attack move distance
+        difference = difference.normalized * attackMoveDistance;
+
+        // Add force in Attack Direction
+        rb.AddForce(difference, ForceMode2D.Impulse);
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
