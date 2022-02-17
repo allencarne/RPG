@@ -11,7 +11,7 @@ public class EnemyCombat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("PlayerAimer").transform;
+        player = GameObject.Find("Player Aimer").transform;
     }
 
     // Update is called once per frame

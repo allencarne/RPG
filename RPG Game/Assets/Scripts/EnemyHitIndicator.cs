@@ -10,7 +10,6 @@ public class EnemyHitIndicator : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Take Damage");
             other.GetComponent<Player>().PlayerTakeDamage(enemyDamage);
         }
     }
