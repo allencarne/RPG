@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText;
 
     public float maxHealth;
-    public float chipSpeed = 2f;
+    [SerializeField] private float chipSpeed = 2f;
     
     private float currentHealth;
     private float lerpTimer;

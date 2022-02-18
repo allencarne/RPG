@@ -570,6 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawner: {fileID: 0}
+  expObject: {fileID: 6549391921704182420, guid: 5776c447054334a45bcc0712b95cd3d4, type: 3}
   animator: {fileID: 5373405154731565597}
   frontHealthBar: {fileID: 588613}
   backHealthBar: {fileID: 1700641918}

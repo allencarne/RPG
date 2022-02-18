@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public EnemySpawner enemySpawner;
+    public GameObject expObject;
     public Animator animator;
     public Image frontHealthBar;
     public Image backHealthBar;
@@ -53,6 +54,9 @@ public class Enemy : MonoBehaviour
     {
         // Die animation
         animator.SetBool("isDead", true);
+
+        // Instantiate Exp Object
+        Instantiate(expObject, transform.position, Quaternion.identity);
 
         // Turn off Healthbar
         enemyUI.gameObject.SetActive(false);
