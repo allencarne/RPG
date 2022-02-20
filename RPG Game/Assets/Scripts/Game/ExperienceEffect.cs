@@ -25,7 +25,7 @@ public class ExperienceEffect : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponent<LevelSystem>().GainExperience(20f);
+            collision.GetComponent<LevelSystem>().GainExperience(1f);
             Destroy(gameObject);
         }
     }

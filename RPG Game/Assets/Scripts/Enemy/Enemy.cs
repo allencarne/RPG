@@ -12,8 +12,8 @@ public class Enemy : MonoBehaviour
     public Image backHealthBar;
     public Canvas enemyUI;
     
-    public float maxHealth = 100;
-    public float chipSpeed = 2f;
+    [SerializeField] float maxHealth = 100;
+    [SerializeField] float chipSpeed = 2f;
 
     private float lerpTimer;
     private float currentHealth;
