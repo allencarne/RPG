@@ -20,6 +20,18 @@ TextureImporter:
   - first:
       213: -887221120205503328
     second: OldSlimeAttackRight_5
+  - first:
+      213: -1727214036531718170
+    second: OldSlimeAttackRight_6
+  - first:
+      213: 2428333034558672779
+    second: OldSlimeAttackRight_7
+  - first:
+      213: 6566544808215441495
+    second: OldSlimeAttackRight_8
+  - first:
+      213: -1115500562663822365
+    second: OldSlimeAttackRight_9
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -230,6 +242,90 @@ TextureImporter:
       bones: []
       spriteID: 0a44de48715ffa3f0800000000000000
       internalID: -887221120205503328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OldSlimeAttackRight_6
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 0
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e755752cf3b708e0800000000000000
+      internalID: -1727214036531718170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OldSlimeAttackRight_7
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 0
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8f4731770c23b120800000000000000
+      internalID: 2428333034558672779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OldSlimeAttackRight_8
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 0
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 750fd5746bd012b50800000000000000
+      internalID: 6566544808215441495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OldSlimeAttackRight_9
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 0
+        width: 37
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ebacaff522f480f0800000000000000
+      internalID: -1115500562663822365
       vertices: []
       indices: 
       edges: []
