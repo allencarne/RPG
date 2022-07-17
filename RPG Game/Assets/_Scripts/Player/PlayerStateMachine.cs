@@ -8,6 +8,8 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float attackMoveDistance;
     [SerializeField] float slashForce;
+
+    private bool isAttacking = false;
     //[SerializeField] float attackRange;
 
     //Components
@@ -133,6 +135,22 @@ public class PlayerStateMachine : MonoBehaviour
 
         // Add force in Attack Direction
         rb.AddForce(difference, ForceMode2D.Impulse);
+
+        if (isAttacking)
+        {
+            // Instantiate Slash prefab
+            GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+
+            // Get the Rigid Body of the Slash prefab
+            Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
+
+            // Add Force to Slash prefab
+            rb.AddForce(firePoint.up * slashForce, ForceMode2D.Force);
+
+            //Reset Animator Trigger
+            animator.ResetTrigger("Attack");
+            isAttacking = false;
+        }
     }
 
     public void AttackAnimationEnd()
@@ -143,16 +161,6 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void Attack()
     {
-        // Instantiate Slash prefab
-        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
-
-        // Get the Rigid Body of the Slash prefab
-        Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
-
-        // Add Force to Slash prefab
-        rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
-
-        //Reset Animator Trigger
-        animator.ResetTrigger("Attack");
+        isAttacking = true;
     }
 }

@@ -892,8 +892,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 6
-  m_fontSizeBase: 6
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -985,10 +985,10 @@ GameObject:
   - component: {fileID: 7388813305273751380}
   - component: {fileID: 7388813305273751383}
   - component: {fileID: 1854658176}
-  - component: {fileID: 4642913491849814023}
   - component: {fileID: 219745874479565941}
   - component: {fileID: 533100505}
   - component: {fileID: 85770857}
+  - component: {fileID: 221704826}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1117,24 +1117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrderBase: 5000
   offset: -10
---- !u!114 &4642913491849814023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7388813305273751378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe65962c81c24074fb66218dfea72df5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firePoint: {fileID: 2065340723}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  animator: {fileID: 7388813305273751383}
-  rb: {fileID: 7388813305273751380}
-  slashForce: 0
-  attackRange: 0
 --- !u!58 &219745874479565941
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1190,3 +1172,22 @@ MonoBehaviour:
   level: 1
   currentExperience: 0
   requiredExperience: 130
+--- !u!114 &221704826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388813305273751378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ea451d9ea498643bdc05c6fb5703d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  attackMoveDistance: 1
+  slashForce: 1
+  animator: {fileID: 7388813305273751383}
+  rb: {fileID: 7388813305273751380}
+  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+  firePoint: {fileID: 2065340723}
