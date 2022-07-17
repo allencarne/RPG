@@ -36,7 +36,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void Attack()
+    /*public void Attack()
     {
         // Instantiate Slash prefab
         GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
@@ -49,5 +49,5 @@ public class PlayerCombat : MonoBehaviour
 
         //Reset Animator Trigger
         animator.ResetTrigger("Attack");
-    }
+    }*/
 }

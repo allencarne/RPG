@@ -7,12 +7,16 @@ public class PlayerStateMachine : MonoBehaviour
     //Variables
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float attackMoveDistance;
+    [SerializeField] float slashForce;
+    //[SerializeField] float attackRange;
 
     //Components
+    private Vector2 movement;
+
     public Animator animator;
     public Rigidbody2D rb;
-    public Vector2 movement;
-    public Transform transform;
+    public GameObject slashPrefab;
+    public Transform firePoint;
 
     enum PlayerState
     {
@@ -26,7 +30,7 @@ public class PlayerStateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -56,6 +60,12 @@ public class PlayerStateMachine : MonoBehaviour
             state = PlayerState.move;
         }
 
+        //State Transition - Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            state = PlayerState.attack;
+        }
+
         ////State Logic
         //Set isMoving Bool to False
         animator.SetBool("isMoving", false);
@@ -67,6 +77,12 @@ public class PlayerStateMachine : MonoBehaviour
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             state = PlayerState.idle;
+        }
+
+        //State Transition - Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            state = PlayerState.attack;
         }
 
         ////State Logic
@@ -91,6 +107,52 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PlayerAttackState()
     {
+        //State Transition
+        //AttackAnimationEnd Method Is Handling The Transition
 
+        //////State Logic
+        //Set Attack Animation
+        animator.SetTrigger("Attack");
+
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // Set Attack in Current Attack Direction
+        animator.SetFloat("Aim Horizontal", difference.x);
+        animator.SetFloat("Aim Vertical", difference.y);
+
+        // Set Idle to last attack position
+        animator.SetFloat("Horizontal", difference.x);
+        animator.SetFloat("Vertical", difference.y);
+
+        //// Slide Forward When Attacking
+        // Create a Vector from Camera position subtracted by player position
+        //Vector3 differencee = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
+
+        // Normalize movement vector and times it by attack move distance
+        difference = difference.normalized * attackMoveDistance;
+
+        // Add force in Attack Direction
+        rb.AddForce(difference, ForceMode2D.Impulse);
+    }
+
+    public void AttackAnimationEnd()
+    {
+        animator.ResetTrigger("Attack");
+        state = PlayerState.idle;
+    }
+
+    public void Attack()
+    {
+        // Instantiate Slash prefab
+        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+
+        // Get the Rigid Body of the Slash prefab
+        Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
+
+        // Add Force to Slash prefab
+        rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+
+        //Reset Animator Trigger
+        animator.ResetTrigger("Attack");
     }
 }
