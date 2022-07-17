@@ -794,7 +794,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065340722}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1163463867}
@@ -985,7 +985,6 @@ GameObject:
   - component: {fileID: 7388813305273751380}
   - component: {fileID: 7388813305273751383}
   - component: {fileID: 1854658176}
-  - component: {fileID: 219745874479565941}
   - component: {fileID: 533100505}
   - component: {fileID: 85770857}
   - component: {fileID: 221704826}
@@ -1117,22 +1116,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrderBase: 5000
   offset: -10
---- !u!58 &219745874479565941
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7388813305273751378}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.43773064}
-  serializedVersion: 2
-  m_Radius: 0.108169585
 --- !u!114 &533100505
 MonoBehaviour:
   m_ObjectHideFlags: 0

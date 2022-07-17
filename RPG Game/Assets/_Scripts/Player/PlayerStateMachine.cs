@@ -136,6 +136,7 @@ public class PlayerStateMachine : MonoBehaviour
         // Add force in Attack Direction
         rb.AddForce(difference, ForceMode2D.Impulse);
 
+
         if (isAttacking)
         {
             // Instantiate Slash prefab
@@ -145,7 +146,7 @@ public class PlayerStateMachine : MonoBehaviour
             Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            rb.AddForce(firePoint.up * slashForce, ForceMode2D.Force);
+            rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Attack");
