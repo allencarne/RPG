@@ -10,6 +10,7 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] float slashForce;
     //[SerializeField] float attackRange;
     public bool isAttacking;
+    public bool attackAnglePaused = false;
 
     //Components
     Vector2 movement;
@@ -120,23 +121,28 @@ public class PlayerStateMachine : MonoBehaviour
 
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-        // Set Attack Animation Depending on Mouse Position
-        animator.SetFloat("Aim Horizontal", difference.x);
-        animator.SetFloat("Aim Vertical", difference.y);
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
 
-        // Set Idle to last attack position
-        animator.SetFloat("Horizontal", difference.x);
-        animator.SetFloat("Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
 
-        //// Slide Forward When Attacking
-        // Create a Vector from Camera position subtracted by player position
-        //Vector3 differencee = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
+            //// Slide Forward When Attacking
+            // Create a Vector from Camera position subtracted by player position
+            //Vector3 differencee = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
 
-        // Normalize movement vector and times it by attack move distance
-        difference = difference.normalized * attackMoveDistance;
+            // Normalize movement vector and times it by attack move distance
+            difference = difference.normalized * attackMoveDistance;
 
-        // Add force in Attack Direction
-        rb.AddForce(difference, ForceMode2D.Impulse);
+            // Add force in Attack Direction
+            rb.AddForce(difference, ForceMode2D.Impulse);
+
+            attackAnglePaused = true;
+        }
 
         if (isAttacking)
         {
@@ -158,16 +164,12 @@ public class PlayerStateMachine : MonoBehaviour
     public void AttackAnimationEnd()
     {
         animator.ResetTrigger("Attack");
+        attackAnglePaused = false;
         state = PlayerState.idle;
     }
 
     public void Attack()
     {
         isAttacking = true;
-    }
-
-    public void PauseAttackAngleMethod()
-    {
-
     }
 }
