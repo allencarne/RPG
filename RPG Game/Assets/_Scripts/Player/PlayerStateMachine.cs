@@ -8,7 +8,6 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float attackMoveDistance;
     [SerializeField] float slashForce;
-    //[SerializeField] float attackRange;
     public bool isAttacking;
     public bool attackAnglePaused = false;
 
@@ -25,6 +24,7 @@ public class PlayerStateMachine : MonoBehaviour
         idle,
         move,
         attack,
+        dash
     }
 
     PlayerState state = PlayerState.idle;
@@ -54,6 +54,9 @@ public class PlayerStateMachine : MonoBehaviour
             case PlayerState.attack:
                 PlayerAttackState();
                 break;
+            case PlayerState.dash:
+                PlayerDashState();
+                break;
         }
     }
 
@@ -71,7 +74,13 @@ public class PlayerStateMachine : MonoBehaviour
             state = PlayerState.attack;
         }
 
-        ////////State Logic
+        //State Transition - Dash\\
+        if (Input.GetKey(KeyCode.Space))
+        {
+            state = PlayerState.dash;
+        }
+
+        //__State Logic__\\
         //Set isMoving Bool to False
         animator.SetBool("isMoving", false);
     }
@@ -90,7 +99,13 @@ public class PlayerStateMachine : MonoBehaviour
             state = PlayerState.attack;
         }
 
-        ////////State Logic
+        //State Transition - Dash\\
+        if (Input.GetKey(KeyCode.Space))
+        {
+            state = PlayerState.dash;
+        }
+
+        //__State Logic__\\
         //Set isMoving Bool to true
         animator.SetBool("isMoving", true);
 
@@ -112,53 +127,56 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PlayerAttackState()
     {
-        //State Transition\\
-        //AttackAnimationEnd Method Is Handling The Transition
-
-        ////////State Logic
+        //__State Logic__\\
         //Trigger Attack Animation
         animator.SetTrigger("Attack");
 
+        //Calculate the difference between mouse position and player position
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (!attackAnglePaused)
         {
-            // Set Attack Animation Depending on Mouse Position
+            //Set Attack Animation Depending on Mouse Position
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
 
-            // Set Idle to last attack position
+            //Set Idle to last attack position
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            //// Slide Forward When Attacking
-            // Create a Vector from Camera position subtracted by player position
-            //Vector3 differencee = Camera.main.ScreenToWorldPoint(Input.mousePosition) - playerTransform.position;
-
-            // Normalize movement vector and times it by attack move distance
+            ////Slide Forward When Attacking
+            //Normalize movement vector and times it by attack move distance
             difference = difference.normalized * attackMoveDistance;
 
-            // Add force in Attack Direction
+            //Add force in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
+            //Set AttackAnglePause Bool to True
             attackAnglePaused = true;
         }
 
         if (isAttacking)
         {
-            // Instantiate Slash prefab
+            //Instantiate Slash prefab
             GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
 
-            // Get the Rigid Body of the Slash prefab
+            //Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
-            // Add Force to Slash prefab
+            //Add Force to Slash prefab
             slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Attack");
+
+            //Reset isAttacking Bool;
             isAttacking = false;
         }
+    }
+
+    public void PlayerDashState()
+    {
+        //State Logic
     }
 
     public void AttackAnimationEnd()

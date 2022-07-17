@@ -44,8 +44,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -2002503359950850855}
   - {fileID: -3407110220356789334}
-  m_StateMachineBehaviours:
-  - {fileID: -1565141210117387861}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -173,8 +172,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: -1531813915993348388}
   - {fileID: 2196588041231316035}
-  m_StateMachineBehaviours:
-  - {fileID: 3128972642801114393}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -201,6 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76e5f7d60754ed44a8546dff94fc72c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  transform: {fileID: 0}
   attackMoveDistance: 1
 --- !u!206 &-2170354679394927331
 BlendTree:
@@ -526,6 +526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+  rb: {fileID: 0}
+  movement: {x: 0, y: 0}
 --- !u!206 &3482532516520908022
 BlendTree:
   m_ObjectHideFlags: 1
@@ -585,8 +587,7 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1348231628488861938}
-  m_StateMachineBehaviours:
-  - {fileID: -2301292798800989578}
+  m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
