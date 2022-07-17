@@ -8,14 +8,13 @@ public class PlayerStateMachine : MonoBehaviour
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float attackMoveDistance;
     [SerializeField] float slashForce;
-
-    private bool isAttacking = false;
     //[SerializeField] float attackRange;
+    public bool isAttacking;
 
     //Components
-    private Vector2 movement;
-
-    public Animator animator;
+    Vector2 movement;
+    [SerializeField] Animator animator;
+    [SerializeField] GameObject player;
     public Rigidbody2D rb;
     public GameObject slashPrefab;
     public Transform firePoint;
@@ -29,6 +28,11 @@ public class PlayerStateMachine : MonoBehaviour
 
     PlayerState state = PlayerState.idle;
 
+    private void Awake()
+    {
+        animator = player.GetComponent<Animator>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,8 +42,6 @@ public class PlayerStateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(state);
-
         switch (state)
         {
             case PlayerState.idle:
@@ -56,38 +58,38 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PlayerIdleState()
     {
-        //State Transition - Move
+        //State Transition - Move\\
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             state = PlayerState.move;
         }
 
-        //State Transition - Attack
+        //State Transition - Attack\\
         if (Input.GetMouseButtonDown(0))
         {
             state = PlayerState.attack;
         }
 
-        ////State Logic
+        ////////State Logic
         //Set isMoving Bool to False
         animator.SetBool("isMoving", false);
     }
 
     public void PlayerMoveState()
     {
-        //State Transition - Idle
+        //State Transition - Idle\\
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             state = PlayerState.idle;
         }
 
-        //State Transition - Attack
+        //State Transition - Attack\\
         if (Input.GetMouseButtonDown(0))
         {
             state = PlayerState.attack;
         }
 
-        ////State Logic
+        ////////State Logic
         //Set isMoving Bool to true
         animator.SetBool("isMoving", true);
 
@@ -109,16 +111,16 @@ public class PlayerStateMachine : MonoBehaviour
 
     public void PlayerAttackState()
     {
-        //State Transition
+        //State Transition\\
         //AttackAnimationEnd Method Is Handling The Transition
 
-        //////State Logic
-        //Set Attack Animation
+        ////////State Logic
+        //Trigger Attack Animation
         animator.SetTrigger("Attack");
 
         Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-        // Set Attack in Current Attack Direction
+        // Set Attack Animation Depending on Mouse Position
         animator.SetFloat("Aim Horizontal", difference.x);
         animator.SetFloat("Aim Vertical", difference.y);
 
@@ -136,17 +138,16 @@ public class PlayerStateMachine : MonoBehaviour
         // Add force in Attack Direction
         rb.AddForce(difference, ForceMode2D.Impulse);
 
-
         if (isAttacking)
         {
             // Instantiate Slash prefab
             GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
-            Rigidbody2D rb = slash.GetComponent<Rigidbody2D>();
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            rb.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Attack");
@@ -163,5 +164,10 @@ public class PlayerStateMachine : MonoBehaviour
     public void Attack()
     {
         isAttacking = true;
+    }
+
+    public void PauseAttackAngleMethod()
+    {
+
     }
 }

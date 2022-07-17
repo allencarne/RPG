@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4579563226512928267}
   - component: {fileID: 3378966954634762426}
   - component: {fileID: 2780061949572125383}
-  - component: {fileID: 4309815367740588480}
+  - component: {fileID: 7200643924230371729}
   m_Layer: 0
   m_Name: Slash1
   m_TagString: Untagged
@@ -156,8 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrderBase: 5000
   offset: 0
---- !u!58 &4309815367740588480
-CircleCollider2D:
+--- !u!61 &7200643924230371729
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -169,6 +169,16 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.04801303}
+  m_Offset: {x: 0.005413294, y: 0.5109726}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 2, y: 2}
+    newSize: {x: 2, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.6378402
+  m_Size: {x: 0.99312615, y: 1.1392853}
+  m_EdgeRadius: 0
