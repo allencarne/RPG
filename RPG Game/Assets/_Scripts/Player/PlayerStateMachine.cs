@@ -7,6 +7,7 @@ public class PlayerStateMachine : MonoBehaviour
     //Variables
     [SerializeField] float moveSpeed = 5f;
     [SerializeField] float attackMoveDistance;
+    [SerializeField] float dashMoveDistance;
     [SerializeField] float slashForce;
     public bool isAttacking;
     public bool attackAnglePaused = false;
@@ -187,8 +188,8 @@ public class PlayerStateMachine : MonoBehaviour
         if (!attackAnglePaused)
         {
             //Set Attack Animation Depending on Mouse Position
-            animator.SetFloat("Aim Horizontal", difference.x);
-            animator.SetFloat("Aim Vertical", difference.y);
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
 
             //Set Idle to last attack position
             animator.SetFloat("Horizontal", difference.x);
@@ -196,7 +197,7 @@ public class PlayerStateMachine : MonoBehaviour
 
             ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * attackMoveDistance;
+            difference = difference.normalized * dashMoveDistance;
 
             //Add force in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
