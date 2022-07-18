@@ -294,41 +294,17 @@ PrefabInstance:
       propertyPath: frontExperienceBar
       value: 
       objectReference: {fileID: 2100256881}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1388037102}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: attackMoveDistance
-      value: 1000
+    - target: {fileID: 1163463868, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_SortingLayer
+      value: -3
       objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+    - target: {fileID: 1163463868, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1717561531
       objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1388037103}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PauseAttackAngleMethod
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerStateMachine, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: pauseAttackAngle.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+    - target: {fileID: 2086087135, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: offset
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_Name
@@ -875,22 +851,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142952004}
   m_CullTransparentMesh: 1
---- !u!1 &1388037102 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1388037103 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388037102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ea451d9ea498643bdc05c6fb5703d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0
