@@ -12,6 +12,7 @@ public class DashAbility : Ability
         //References
         Animator animator = parent.GetComponent<Animator>();
         Rigidbody2D rb = parent.GetComponent<Rigidbody2D>();
+
         //Tranform.position
         //attackAnglePaused
         //dashMoveDistance
