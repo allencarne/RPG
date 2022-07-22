@@ -5,20 +5,35 @@ using UnityEngine;
 public class PlayerStateMachine : MonoBehaviour
 {
     //Variables
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float attackMoveDistance;
-    [SerializeField] float dashMoveDistance;
+    [SerializeField] float moveSpeed;
     [SerializeField] float slashForce;
-    public bool isAttacking;
-    public bool attackAnglePaused = false;
 
     //Components
-    Vector2 movement;
-    [SerializeField] Animator animator;
     [SerializeField] GameObject player;
-    public Rigidbody2D rb;
-    public GameObject slashPrefab;
-    public Transform firePoint;
+    [SerializeField] GameObject slashPrefab;
+    [SerializeField] Transform firePoint;
+
+    [HideInInspector] Animator animator;
+    [HideInInspector] Rigidbody2D rb;
+
+    //private PlayerAbilities abilities
+    //public Animator Animator => animator;
+    //public float MoveSpeed => moveSpeed;
+    //public Rigidbody2D Rigidbody => rb;
+
+    //turn into getter and setter
+    public bool attackAnglePaused = false;
+    public bool isAttacking;
+
+    private Camera cam;
+    //private PlayerState state;
+
+    //State/Ability Specific Variables
+    [SerializeField] float attackMoveDistance;
+    [SerializeField] float dashMoveDistance;
+
+    //Move State Variable
+    Vector2 movement;
 
     enum PlayerState
     {
@@ -33,6 +48,7 @@ public class PlayerStateMachine : MonoBehaviour
     private void Awake()
     {
         animator = player.GetComponent<Animator>();
+        rb = player.GetComponent<Rigidbody2D>();
     }
 
     // Start is called before the first frame update
@@ -160,14 +176,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (isAttacking)
         {
-            //Instantiate Slash prefab
-            GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
-
-            //Get the Rigid Body of the Slash prefab
-            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-
-            //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+            CreateSlash();
 
             //Reset Animator Trigger
             animator.ResetTrigger("Attack");
@@ -208,14 +217,7 @@ public class PlayerStateMachine : MonoBehaviour
 
         if (isAttacking)
         {
-            //Instantiate Slash prefab
-            GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
-
-            //Get the Rigid Body of the Slash prefab
-            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-
-            //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+            CreateSlash();
 
             //Reset Animator Trigger
             animator.ResetTrigger("Dash");
@@ -225,6 +227,7 @@ public class PlayerStateMachine : MonoBehaviour
         }
     }
 
+    //Used in Animation Event
     public void AttackAnimationEnd()
     {
         animator.ResetTrigger("Attack");
@@ -233,8 +236,21 @@ public class PlayerStateMachine : MonoBehaviour
         state = PlayerState.idle;
     }
 
+    //Used in Animation Event
     public void Attack()
     {
         isAttacking = true;
+    }
+
+    public void CreateSlash()
+    {
+        //Instantiate Slash prefab
+        GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+
+        //Get the Rigid Body of the Slash prefab
+        Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+        //Add Force to Slash prefab
+        slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
     }
 }
