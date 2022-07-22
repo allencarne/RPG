@@ -864,11 +864,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 271c20b20edfbe64db865986fcef2ee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: a4c009e8b39aae74d881a73d9b02bd0e, type: 2}
-  coolDownTime: 0
-  activeTime: 0
-  state: 0
-  key: 9
 --- !u!114 &1495846960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -882,6 +877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackBehaviourReference: {fileID: 11400000, guid: 6ba7cf9717f273a498470db701163d10, type: 2}
+  dashBehaviourReference: {fileID: 11400000, guid: 58ef223566707d1488da93617ab59791, type: 2}
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0

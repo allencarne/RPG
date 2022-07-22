@@ -16,12 +16,10 @@ public class PlayerMoveState : PlayerState
         //State Transition - Attack\\
         if (stateMachine.AttackKeyPressed)
             stateMachine.SetState(new PlayerAttackState(stateMachine));
-                /*
 
         //State Transition - Dash\\
         if (stateMachine.DashKeyPressed)
-            stateMachine.SetState(new DashState(stateMachine));
-        */
+            stateMachine.SetState(new PlayerDashState(stateMachine));
 
         //__State Logic__\\
         stateMachine.Animator.SetBool("isMoving", true);

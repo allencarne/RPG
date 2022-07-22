@@ -17,10 +17,9 @@ public class PlayerIdleState : PlayerState
         if (stateMachine.AttackKeyPressed)
             stateMachine.SetState(new PlayerAttackState(stateMachine));
 
-        /*/State Transition - Dash\\
+        //State Transition - Dash\\
         if (stateMachine.DashKeyPressed)
-            stateMachine.SetState(new DashState(stateMachine));
-        */
+            stateMachine.SetState(new PlayerDashState(stateMachine));
 
         //State Logic
         stateMachine.Animator.SetBool("isMoving", false);
