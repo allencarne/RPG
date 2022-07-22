@@ -295,6 +295,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100256881}
     - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: abilities
+      value: 
+      objectReference: {fileID: 1495846960}
+    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: dashMoveDistance
       value: 3000
       objectReference: {fileID: 0}
@@ -861,7 +865,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ability: {fileID: 11400000, guid: a4c009e8b39aae74d881a73d9b02bd0e, type: 2}
+  coolDownTime: 0
+  activeTime: 0
+  state: 0
   key: 9
+--- !u!114 &1495846960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495846950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bb57cafc53874bb6cdaed09e18e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBehaviourReference: {fileID: 11400000, guid: 6ba7cf9717f273a498470db701163d10, type: 2}
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0
