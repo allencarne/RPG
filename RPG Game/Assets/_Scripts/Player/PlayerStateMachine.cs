@@ -30,6 +30,7 @@ public class PlayerStateMachine : MonoBehaviour
     {
         animator = player.GetComponent<Animator>();
         rb = player.GetComponent<Rigidbody2D>();
+        cam = Camera.main;
         SetState(new PlayerIdleState(this));
     }
 
