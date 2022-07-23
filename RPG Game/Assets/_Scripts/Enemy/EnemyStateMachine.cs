@@ -16,6 +16,9 @@ public class EnemyStateMachine : MonoBehaviour
     [HideInInspector] Rigidbody2D enemyRigidBody;
     [HideInInspector] Animator animator;
 
+    Enemy enemy;
+    [SerializeField] GameObject enemyObject;
+
     enum EnemyState
     {
         spawn,
@@ -31,6 +34,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Awake()
     {
+        enemy = enemyObject.GetComponent<Enemy>();
         playerRigidBody = player.GetComponent<Rigidbody2D>();
         enemyRigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -128,6 +132,10 @@ public class EnemyStateMachine : MonoBehaviour
     public void EnemyAttackState()
     {
         //IdleAfterAttack Animation Event
+
+        //Animate
+        //animator.SetFloat("Horizontal", (playerTransform.position.x - enemyRigidBody.position.x));
+        //animator.SetFloat("Vertical", (playerTransform.position.y - enemyRigidBody.position.y));
     }
 
     public void EnemyHitState()
@@ -137,7 +145,6 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void EnemyDeathState()
     {
-
     }
 
     //Animation Events
@@ -149,5 +156,48 @@ public class EnemyStateMachine : MonoBehaviour
     public void IdleAfterAttack()
     {
         state = EnemyState.idle;
+    }
+
+    //Other Methods
+    public void TakeDamage(float damage)
+    {
+        enemy.currentHealth -= damage;
+        enemy.lerpTimer = 0f;
+
+        // Player hurt animation
+        animator.SetTrigger("Hurt");
+
+        if (enemy.currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        // Die animation
+        animator.SetTrigger("Dead");
+
+        // Instantiate Exp Object
+        Instantiate(enemy.expObject, transform.position, Quaternion.identity);
+
+        // Turn off Healthbar
+        enemy.enemyUI.gameObject.SetActive(false);
+
+        // Turn off Enemy Collider
+        GetComponent<Collider2D>().enabled = false;
+
+        // Destroy Enemy after a delay
+        Destroy(gameObject, 5f);
+
+        // Spawn another enemy
+        enemy.enemySpawner.SpawnEnemy();
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(enemyRigidBody.position, aggroRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(enemyRigidBody.position, attackRange);
     }
 }

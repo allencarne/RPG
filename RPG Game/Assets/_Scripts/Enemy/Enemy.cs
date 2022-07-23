@@ -12,11 +12,11 @@ public class Enemy : MonoBehaviour
     public Image backHealthBar;
     public Canvas enemyUI;
     
-    [SerializeField] float maxHealth = 100;
-    [SerializeField] float chipSpeed = 2f;
+    public float maxHealth = 100;
+    public float chipSpeed = 2f;
 
-    private float lerpTimer;
-    private float currentHealth;
+    public float lerpTimer;
+    public float currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -34,41 +34,6 @@ public class Enemy : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         UpateHealthUI();
-    }
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        lerpTimer = 0f;
-
-        // Player hurt animation
-        animator.SetTrigger("Hurt");
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    void Die()
-    {
-        // Die animation
-        animator.SetTrigger("Dead");
-
-        // Instantiate Exp Object
-        Instantiate(expObject, transform.position, Quaternion.identity);
-
-        // Turn off Healthbar
-        enemyUI.gameObject.SetActive(false);
-
-        // Turn off Enemy Collider
-        GetComponent<Collider2D>().enabled = false;
-
-        // Destroy Enemy after a delay
-        Destroy(gameObject, 5f);
-
-        // Spawn another enemy
-        enemySpawner.SpawnEnemy();
     }
 
     void UpateHealthUI()

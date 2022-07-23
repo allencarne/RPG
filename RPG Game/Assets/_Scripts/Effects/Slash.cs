@@ -18,7 +18,7 @@ public class Slash : MonoBehaviour
             Destroy(effect, .3f);
 
             // Deal Damage
-            other.GetComponent<Enemy>().TakeDamage(attackDamage);
+            other.GetComponent<EnemyStateMachine>().TakeDamage(attackDamage);
 
             // Apply Knockback
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();

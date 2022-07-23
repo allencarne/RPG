@@ -294,13 +294,9 @@ PrefabInstance:
       propertyPath: frontExperienceBar
       value: 
       objectReference: {fileID: 2100256881}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: abilities
-      value: 
-      objectReference: {fileID: 1495846960}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: dashMoveDistance
-      value: 3000
+    - target: {fileID: 1495846959, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_Name
@@ -847,9 +843,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142952004}
   m_CullTransparentMesh: 1
---- !u!50 &1309690965 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+--- !u!1 &1309690962 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
   m_PrefabInstance: {fileID: 1856811445}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1495846950 stripped
@@ -857,20 +853,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
   m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1495846960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!4 &1606360589 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1163463867, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495846950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 759bb57cafc53874bb6cdaed09e18e29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackBehaviourReference: {fileID: 11400000, guid: 6ba7cf9717f273a498470db701163d10, type: 2}
-  dashBehaviourReference: {fileID: 11400000, guid: 58ef223566707d1488da93617ab59791, type: 2}
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0
@@ -10815,24 +10802,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1309690965}
-    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1495846950}
     - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-      propertyPath: aggroRange
+      propertyPath: enemySpeed
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: attackRange
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: enemyObject
+      value: 
+      objectReference: {fileID: 1309690962}
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: playerTransform
       value: 
-      objectReference: {fileID: 2069123888}
+      objectReference: {fileID: 1606360589}
     - target: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_Name
       value: OldSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5373405154731565596, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: m_FlipX
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_RootOrder
@@ -10840,11 +10839,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.04
+      value: -6.054
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.72
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 5373405154731565599, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_LocalPosition.z
