@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 5373405154731565601}
   - component: {fileID: 5373405154731565598}
   - component: {fileID: 658640467}
-  - component: {fileID: 262390743}
+  - component: {fileID: 1309690963}
   m_Layer: 0
   m_Name: OldSlime
   m_TagString: Enemy
@@ -577,7 +577,7 @@ MonoBehaviour:
   enemyUI: {fileID: 1780099369}
   maxHealth: 3
   chipSpeed: 2
---- !u!114 &262390743
+--- !u!114 &1309690963
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,8 +586,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5373405154731565594}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 739ea5b4b5b101545b636c362b1c3a95, type: 3}
+  m_Script: {fileID: 11500000, guid: ae66816d273df054c864d389d825ded4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHitIndicator: {fileID: 7317179029955783172, guid: 6812f9774bf39d845a7d2acaae33bec2, type: 3}
-  rb: {fileID: 5373405154731565598}
+  attackRange: 0.5
+  aggroRange: 3
+  enemySpeed: 0
+  player: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}

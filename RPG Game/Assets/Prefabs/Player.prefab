@@ -1000,12 +1000,13 @@ GameObject:
   - component: {fileID: 7388813305273751382}
   - component: {fileID: 7388813305273751381}
   - component: {fileID: 7388813305273751380}
-  - component: {fileID: 221704820}
   - component: {fileID: 7388813305273751383}
   - component: {fileID: 1854658176}
   - component: {fileID: 533100505}
   - component: {fileID: 85770857}
   - component: {fileID: 1388037103}
+  - component: {fileID: 1495846959}
+  - component: {fileID: 1495846960}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1101,22 +1102,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!70 &221704820
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7388813305273751378}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.000000050455583, y: -0.42325217}
-  m_Size: {x: 0.2870279, y: 0.095378056}
-  m_Direction: 1
 --- !u!95 &7388813305273751383
 Animator:
   serializedVersion: 3
@@ -1202,12 +1187,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  attackMoveDistance: 1000
   slashForce: 1
-  isAttacking: 0
-  attackAnglePaused: 0
-  animator: {fileID: 7388813305273751383}
   player: {fileID: 7388813305273751378}
-  rb: {fileID: 7388813305273751380}
   slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   firePoint: {fileID: 2065340723}
+  abilities: {fileID: 1495846960}
+--- !u!58 &1495846959
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388813305273751378}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.42}
+  serializedVersion: 2
+  m_Radius: 0.11
+--- !u!114 &1495846960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7388813305273751378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759bb57cafc53874bb6cdaed09e18e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackBehaviourReference: {fileID: 11400000, guid: 6ba7cf9717f273a498470db701163d10, type: 2}
+  dashBehaviourReference: {fileID: 11400000, guid: 58ef223566707d1488da93617ab59791, type: 2}

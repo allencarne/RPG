@@ -7,13 +7,14 @@ public class EnemyStateMachine : MonoBehaviour
     //Variables
     [SerializeField] private float attackRange;
     [SerializeField] private float aggroRange;
+    [SerializeField] private float enemySpeed;
 
     //Components
     [SerializeField] GameObject player;
-    [SerializeField] Animator animator;
-
-    [HideInInspector] Transform playerTransform;
+    [SerializeField] Transform playerTransform;
     [HideInInspector] Rigidbody2D playerRigidBody;
+    [HideInInspector] Rigidbody2D enemyRigidBody;
+    [HideInInspector] Animator animator;
 
     enum EnemyState
     {
@@ -30,8 +31,10 @@ public class EnemyStateMachine : MonoBehaviour
 
     private void Awake()
     {
-        playerTransform = player.GetComponent<Transform>();
         playerRigidBody = player.GetComponent<Rigidbody2D>();
+        enemyRigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+
     }
 
     // Start is called before the first frame update
@@ -73,7 +76,7 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void EnemySpawnState()
     {
-        state = EnemyState.idle;
+        //IdleAfterSpawn Animation Event
     }
 
     public void EnemyIdleState()
@@ -82,17 +85,10 @@ public class EnemyStateMachine : MonoBehaviour
         animator.SetFloat("Horizontal", playerRigidBody.position.x);
         animator.SetFloat("Vertical", playerRigidBody.position.y);
 
-        // If Player is in range - Attack
-        if (Vector2.Distance(playerTransform.position, playerRigidBody.position) <= attackRange)
-        {
-            //animator.SetTrigger("Attack");
-            state = EnemyState.attack;
-        }
-
         //If Player is in range - Chase
-        if (Vector2.Distance(playerTransform.position, playerRigidBody.position) <= aggroRange)
+        if (Vector2.Distance(playerTransform.position, enemyRigidBody.position) <= aggroRange)
         {
-            //animator.SetTrigger("Chase");
+            animator.SetBool("isChasing", true);
             state = EnemyState.chase;
         }
     }
@@ -104,12 +100,34 @@ public class EnemyStateMachine : MonoBehaviour
 
     public void EnemyChaseState()
     {
+        //Get target position and move to that position
+        Vector2 target = new Vector2(playerRigidBody.position.x, playerRigidBody.position.y);
+        Vector2 newPos = Vector2.MoveTowards(enemyRigidBody.position, target, enemySpeed * Time.fixedDeltaTime);
+        enemyRigidBody.MovePosition(newPos);
 
+        //Animate
+        animator.SetFloat("Horizontal", (playerRigidBody.position.x - enemyRigidBody.position.x));
+        animator.SetFloat("Vertical", (playerRigidBody.position.y - enemyRigidBody.position.y));
+
+        //If Player is out of AggroRange - Idle
+        if (Vector2.Distance(playerTransform.position, enemyRigidBody.position) >= aggroRange)
+        {
+            animator.SetBool("isChasing", false);
+            state = EnemyState.idle;
+        }
+
+        // If Player is in range - Attack
+        if (Vector2.Distance(playerTransform.position, enemyRigidBody.position) <= attackRange)
+        {
+            animator.SetBool("isChasing", false);
+            animator.SetTrigger("Attack");
+            state = EnemyState.attack;
+        }
     }
 
     public void EnemyAttackState()
     {
-
+        //IdleAfterAttack Animation Event
     }
 
     public void EnemyHitState()
@@ -120,5 +138,16 @@ public class EnemyStateMachine : MonoBehaviour
     public void EnemyDeathState()
     {
 
+    }
+
+    //Animation Events
+    public void IdleAfterSpawn()
+    {
+        state = EnemyState.idle;
+    }
+
+    public void IdleAfterAttack()
+    {
+        state = EnemyState.idle;
     }
 }

@@ -847,30 +847,9 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142952004}
   m_CullTransparentMesh: 1
---- !u!1 &1309690962 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
-  m_PrefabInstance: {fileID: 1856811445}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1309690963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309690962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae66816d273df054c864d389d825ded4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackRange: 3
-  aggroRange: 5
-  player: {fileID: 1495846950}
-  animator: {fileID: 1309690968}
---- !u!95 &1309690968 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5373405154731565597, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+--- !u!50 &1309690965 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 5373405154731565598, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
   m_PrefabInstance: {fileID: 1856811445}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1495846950 stripped
@@ -10835,6 +10814,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1309690965}
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1495846950}
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: aggroRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1309690963, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 2069123888}
     - target: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
       propertyPath: m_Name
       value: OldSlime
@@ -10883,8 +10878,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 262390743, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
 --- !u!1 &1940109605
 GameObject:

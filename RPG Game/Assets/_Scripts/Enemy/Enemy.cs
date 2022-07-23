@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         // Die animation
-        animator.SetBool("isDead", true);
+        animator.SetTrigger("Dead");
 
         // Instantiate Exp Object
         Instantiate(expObject, transform.position, Quaternion.identity);
