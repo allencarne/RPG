@@ -7,7 +7,6 @@ public class SwordWindSlash : ScriptableObject, IAttackBehaviour
 
     public void BehaviourUpdate(PlayerStateMachine stateMachine)
     {
-        //__State Logic__\\
         //Trigger Attack Animation
         stateMachine.Animator.SetTrigger("Attack");
 
@@ -23,7 +22,6 @@ public class SwordWindSlash : ScriptableObject, IAttackBehaviour
             stateMachine.Animator.SetFloat("Horizontal", difference.x);
             stateMachine.Animator.SetFloat("Vertical", difference.y);
 
-            ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
             difference = difference.normalized * attackMoveDistance;
 
