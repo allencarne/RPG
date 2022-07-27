@@ -193,11 +193,12 @@ public class EnemyStateMachine : MonoBehaviour
         enemy.enemySpawner.SpawnEnemy();
     }
 
-    void OnDrawGizmosSelected()
+    /*void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(enemyRigidBody.position, aggroRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(enemyRigidBody.position, attackRange);
     }
+    */
 }
