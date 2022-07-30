@@ -4,8 +4,8 @@ using UnityEngine;
 public class PlayerScriptableObject : ScriptableObject
 {
     public new string name;
-    public int health;
-    public int maxHealth;
+    public float health;
+    public float maxHealth;
     public float speed;
 
     public WeaponScriptableObject weapon;

@@ -6,31 +6,21 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    // Variables
-    public float maxHealth;
-    private float currentHealth;
-
-    //Variables
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float attackMoveDistance;
-    [SerializeField] float dashMoveDistance;
-    [SerializeField] float slashForce;
-    public bool isAttacking;
-    public bool attackAnglePaused = false;
-
-    //Components
+    public PlayerScriptableObject playerScriptableObject;
     Vector2 movement;
-    [SerializeField] Animator animator;
-    [SerializeField] GameObject player;
+    bool isAttacking;
+    bool attackAnglePaused = false;
+
+    // Components
+    public Animator animator;
     public Rigidbody2D rb;
-    public GameObject slashPrefab;
     public Transform firePoint;
 
     // HealthBar
-    [SerializeField] private float chipSpeed = 2f;
     public Image frontHealthBar;
     public Image backHealthbar;
     public TextMeshProUGUI healthText;
+    private float chipSpeed = 2f;
     private float lerpTimer;
 
     enum PlayerState
@@ -43,16 +33,11 @@ public class Player : MonoBehaviour
 
     PlayerState state = PlayerState.idle;
 
-    private void Awake()
-    {
-        animator = player.GetComponent<Animator>();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         // Set Current Player Health to Max Health
-        currentHealth = maxHealth;
+        playerScriptableObject.health = playerScriptableObject.maxHealth;
     }
      void Update()
     {
@@ -74,7 +59,8 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        // Healthbar UI Update
+        playerScriptableObject.health = Mathf.Clamp(playerScriptableObject.health, 0, playerScriptableObject.maxHealth);
         UpdateHealthUI();
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -90,72 +76,67 @@ public class Player : MonoBehaviour
 
     public void PlayerIdleState()
     {
-        //State Transition - Move\\
+        // Animate
+        animator.SetBool("isMoving", false);
+
+        // State Transition - Move
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             state = PlayerState.move;
         }
 
-        //State Transition - Attack\\
+        // State Transition - Attack
         if (Input.GetMouseButtonDown(0))
         {
             state = PlayerState.attack;
         }
 
-        //State Transition - Dash\\
+        // State Transition - Dash
         if (Input.GetKey(KeyCode.Space))
         {
             state = PlayerState.dash;
         }
-
-        //__State Logic__\\
-        //Set isMoving Bool to False
-        animator.SetBool("isMoving", false);
     }
 
     public void PlayerMoveState()
     {
-        //State Transition - Idle\\
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
-        {
-            state = PlayerState.idle;
-        }
-
-        //State Transition - Attack\\
-        if (Input.GetMouseButtonDown(0))
-        {
-            state = PlayerState.attack;
-        }
-
-        //State Transition - Dash\\
-        if (Input.GetKey(KeyCode.Space))
-        {
-            state = PlayerState.dash;
-        }
-
-        //__State Logic__\\
-        //Set isMoving Bool to true
+        // Animate
         animator.SetBool("isMoving", true);
-
-        //Input
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        movement = moveInput.normalized * moveSpeed;
-
-        //Movement
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
-
-        //Animations
         if (movement != Vector2.zero)
         {
             animator.SetFloat("Horizontal", movement.x);
             animator.SetFloat("Vertical", movement.y);
         }
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        //Input
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        movement = moveInput.normalized * playerScriptableObject.speed;
+
+        //Movement
+        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+
+        //State Transition - Idle
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            state = PlayerState.idle;
+        }
+
+        //State Transition - Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            state = PlayerState.attack;
+        }
+
+        //State Transition - Dash
+        if (Input.GetKey(KeyCode.Space))
+        {
+            state = PlayerState.dash;
+        }
     }
 
     public void PlayerAttackState()
     {
-        //__State Logic__\\
         //Trigger Attack Animation
         animator.SetTrigger("Attack");
 
@@ -174,7 +155,7 @@ public class Player : MonoBehaviour
 
             ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * attackMoveDistance;
+            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1Velocity;
 
             //Add force in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
@@ -186,13 +167,13 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             //Instantiate Slash prefab
-            GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
 
             //Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.projectileForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Attack");
@@ -222,7 +203,7 @@ public class Player : MonoBehaviour
 
             ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * dashMoveDistance;
+            difference = difference.normalized * playerScriptableObject.weapon.spaceVelocity;
 
             //Add force in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
@@ -234,13 +215,13 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             //Instantiate Slash prefab
-            GameObject slash = Instantiate(slashPrefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.spacePrefab, firePoint.position, firePoint.rotation);
 
             //Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * slashForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.projectileForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Dash");
@@ -267,7 +248,7 @@ public class Player : MonoBehaviour
     {
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthbar.fillAmount;
-        float healthFraction = currentHealth / maxHealth;
+        float healthFraction = playerScriptableObject.health / playerScriptableObject.maxHealth;
 
         if (fillBack > healthFraction)
         {
@@ -289,21 +270,21 @@ public class Player : MonoBehaviour
             frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthbar.fillAmount, percentComplete);
         }
 
-        healthText.text = Mathf.Round(currentHealth) + "/" + Mathf.Round(maxHealth);
+        healthText.text = Mathf.Round(playerScriptableObject.health) + "/" + Mathf.Round(playerScriptableObject.maxHealth);
     }
 
     public void RestoreHealth (float healAmount)
     {
-        currentHealth += healAmount;
+        playerScriptableObject.health += healAmount;
         lerpTimer = 0f;
     }
 
     public void PlayerTakeDamage(float damage)
     {
-        currentHealth -= damage;
+        playerScriptableObject.health -= damage;
         lerpTimer = 0f;
 
-        if (currentHealth <= 0)
+        if (playerScriptableObject.health <= 0)
         {
             PlayerDie();
         }
@@ -311,8 +292,8 @@ public class Player : MonoBehaviour
 
     public void IncreaseHealth(int level)
     {
-        maxHealth += (currentHealth * 0.01f) * ((100 - level) * 0.01f);
-        currentHealth = maxHealth;
+        playerScriptableObject.maxHealth += (playerScriptableObject.health * 0.01f) * ((100 - level) * 0.01f);
+        playerScriptableObject.health = playerScriptableObject.maxHealth;
     }
 
     public void PlayerDie()

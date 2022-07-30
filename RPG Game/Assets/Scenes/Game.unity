@@ -295,45 +295,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100256881}
     - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: rb
-      value: 
-      objectReference: {fileID: 1495846957}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1495846950}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1495846955}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: firePoint
-      value: 
-      objectReference: {fileID: 1101106002}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: slashForce
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: slashPrefab
-      value: 
-      objectReference: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: dashMoveDistance
-      value: 3000
-      objectReference: {fileID: 0}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: attackMoveDistance
-      value: 3
+      value: 1000
       objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: dashMoveDistance
-      value: 3000
-      objectReference: {fileID: 0}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: playerScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
     - target: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -804,11 +772,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1101106002 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2065340723, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1142952004
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,21 +847,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142952004}
   m_CullTransparentMesh: 1
---- !u!1 &1495846950 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1495846955 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751383, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1495846957 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 7388813305273751380, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-  m_PrefabInstance: {fileID: 479851453}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0

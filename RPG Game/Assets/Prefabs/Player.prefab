@@ -1005,7 +1005,6 @@ GameObject:
   - component: {fileID: 1854658176}
   - component: {fileID: 533100505}
   - component: {fileID: 85770857}
-  - component: {fileID: 1388037103}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1162,11 +1161,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb8834078667a4488620113c2ba0271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  moveSpeed: 5
+  attackMoveDistance: 3
+  dashMoveDistance: 3000
+  slashForce: 0.5
+  isAttacking: 0
+  attackAnglePaused: 0
+  animator: {fileID: 7388813305273751383}
+  player: {fileID: 7388813305273751378}
+  rb: {fileID: 7388813305273751380}
+  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+  firePoint: {fileID: 2065340723}
+  chipSpeed: 2
   frontHealthBar: {fileID: 455584497}
   backHealthbar: {fileID: 946604189}
   healthText: {fileID: 2143432503}
-  maxHealth: 100
-  chipSpeed: 2
 --- !u!114 &85770857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,25 +1199,3 @@ MonoBehaviour:
   level: 1
   currentExperience: 0
   requiredExperience: 130
---- !u!114 &1388037103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7388813305273751378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ea451d9ea498643bdc05c6fb5703d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  attackMoveDistance: 1000
-  slashForce: 1
-  isAttacking: 0
-  attackAnglePaused: 0
-  animator: {fileID: 7388813305273751383}
-  player: {fileID: 7388813305273751378}
-  rb: {fileID: 7388813305273751380}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  firePoint: {fileID: 2065340723}

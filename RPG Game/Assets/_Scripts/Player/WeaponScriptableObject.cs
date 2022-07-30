@@ -12,11 +12,16 @@ public class WeaponScriptableObject : ScriptableObject
     //public float duration;
     //public float castTime;
     public int weaponIndex;
-    public float coolDown;
-    public float velocity;
 
-    public float attackMoveDistance;
-    public float slashForce;
+    public float leftMouse1CoolDown;
+    public float leftMouse1Velocity;
+    public GameObject leftMouse1Prefab;
+
+    public float spaceCoolDown;
+    public float spaceVelocity;
+    public GameObject spacePrefab;
+
+    public float projectileForce;
 
     // Particles
 
