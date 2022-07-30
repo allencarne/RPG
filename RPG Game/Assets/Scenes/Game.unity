@@ -294,6 +294,42 @@ PrefabInstance:
       propertyPath: frontExperienceBar
       value: 
       objectReference: {fileID: 2100256881}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1495846957}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1495846950}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 1495846955}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 1101106002}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: slashForce
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: slashPrefab
+      value: 
+      objectReference: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: dashMoveDistance
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: attackMoveDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1388037103, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: dashMoveDistance
       value: 3000
@@ -768,6 +804,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1101106002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2065340723, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1142952004
 GameObject:
   m_ObjectHideFlags: 0
@@ -848,20 +889,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
   m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1495846959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!95 &1495846955 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7388813305273751383, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495846950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 271c20b20edfbe64db865986fcef2ee0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ability: {fileID: 11400000, guid: a4c009e8b39aae74d881a73d9b02bd0e, type: 2}
-  key: 9
+--- !u!50 &1495846957 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7388813305273751380, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0
