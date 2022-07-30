@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIndex: 0
   leftMouse1CoolDown: 0
-  leftMouse1Velocity: 1000
+  leftMouse1Velocity: 400
   leftMouse1Prefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   spaceCoolDown: 0
-  spaceVelocity: 3000
-  spacePrefab: {fileID: 7206372814929114242, guid: 21c5eb3414754644e8cec0d89a20b1cc, type: 3}
+  spaceVelocity: 1700
+  spacePrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   projectileForce: 1

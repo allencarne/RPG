@@ -283,6 +283,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: experienceText
       value: 
       objectReference: {fileID: 2012457930}

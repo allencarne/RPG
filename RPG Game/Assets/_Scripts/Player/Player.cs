@@ -6,17 +6,19 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
-    public PlayerScriptableObject playerScriptableObject;
+    [Header("Variables")]
     Vector2 movement;
     bool isAttacking;
     bool attackAnglePaused = false;
 
-    // Components
+    [Header("Components")]
+    public PlayerScriptableObject playerScriptableObject;
     public Animator animator;
     public Rigidbody2D rb;
     public Transform firePoint;
+    private Camera cam;
 
-    // HealthBar
+    [Header("HealthBar")]
     public Image frontHealthBar;
     public Image backHealthbar;
     public TextMeshProUGUI healthText;
@@ -32,6 +34,11 @@ public class Player : MonoBehaviour
     }
 
     PlayerState state = PlayerState.idle;
+
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -137,26 +144,24 @@ public class Player : MonoBehaviour
 
     public void PlayerAttackState()
     {
-        //Trigger Attack Animation
+        // Animate
         animator.SetTrigger("Attack");
 
-        //Calculate the difference between mouse position and player position
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
         if (!attackAnglePaused)
         {
-            //Set Attack Animation Depending on Mouse Position
+            // Set Attack Animation Depending on Mouse Position
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
-
-            //Set Idle to last attack position
+            // Set Idle to last attack position
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
             difference = difference.normalized * playerScriptableObject.weapon.leftMouse1Velocity;
-
             //Add force in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
@@ -189,7 +194,7 @@ public class Player : MonoBehaviour
         animator.SetTrigger("Dash");
 
         //Calculate the difference between mouse position and player position
-        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (!attackAnglePaused)
         {
