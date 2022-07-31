@@ -298,6 +298,10 @@ PrefabInstance:
       propertyPath: frontExperienceBar
       value: 
       objectReference: {fileID: 2100256881}
+    - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: playerScriptableObject
+      value: 
+      objectReference: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
     - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: attackMoveDistance
       value: 1000

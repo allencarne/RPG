@@ -1161,19 +1161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb8834078667a4488620113c2ba0271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  moveSpeed: 5
-  attackMoveDistance: 3
-  dashMoveDistance: 3000
-  slashForce: 0.5
-  isAttacking: 0
-  attackAnglePaused: 0
+  playerScriptableObject: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
   animator: {fileID: 7388813305273751383}
-  player: {fileID: 7388813305273751378}
   rb: {fileID: 7388813305273751380}
-  slashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   firePoint: {fileID: 2065340723}
-  chipSpeed: 2
   frontHealthBar: {fileID: 455584497}
   backHealthbar: {fileID: 946604189}
   healthText: {fileID: 2143432503}
@@ -1189,6 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf2ec84c6c0c2a438671d39358bc8cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerScriptableObject: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
   frontExperienceBar: {fileID: 0}
   backExperienceBar: {fileID: 0}
   levelText: {fileID: 1556779752}
@@ -1196,6 +1188,3 @@ MonoBehaviour:
   additionMultiplier: 1
   powerMultiplier: 2
   divisionMultiplier: 7
-  level: 1
-  currentExperience: 0
-  requiredExperience: 130

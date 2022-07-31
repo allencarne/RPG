@@ -6,6 +6,8 @@ using TMPro;
 
 public class LevelSystem : MonoBehaviour
 {
+    public PlayerScriptableObject playerScriptableObject;
+
     [Header("UI")]
     public Image frontExperienceBar;
     public Image backExperienceBar;
@@ -19,9 +21,9 @@ public class LevelSystem : MonoBehaviour
     [Range(7f, 14f)]
     public float divisionMultiplier = 7;
 
-    public int level;
-    public float currentExperience;
-    public float requiredExperience;
+    //public int level;
+    //public float currentExperience;
+    //public float requiredExperience;
 
     private float lerpTimer;
     private float delayTimer;
@@ -29,10 +31,10 @@ public class LevelSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        frontExperienceBar.fillAmount = currentExperience / requiredExperience;
-        backExperienceBar.fillAmount = currentExperience / requiredExperience;
-        requiredExperience = CalculateRequiredExperience();
-        levelText.text = level.ToString();
+        frontExperienceBar.fillAmount = playerScriptableObject.currentExperience / playerScriptableObject.requiredExperience;
+        backExperienceBar.fillAmount = playerScriptableObject.currentExperience / playerScriptableObject.requiredExperience;
+        playerScriptableObject.requiredExperience = CalculateRequiredExperience();
+        levelText.text = playerScriptableObject.level.ToString();
     }
 
     // Update is called once per frame
@@ -44,7 +46,7 @@ public class LevelSystem : MonoBehaviour
             GainExperience(20);
         }
 
-        if (currentExperience >= requiredExperience)
+        if (playerScriptableObject.currentExperience >= playerScriptableObject.requiredExperience)
         {
             LevelUp();
         }
@@ -52,7 +54,7 @@ public class LevelSystem : MonoBehaviour
 
     public void UpdateExperienceUI()
     {
-        float experienceFraction = currentExperience / requiredExperience;
+        float experienceFraction = playerScriptableObject.currentExperience / playerScriptableObject.requiredExperience;
         float frontExperienceBarFill = frontExperienceBar.fillAmount;
         if (frontExperienceBarFill < experienceFraction)
         {
@@ -66,31 +68,31 @@ public class LevelSystem : MonoBehaviour
             }
         }
 
-        experienceText.text = currentExperience + "/" + requiredExperience;
+        experienceText.text = playerScriptableObject.currentExperience + "/" + playerScriptableObject.requiredExperience;
     }
 
     public void GainExperience(float experienceGained)
     {
-        currentExperience += experienceGained;
+        playerScriptableObject.currentExperience += experienceGained;
         lerpTimer = 0f;
         delayTimer = 0f;
     }
 
     public void LevelUp()
     {
-        level++;
+        playerScriptableObject.level++;
         frontExperienceBar.fillAmount = 0;
         backExperienceBar.fillAmount = 0;
-        currentExperience = Mathf.RoundToInt(currentExperience - requiredExperience);
-        GetComponent<Player>().IncreaseHealth(level);
-        requiredExperience = CalculateRequiredExperience();
-        levelText.text = level.ToString();
+        playerScriptableObject.currentExperience = Mathf.RoundToInt(playerScriptableObject.currentExperience - playerScriptableObject.requiredExperience);
+        GetComponent<Player>().IncreaseHealth(playerScriptableObject.level);
+        playerScriptableObject.requiredExperience = CalculateRequiredExperience();
+        levelText.text = playerScriptableObject.level.ToString();
     }
 
     private int CalculateRequiredExperience()
     {
         int solveForRequiredExperience = 0;
-        for (int levelCycle = 1; levelCycle <= level; levelCycle++)
+        for (int levelCycle = 1; levelCycle <= playerScriptableObject.level; levelCycle++)
         {
             solveForRequiredExperience += (int)Mathf.Floor(levelCycle + additionMultiplier * Mathf.Pow(powerMultiplier, levelCycle / divisionMultiplier));
         }

@@ -7,6 +7,9 @@ public class PlayerScriptableObject : ScriptableObject
     public float health;
     public float maxHealth;
     public float speed;
+    public int level;
+    public float currentExperience;
+    public float requiredExperience;
 
     public WeaponScriptableObject weapon;
 }
