@@ -139,9 +139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04137a27cb4e4774888c5d9cf1377424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 5076571333579909779, guid: ef5741b23b5f310468da96f0485271be, type: 3}
-  attackDamage: 1
-  knockBackForce: 3
+  weaponScriptableObject: {fileID: 11400000, guid: fae32442dde05ac44b305cdc1371a4bc, type: 2}
 --- !u!114 &2780061949572125383
 MonoBehaviour:
   m_ObjectHideFlags: 0

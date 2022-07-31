@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2698e56d078b514baf4c760dc36fdec, type: 3}
-  m_Name: AllenRene
+  m_Name: Fern
   m_EditorClassIdentifier: 
-  name: FernandoDaBeast
-  health: 124.37284
-  maxHealth: 124.37284
-  speed: 5
-  level: 13
-  currentExperience: 5
-  requiredExperience: 28
+  name: Fern
+  health: -0.8533871
+  maxHealth: 3.146613
+  speed: 7
+  level: 7
+  currentExperience: 7
+  requiredExperience: 9
   weapon: {fileID: 11400000, guid: fae32442dde05ac44b305cdc1371a4bc, type: 2}

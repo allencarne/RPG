@@ -146,47 +146,13 @@ public class Player : MonoBehaviour
 
     public void PlayerAttackState()
     {
-        // Animate
-        animator.SetTrigger("Attack");
-
-        // Calculate the difference between mouse position and player position
-        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
-        if (!attackAnglePaused)
+        switch (playerScriptableObject.weapon.weaponIndex)
         {
-            // Set Attack Animation Depending on Mouse Position
-            animator.SetFloat("Aim Horizontal", difference.x);
-            animator.SetFloat("Aim Vertical", difference.y);
-            // Set Idle to last attack position
-            animator.SetFloat("Horizontal", difference.x);
-            animator.SetFloat("Vertical", difference.y);
-
-            //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1Velocity;
-            //Add force in Attack Direction
-            rb.AddForce(difference, ForceMode2D.Impulse);
-
-            //Set AttackAnglePause Bool to True
-            attackAnglePaused = true;
-        }
-
-        if (isAttacking)
-        {
-            //Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
-
-            //Get the Rigid Body of the Slash prefab
-            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-
-            //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.projectileForce, ForceMode2D.Impulse);
-
-            //Reset Animator Trigger
-            animator.ResetTrigger("Attack");
-
-            //Reset isAttacking Bool;
-            isAttacking = false;
+            case 0:
+                LeftMouse1Ability();
+                break;
+            case 1:
+                break;
         }
     }
 
@@ -228,10 +194,56 @@ public class Player : MonoBehaviour
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             //Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.projectileForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.spaceprojectileForce, ForceMode2D.Impulse);
 
             //Reset Animator Trigger
             animator.ResetTrigger("Dash");
+
+            //Reset isAttacking Bool;
+            isAttacking = false;
+        }
+    }
+
+    public void LeftMouse1Ability()
+    {
+        // Animate
+        animator.SetTrigger("Attack");
+
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            //Normalize movement vector and times it by attack move distance
+            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1SlideVelocity;
+            //Add force in Attack Direction
+            rb.AddForce(difference, ForceMode2D.Impulse);
+
+            //Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
+        if (isAttacking)
+        {
+            //Instantiate Slash prefab
+            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
+
+            //Get the Rigid Body of the Slash prefab
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+            //Add Force to Slash prefab
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
+
+            //Reset Animator Trigger
+            animator.ResetTrigger("Attack");
 
             //Reset isAttacking Bool;
             isAttacking = false;
