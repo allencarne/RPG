@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &13570154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 455584497, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &126501143
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,10 +294,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: level
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: experienceText
       value: 
       objectReference: {fileID: 2012457930}
@@ -298,18 +305,14 @@ PrefabInstance:
       propertyPath: frontExperienceBar
       value: 
       objectReference: {fileID: 2100256881}
-    - target: {fileID: 85770857, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: playerScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
     - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: attackMoveDistance
-      value: 1000
+      propertyPath: nameText
+      value: 
+      objectReference: {fileID: 1412855202}
+    - target: {fileID: 1229768598, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_text
+      value: xXxPussySlayerxXx
       objectReference: {fileID: 0}
-    - target: {fileID: 533100505, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
-      propertyPath: playerScriptableObject
-      value: 
-      objectReference: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
     - target: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_Name
       value: Player
@@ -855,6 +858,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142952004}
   m_CullTransparentMesh: 1
+--- !u!114 &1412855202 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1229768598, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1554605444 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 946604189, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1566622998 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2143432503, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1762470788
 GameObject:
   m_ObjectHideFlags: 0
@@ -11005,6 +11041,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7388813305273751382, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
   m_PrefabInstance: {fileID: 479851453}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2090863388 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+  m_PrefabInstance: {fileID: 479851453}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2090863396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090863388}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b6044116ce27b4994244ad2a31f886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScriptableObject: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
+  frontHealthBar: {fileID: 13570154}
+  backHealthbar: {fileID: 1554605444}
+  healthText: {fileID: 1566622998}
+  chipSpeed: 2
+  lerpTimer: 0
 --- !u!1 &2100256879
 GameObject:
   m_ObjectHideFlags: 0

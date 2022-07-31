@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public Image frontHealthBar;
     public Image backHealthbar;
     public TextMeshProUGUI healthText;
+    public TextMeshProUGUI nameText;
     private float chipSpeed = 2f;
     private float lerpTimer;
 
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
     {
         // Set Current Player Health to Max Health
         playerScriptableObject.health = playerScriptableObject.maxHealth;
+        nameText.text = playerScriptableObject.name.ToString();
     }
      void Update()
     {
@@ -236,7 +238,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AttackAnimationEnd()
+    public void AttackAnimationEnd() // Animation Event
     {
         animator.ResetTrigger("Attack");
         animator.ResetTrigger("Dash");
@@ -244,7 +246,7 @@ public class Player : MonoBehaviour
         state = PlayerState.idle;
     }
 
-    public void Attack()
+    public void Attack() // Animation Event
     {
         isAttacking = true;
     }
