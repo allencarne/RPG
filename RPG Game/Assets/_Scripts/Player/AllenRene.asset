@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2698e56d078b514baf4c760dc36fdec, type: 3}
   m_Name: AllenRene
   m_EditorClassIdentifier: 
-  name: FernandoDaBeast
-  health: 124.37284
-  maxHealth: 124.37284
+  name: AllenRene
+  health: 121.65115
+  maxHealth: 129.65115
   speed: 5
-  level: 13
-  currentExperience: 5
-  requiredExperience: 28
+  level: 18
+  currentExperience: 46
+  requiredExperience: 53
   weapon: {fileID: 11400000, guid: fae32442dde05ac44b305cdc1371a4bc, type: 2}
