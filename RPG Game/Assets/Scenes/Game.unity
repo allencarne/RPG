@@ -515,7 +515,7 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5373405154731565594, guid: effcd77381b06294982dbe24ed4e915e, type: 3}
   enemySpawner: {fileID: 584547538}
   spawnBox: {x: 10, y: 10, z: 0}
-  enemyCount: 0
+  maxEnemyCount: 20
 --- !u!4 &584547540
 Transform:
   m_ObjectHideFlags: 0
@@ -37180,7 +37180,7 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -3, y: 1, z: 0}
+  - first: {x: -4, y: 1, z: 0}
     second:
       serializedVersion: 2
       m_TileIndex: 1

@@ -7,24 +7,24 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     [Header("Variables")]
-    Vector2 movement;
-    bool isAttacking;
-    bool attackAnglePaused = false;
+    [HideInInspector] Vector2 movement;
+    [HideInInspector] bool isAttacking;
+    [HideInInspector] bool attackAnglePaused = false;
 
     [Header("Components")]
-    public PlayerScriptableObject playerScriptableObject;
-    public Animator animator;
-    public Rigidbody2D rb;
-    public Transform firePoint;
-    private Camera cam;
+    [SerializeField] PlayerScriptableObject playerScriptableObject;
+    [SerializeField] Animator animator;
+    [SerializeField] Rigidbody2D rb;
+    [SerializeField] Transform firePoint;
+    [HideInInspector] Camera cam;
 
     [Header("HealthBar")]
-    public Image frontHealthBar;
-    public Image backHealthbar;
-    public TextMeshProUGUI healthText;
-    public TextMeshProUGUI nameText;
-    private float chipSpeed = 2f;
-    private float lerpTimer;
+    [SerializeField] Image frontHealthBar;
+    [SerializeField] Image backHealthbar;
+    [SerializeField] TextMeshProUGUI healthText;
+    [SerializeField] TextMeshProUGUI nameText;
+    [HideInInspector] float chipSpeed = 2f;
+    [HideInInspector] float lerpTimer;
 
     enum PlayerState
     {
