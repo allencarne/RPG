@@ -31,7 +31,8 @@ public class Player : MonoBehaviour
         idle,
         move,
         attack,
-        dash
+        dash,
+        hit
     }
 
     PlayerState state = PlayerState.idle;
@@ -65,6 +66,9 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.dash:
                 PlayerDashState();
+                break;
+            case PlayerState.hit:
+                PlayerHitState();
                 break;
         }
 
@@ -202,6 +206,11 @@ public class Player : MonoBehaviour
             //Reset isAttacking Bool;
             isAttacking = false;
         }
+    }
+
+    public void PlayerHitState()
+    {
+
     }
 
     public void LeftMouse1Ability()
