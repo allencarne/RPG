@@ -10,7 +10,7 @@ public class EnemyHitIndicator : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            other.GetComponent<Player>().PlayerTakeDamage(enemyDamage);
+            other.GetComponent<Player>().PlayerHitState(enemyDamage);
         }
     }
 

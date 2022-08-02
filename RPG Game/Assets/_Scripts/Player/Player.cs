@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [HideInInspector] Vector2 movement;
     [HideInInspector] bool isAttacking;
     [HideInInspector] bool attackAnglePaused = false;
+    public float damage;
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
                 PlayerDashState();
                 break;
             case PlayerState.hit:
-                PlayerHitState();
+                PlayerHitState(damage);
                 break;
         }
 
@@ -78,7 +79,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            PlayerTakeDamage(5f);
+            PlayerHitState(5f);
         }
 
         if (Input.GetKeyDown(KeyCode.Z))
@@ -208,9 +209,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void PlayerHitState()
+    public void PlayerHitState(float damage)
     {
+        // Transition
+        state = PlayerState.hit;
 
+        // Animate
+        animator.Play("Hit");
+
+        // Logic
+        playerScriptableObject.health -= damage;
+        lerpTimer = 0f;
+
+        if (playerScriptableObject.health <= 0)
+        {
+            PlayerDie();
+        }
     }
 
     public void LeftMouse1Ability()
@@ -272,6 +286,12 @@ public class Player : MonoBehaviour
         isAttacking = true;
     }
 
+    public void HitAnimationEnd()
+    {
+        //animator.ResetTrigger("Hit");
+        state = PlayerState.idle;
+    }
+
     public void UpdateHealthUI()
     {
         float fillFront = frontHealthBar.fillAmount;
@@ -307,6 +327,7 @@ public class Player : MonoBehaviour
         lerpTimer = 0f;
     }
 
+    /*
     public void PlayerTakeDamage(float damage)
     {
         playerScriptableObject.health -= damage;
@@ -317,6 +338,7 @@ public class Player : MonoBehaviour
             PlayerDie();
         }
     }
+    */
 
     public void IncreaseHealth(int level)
     {
