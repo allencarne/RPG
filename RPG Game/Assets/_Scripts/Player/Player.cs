@@ -95,7 +95,8 @@ public class Player : MonoBehaviour
     public void PlayerIdleState()
     {
         // Animate
-        animator.SetBool("isMoving", false);
+        animator.Play("Idle");
+        //animator.SetBool("isMoving", false);
 
         // State Transition - Move
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
@@ -119,7 +120,8 @@ public class Player : MonoBehaviour
     public void PlayerMoveState()
     {
         // Animate
-        animator.SetBool("isMoving", true);
+        animator.Play("Move");
+        //animator.SetBool("isMoving", true);
         if (movement != Vector2.zero)
         {
             animator.SetFloat("Horizontal", movement.x);
@@ -155,6 +157,9 @@ public class Player : MonoBehaviour
 
     public void PlayerAttackState()
     {
+        //Animate
+        animator.Play("Attack");
+
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
@@ -167,8 +172,9 @@ public class Player : MonoBehaviour
 
     public void PlayerDashState()
     {
-        //State Logic
-        animator.SetTrigger("Dash");
+        // Animate
+        animator.Play("Dash");
+        //animator.SetTrigger("Dash");
 
         //Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -215,6 +221,8 @@ public class Player : MonoBehaviour
 
     public void PlayerHitState(float damage)
     {
+        // Animate
+        animator.Play("Hit");
         //animator.ResetTrigger("Attack");
         //animator.ResetTrigger("Dash");
 
@@ -243,7 +251,7 @@ public class Player : MonoBehaviour
     public void LeftMouse1Ability()
     {
         // Animate
-        animator.SetTrigger("Attack");
+        //animator.SetTrigger("Attack");
 
         // Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -288,8 +296,8 @@ public class Player : MonoBehaviour
 
     public void AttackAnimationEnd() // Animation Event
     {
-        animator.ResetTrigger("Attack");
-        animator.ResetTrigger("Dash");
+        //animator.ResetTrigger("Attack");
+        //animator.ResetTrigger("Dash");
         attackAnglePaused = false;
         state = PlayerState.idle;
     }
