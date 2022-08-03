@@ -33,7 +33,8 @@ public class Player : MonoBehaviour
         move,
         attack,
         dash,
-        hit
+        hit,
+        death
     }
 
     PlayerState state = PlayerState.idle;
@@ -70,6 +71,9 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.hit:
                 PlayerHitState(damage);
+                break;
+            case PlayerState.death:
+                PlayerDeathState();
                 break;
         }
 
@@ -223,8 +227,14 @@ public class Player : MonoBehaviour
 
         if (playerScriptableObject.health <= 0)
         {
-            PlayerDie();
+            PlayerDeathState();
         }
+    }
+
+    public void PlayerDeathState()
+    {
+        state = PlayerState.death;
+        Destroy(gameObject);
     }
 
     public void LeftMouse1Ability()
@@ -344,10 +354,5 @@ public class Player : MonoBehaviour
     {
         playerScriptableObject.maxHealth += (playerScriptableObject.health * 0.01f) * ((100 - level) * 0.01f);
         playerScriptableObject.health = playerScriptableObject.maxHealth;
-    }
-
-    public void PlayerDie()
-    {
-        Destroy(gameObject);
     }
 }
