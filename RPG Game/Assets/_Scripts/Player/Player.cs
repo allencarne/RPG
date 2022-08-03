@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     [HideInInspector] Vector2 movement;
     [HideInInspector] bool isAttacking;
     [HideInInspector] bool attackAnglePaused = false;
-    public float damage;
+    public float damage; // Temporary
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -215,6 +215,9 @@ public class Player : MonoBehaviour
 
     public void PlayerHitState(float damage)
     {
+        //animator.ResetTrigger("Attack");
+        //animator.ResetTrigger("Dash");
+
         // Transition
         state = PlayerState.hit;
 
@@ -336,19 +339,6 @@ public class Player : MonoBehaviour
         playerScriptableObject.health += healAmount;
         lerpTimer = 0f;
     }
-
-    /*
-    public void PlayerTakeDamage(float damage)
-    {
-        playerScriptableObject.health -= damage;
-        lerpTimer = 0f;
-
-        if (playerScriptableObject.health <= 0)
-        {
-            PlayerDie();
-        }
-    }
-    */
 
     public void IncreaseHealth(int level)
     {
