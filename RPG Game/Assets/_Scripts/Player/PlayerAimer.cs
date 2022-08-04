@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerAimer : MonoBehaviour
 {
+    Player playerScript;
     public float offset;
     public Transform firePoint;
     [SerializeField] GameObject player;
-    [SerializeField] Animator animator;
-
+    //[SerializeField] Animator animator;
     private void Awake()
     {
-        animator = player.GetComponent<Animator>();
+        playerScript = player.GetComponent<Player>();
     }
 
     void Update()
     {
         // If Attack Animation is playing Don't Move the firepoint (This is to prevent moving attacks moving during animation && this dosn't handle the animation)
-        if (animator.GetBool("Attack") == false)
+        if (!playerScript.attackAnglePaused)
         {
             // Rotate towards mouse position
             Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;

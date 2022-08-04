@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("Variables")]
     [HideInInspector] Vector2 movement;
     [HideInInspector] bool isAttacking;
-    [HideInInspector] bool attackAnglePaused = false;
+    public bool attackAnglePaused = false;
     public float damage; // Temporary
 
     [Header("Components")]
@@ -157,9 +157,6 @@ public class Player : MonoBehaviour
 
     public void PlayerAttackState()
     {
-        //Animate
-        animator.Play("Attack");
-
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
@@ -250,15 +247,15 @@ public class Player : MonoBehaviour
 
     public void LeftMouse1Ability()
     {
-        // Animate
-        //animator.SetTrigger("Attack");
-
         // Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
         if (!attackAnglePaused)
         {
+            // Animate
+            animator.Play("Attack");
+
             // Set Attack Animation Depending on Mouse Position
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
