@@ -129,26 +129,26 @@ public class Player : MonoBehaviour
         }
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        //Input
+        // Input
         Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         movement = moveInput.normalized * playerScriptableObject.speed;
 
-        //Movement
+        // Movement
         rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
 
-        //State Transition - Idle
+        // State Transition - Idle
         if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
         {
             state = PlayerState.idle;
         }
 
-        //State Transition - Attack
+        // State Transition - Attack
         if (Input.GetMouseButtonDown(0))
         {
             state = PlayerState.attack;
         }
 
-        //State Transition - Dash
+        // State Transition - Dash
         if (Input.GetKey(KeyCode.Space))
         {
             state = PlayerState.dash;
@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
         // Animate
         animator.Play("Dash");
 
-        //Calculate the difference between mouse position and player position
+        // Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         if (!attackAnglePaused)
@@ -180,34 +180,31 @@ public class Player : MonoBehaviour
             //Set Attack Animation Depending on Mouse Position
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
-
             //Set Idle to last attack position
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            ////Slide Forward When Attacking
             //Normalize movement vector and times it by attack move distance
             difference = difference.normalized * playerScriptableObject.weapon.spaceVelocity;
-
-            //Add force in Attack Direction
+            // Slide in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
-            //Set AttackAnglePause Bool to True
+            // Set AttackAnglePause Bool to True
             attackAnglePaused = true;
         }
 
         if (isAttacking)
         {
-            //Instantiate Slash prefab
+            // Instantiate Slash prefab
             GameObject slash = Instantiate(playerScriptableObject.weapon.spacePrefab, firePoint.position, firePoint.rotation);
 
-            //Get the Rigid Body of the Slash prefab
+            // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
-            //Add Force to Slash prefab
+            // Add Force to Slash prefab
             slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.spaceprojectileForce, ForceMode2D.Impulse);
 
-            //Reset isAttacking Bool;
+            // Reset isAttacking Bool;
             isAttacking = false;
         }
     }
@@ -219,6 +216,9 @@ public class Player : MonoBehaviour
 
         // Animate
         animator.Play("Hit");
+
+        // Prevents Bug - Makes sure that dash and attack always allows direction change and slide
+        attackAnglePaused = false;
 
         // Logic
         playerScriptableObject.health -= damage;
@@ -254,27 +254,27 @@ public class Player : MonoBehaviour
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            //Normalize movement vector and times it by attack move distance
+            // Normalize movement vector and times it by attack move distance
             difference = difference.normalized * playerScriptableObject.weapon.leftMouse1SlideVelocity;
-            //Add force in Attack Direction
+            // Slide in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
-            //Set AttackAnglePause Bool to True
+            // Set AttackAnglePause Bool to True
             attackAnglePaused = true;
         }
 
         if (isAttacking)
         {
-            //Instantiate Slash prefab
+            // Instantiate Slash prefab
             GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
 
-            //Get the Rigid Body of the Slash prefab
+            // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
-            //Add Force to Slash prefab
+            // Add Force to Slash prefab
             slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
 
-            //Reset isAttacking Bool;
+            // Reset isAttacking Bool;
             isAttacking = false;
         }
     }
