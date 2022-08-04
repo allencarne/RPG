@@ -14,18 +14,11 @@ public class Player : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
+    PlayerHealthbar playerHealthbar;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform firePoint;
     Camera cam;
-
-    [Header("HealthBar")]
-    [SerializeField] Image frontHealthBar;
-    [SerializeField] Image backHealthbar;
-    [SerializeField] TextMeshProUGUI healthText;
-    [SerializeField] TextMeshProUGUI nameText;
-    float chipSpeed = 2f;
-    float lerpTimer;
 
     enum PlayerState
     {
@@ -41,16 +34,10 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        playerHealthbar = GetComponent<PlayerHealthbar>();
         cam = Camera.main;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Set Current Player Health to Max Health
-        playerScriptableObject.health = playerScriptableObject.maxHealth;
-        nameText.text = playerScriptableObject.name.ToString();
-    }
      void Update()
     {
         Debug.Log(state);
@@ -76,10 +63,6 @@ public class Player : MonoBehaviour
                 PlayerDeathState();
                 break;
         }
-
-        // Healthbar UI Update
-        playerScriptableObject.health = Mathf.Clamp(playerScriptableObject.health, 0, playerScriptableObject.maxHealth);
-        UpdateHealthUI();
 
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -222,7 +205,7 @@ public class Player : MonoBehaviour
 
         // Logic
         playerScriptableObject.health -= damage;
-        lerpTimer = 0f;
+        playerHealthbar.lerpTimer = 0f;
 
         if (playerScriptableObject.health <= 0)
         {
@@ -295,39 +278,10 @@ public class Player : MonoBehaviour
         state = PlayerState.idle;
     }
 
-    public void UpdateHealthUI()
-    {
-        float fillFront = frontHealthBar.fillAmount;
-        float fillBack = backHealthbar.fillAmount;
-        float healthFraction = playerScriptableObject.health / playerScriptableObject.maxHealth;
-
-        if (fillBack > healthFraction)
-        {
-            frontHealthBar.fillAmount = healthFraction;
-            backHealthbar.color = Color.red;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
-            backHealthbar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
-        }
-
-        if (fillFront < healthFraction)
-        {
-            backHealthbar.color = Color.green;
-            backHealthbar.fillAmount = healthFraction;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
-            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthbar.fillAmount, percentComplete);
-        }
-
-        healthText.text = Mathf.Round(playerScriptableObject.health) + "/" + Mathf.Round(playerScriptableObject.maxHealth);
-    }
-
     public void RestoreHealth (float healAmount)
     {
         playerScriptableObject.health += healAmount;
-        lerpTimer = 0f;
+        playerHealthbar.lerpTimer = 0f;
     }
 
     public void IncreaseHealth(int level)
