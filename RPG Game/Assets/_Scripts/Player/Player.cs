@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
     {
         // Animate
         animator.Play("Idle");
-        //animator.SetBool("isMoving", false);
 
         // State Transition - Move
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
@@ -121,7 +120,8 @@ public class Player : MonoBehaviour
     {
         // Animate
         animator.Play("Move");
-        //animator.SetBool("isMoving", true);
+
+        // Set idle Animation after move
         if (movement != Vector2.zero)
         {
             animator.SetFloat("Horizontal", movement.x);
@@ -171,7 +171,6 @@ public class Player : MonoBehaviour
     {
         // Animate
         animator.Play("Dash");
-        //animator.SetTrigger("Dash");
 
         //Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -208,9 +207,6 @@ public class Player : MonoBehaviour
             //Add Force to Slash prefab
             slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.spaceprojectileForce, ForceMode2D.Impulse);
 
-            //Reset Animator Trigger
-            animator.ResetTrigger("Dash");
-
             //Reset isAttacking Bool;
             isAttacking = false;
         }
@@ -218,11 +214,6 @@ public class Player : MonoBehaviour
 
     public void PlayerHitState(float damage)
     {
-        // Animate
-        animator.Play("Hit");
-        //animator.ResetTrigger("Attack");
-        //animator.ResetTrigger("Dash");
-
         // Transition
         state = PlayerState.hit;
 
@@ -247,15 +238,15 @@ public class Player : MonoBehaviour
 
     public void LeftMouse1Ability()
     {
+        // Animate
+        animator.Play("Attack");
+
         // Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
         if (!attackAnglePaused)
         {
-            // Animate
-            animator.Play("Attack");
-
             // Set Attack Animation Depending on Mouse Position
             animator.SetFloat("Aim Horizontal", difference.x);
             animator.SetFloat("Aim Vertical", difference.y);
@@ -283,9 +274,6 @@ public class Player : MonoBehaviour
             //Add Force to Slash prefab
             slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
 
-            //Reset Animator Trigger
-            animator.ResetTrigger("Attack");
-
             //Reset isAttacking Bool;
             isAttacking = false;
         }
@@ -293,8 +281,6 @@ public class Player : MonoBehaviour
 
     public void AttackAnimationEnd() // Animation Event
     {
-        //animator.ResetTrigger("Attack");
-        //animator.ResetTrigger("Dash");
         attackAnglePaused = false;
         state = PlayerState.idle;
     }
@@ -306,7 +292,6 @@ public class Player : MonoBehaviour
 
     public void HitAnimationEnd()
     {
-        //animator.ResetTrigger("Hit");
         state = PlayerState.idle;
     }
 
