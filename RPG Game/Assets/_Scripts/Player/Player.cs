@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
 
      void Update()
     {
-        Debug.Log(state);
+        //Debug.Log(state);
 
         switch (state)
         {

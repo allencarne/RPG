@@ -5,18 +5,37 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemySpawner enemySpawner;
-    public GameObject expObject;
-    public Animator animator;
+    [Header("Variables")]
+    private float currentHealth;
+    [SerializeField] float maxHealth = 100;
+    float damage;
+
+    [Header("Components")]
+    [SerializeField] EnemyScriptableObject enemyScriptableObject;
+    //public EnemySpawner enemySpawner;
+    [SerializeField] GameObject expObject;
+    [SerializeField] Animator enemyAnimator;
+    [SerializeField] Rigidbody2D enemyRigidbody2D;
+    [SerializeField] Transform player;
+
     public Image frontHealthBar;
     public Image backHealthBar;
-    public Canvas enemyUI;
-    
-    [SerializeField] float maxHealth = 100;
-    [SerializeField] float chipSpeed = 2f;
+    //public Canvas enemyUI;
+    [HideInInspector] public float chipSpeed = 2f;
+    [HideInInspector] public float lerpTimer;
 
-    private float lerpTimer;
-    private float currentHealth;
+
+    enum EnemyState
+    {
+        idle,
+        wander,
+        chase,
+        attack,
+        hit,
+        death
+    }
+
+    EnemyState state = EnemyState.idle;
 
     // Start is called before the first frame update
     void Start()
@@ -25,41 +44,120 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
 
         // Locate Enemy spawner Class
-        enemySpawner = FindObjectOfType<EnemySpawner>();
+        //enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     private void Update()
     {
+        Debug.Log(state);
+
+        switch (state)
+        {   
+            case EnemyState.idle:
+                EnemyIdleState();
+                break;
+            case EnemyState.wander:
+                EnemyWanderState();
+                break;
+            case EnemyState.chase:
+                EnemyChaseState();
+                break;
+            case EnemyState.attack:
+                EnemyAttackState();
+                break;
+            case EnemyState.hit:
+                EnemyHitState(damage);
+                break;
+            case EnemyState.death:
+                EnemyDeathtate();
+                break;
+        }
+
         // Prevents healthbar from being below or 0 or above max health
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 
         UpateHealthUI();
     }
 
-    public void TakeDamage(float damage)
+    public void EnemyIdleState()
     {
-        currentHealth -= damage;
-        lerpTimer = 0f;
+        // Animate
+        enemyAnimator.Play("Idle");
+        enemyAnimator.SetFloat("Horizontal", enemyRigidbody2D.position.x);
+        enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
-        // Player hurt animation
-        animator.SetTrigger("Hurt");
-
-        if (currentHealth <= 0)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
         {
-            Die();
+            state = EnemyState.idle;
+        }
+
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.aggroRange)
+        {
+            state = EnemyState.chase;
         }
     }
 
-    void Die()
+    public void EnemyWanderState()
     {
-        // Die animation
-        animator.SetBool("isDead", true);
+
+    }
+
+    public void EnemyChaseState()
+    {
+        // Animate
+        enemyAnimator.Play("Move");
+
+        Vector2 target = new Vector2(player.position.x, player.position.y);
+        Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, enemyScriptableObject.speed * Time.fixedDeltaTime);
+        enemyRigidbody2D.MovePosition(newPos);
+
+        enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
+        enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
+
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        {
+            state = EnemyState.idle;
+        }
+
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        {
+            state = EnemyState.attack;
+        }
+    }
+
+    public void EnemyAttackState()
+    {
+        // Animate
+        enemyAnimator.Play("Attack");
+        enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
+        enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
+    }
+
+    public void EnemyHitState(float damage)
+    {
+        // Animate
+        state = EnemyState.hit;
+        enemyAnimator.Play("Hit");
+
+        currentHealth -= damage;
+        lerpTimer = 0f;
+
+        if (currentHealth <= 0)
+        {
+            state = EnemyState.death;
+        }
+    }
+
+    public void EnemyDeathtate()
+    {
+        // Animate
+        enemyAnimator.Play("Death");
 
         // Instantiate Exp Object
         Instantiate(expObject, transform.position, Quaternion.identity);
 
         // Turn off Healthbar
-        enemyUI.gameObject.SetActive(false);
+        //enemyUI.gameObject.SetActive(false);
 
         // Turn off Enemy Collider
         GetComponent<Collider2D>().enabled = false;
@@ -68,7 +166,17 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 5f);
 
         // Spawn another enemy
-        enemySpawner.SpawnEnemy();
+        //enemySpawner.SpawnEnemy();
+    }
+
+    public void AE_AttackAnimationEnd()
+    {
+        state = EnemyState.idle;
+    }
+
+    public void AE_HitAnimationEnd()
+    {
+        state = EnemyState.idle;
     }
 
     void UpateHealthUI()
