@@ -21,7 +21,7 @@ public class EnemyHitIndicator : MonoBehaviour
 
     public void DestroyAfterAnimation()
     {
-        Destroy(gameObject);
         GetComponent<BoxCollider2D>().enabled = false;
+        Destroy(gameObject);
     }
 }
