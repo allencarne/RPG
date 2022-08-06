@@ -14,8 +14,14 @@ public class EnemyHitIndicator : MonoBehaviour
         }
     }
 
+    public void TurnOnHitBox()
+    {
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
     public void DestroyAfterAnimation()
     {
         Destroy(gameObject);
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }

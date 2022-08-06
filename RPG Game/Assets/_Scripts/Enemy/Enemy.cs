@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] Rigidbody2D enemyRigidbody2D;
     [SerializeField] Transform player;
     [SerializeField] EnemyHealthbar enemyHealthbar;
+    [SerializeField] GameObject hitInidcator;
+    [SerializeField] Transform firePoint;
 
     private void Awake()
     {
@@ -161,6 +163,10 @@ public class Enemy : MonoBehaviour
         enemyAnimator.Play("Attack");
         enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
         enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
+
+        Vector2 difference = player.position - transform.position;
+
+        Instantiate(hitInidcator, firePoint.position, firePoint.rotation);
     }
 
     public void EnemyHitState(float damage)
