@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [Header("Variables")]
-    private float currentHealth;
-    [SerializeField] float maxHealth = 100;
+    //private float currentHealth;
+    //[SerializeField] float maxHealth = 100;
     float damage;
 
     [Header("Components")]
@@ -17,13 +17,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] Animator enemyAnimator;
     [SerializeField] Rigidbody2D enemyRigidbody2D;
     [SerializeField] Transform player;
+    [SerializeField] EnemyHealthbar enemyHealthbar;
 
-    public Image frontHealthBar;
-    public Image backHealthBar;
-    //public Canvas enemyUI;
-    [HideInInspector] public float chipSpeed = 2f;
-    [HideInInspector] public float lerpTimer;
-
+    private void Awake()
+    {
+        enemyHealthbar = GetComponent<EnemyHealthbar>();
+    }
 
     enum EnemyState
     {
@@ -40,9 +39,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Set Current Health to Max Health at the start of the game
-        currentHealth = maxHealth;
-
         // Locate Enemy spawner Class
         //enemySpawner = FindObjectOfType<EnemySpawner>();
     }
@@ -72,11 +68,6 @@ public class Enemy : MonoBehaviour
                 EnemyDeathtate();
                 break;
         }
-
-        // Prevents healthbar from being below or 0 or above max health
-        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-
-        UpateHealthUI();
     }
 
     public void EnemyIdleState()
@@ -139,10 +130,10 @@ public class Enemy : MonoBehaviour
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
 
-        currentHealth -= damage;
-        lerpTimer = 0f;
+        enemyScriptableObject.health -= damage;
+        enemyHealthbar.lerpTimer = 0f;
 
-        if (currentHealth <= 0)
+        if (enemyScriptableObject.health <= 0)
         {
             state = EnemyState.death;
         }
@@ -152,9 +143,6 @@ public class Enemy : MonoBehaviour
     {
         // Animate
         enemyAnimator.Play("Death");
-
-        // Instantiate Exp Object
-        Instantiate(expObject, transform.position, Quaternion.identity);
 
         // Turn off Healthbar
         //enemyUI.gameObject.SetActive(false);
@@ -179,30 +167,9 @@ public class Enemy : MonoBehaviour
         state = EnemyState.idle;
     }
 
-    void UpateHealthUI()
+    public void AE_DeathAnimationEnd()
     {
-        float fillFront = frontHealthBar.fillAmount;
-        float fillBack = backHealthBar.fillAmount;
-        float healthFraction = currentHealth / maxHealth;
-
-        if (fillBack > healthFraction)
-        {
-            frontHealthBar.fillAmount = healthFraction;
-            backHealthBar.color = Color.white;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
-            backHealthBar.fillAmount = Mathf.Lerp(fillBack, healthFraction, percentComplete);
-        }
-
-        if (fillFront < healthFraction)
-        {
-            backHealthBar.color = Color.green;
-            backHealthBar.fillAmount = healthFraction;
-            lerpTimer += Time.deltaTime;
-            float percentComplete = lerpTimer / chipSpeed;
-            percentComplete = percentComplete * percentComplete;
-            frontHealthBar.fillAmount = Mathf.Lerp(fillFront, backHealthBar.fillAmount, percentComplete);
-        }
+        // Instantiate Exp Object
+        Instantiate(expObject, transform.position, Quaternion.identity);
     }
 }
