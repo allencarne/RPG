@@ -8,16 +8,20 @@ public class EnemyHealthbar : MonoBehaviour
     [SerializeField] EnemyScriptableObject enemyScriptableObject;
 
     [Header("HealthBar")]
-    public Image frontHealthBar;
-    public Image backHealthBar;
-    public Canvas enemyUI;
+    [SerializeField] Image frontHealthBar;
+    [SerializeField] Image backHealthBar;
+    [SerializeField] public Canvas enemyUI;
     [HideInInspector] public float chipSpeed = 2f;
     [HideInInspector] public float lerpTimer;
 
-    public void Update()
+    public void Start()
     {
         // Set Current Health to Max Health at the start of the game
         enemyScriptableObject.health = enemyScriptableObject.maxHealth;
+    }
+
+    public void Update()
+    {
 
         // Prevents healthbar from being below or 0 or above max health
         enemyScriptableObject.health = Mathf.Clamp(enemyScriptableObject.health, 0, enemyScriptableObject.maxHealth);

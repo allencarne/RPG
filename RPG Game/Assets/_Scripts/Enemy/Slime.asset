@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Slime
   m_EditorClassIdentifier: 
   name: Slime
-  health: 3
+  health: 0
   maxHealth: 3
   speed: 1
   attackRange: 0.7
   aggroRange: 3
+  attackCoolDown: 1.5

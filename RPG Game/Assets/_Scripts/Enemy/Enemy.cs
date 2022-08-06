@@ -6,13 +6,17 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [Header("Variables")]
-    //private float currentHealth;
-    //[SerializeField] float maxHealth = 100;
-    float damage;
+    float damage; // Temporary
+    float lastAttack; // Temporary Variable that helps with Attack Cooldown
+    float wanderCoolDown = 4f;
+    float lastWander;
+    Vector2 wayPoint;
+    float maxDistance = 5;
+    float range = 1;
 
     [Header("Components")]
     [SerializeField] EnemyScriptableObject enemyScriptableObject;
-    //public EnemySpawner enemySpawner;
+    [SerializeField] public EnemySpawner enemySpawner;
     [SerializeField] GameObject expObject;
     [SerializeField] Animator enemyAnimator;
     [SerializeField] Rigidbody2D enemyRigidbody2D;
@@ -40,7 +44,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         // Locate Enemy spawner Class
-        //enemySpawner = FindObjectOfType<EnemySpawner>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     private void Update()
@@ -77,26 +81,54 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetFloat("Horizontal", enemyRigidbody2D.position.x);
         enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
-        {
-            state = EnemyState.idle;
-        }
-
+        // Transitions
         if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.aggroRange)
         {
             state = EnemyState.chase;
         }
+
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        {
+            state = EnemyState.attack;
+        }
+
+        if (Time.time - lastWander < wanderCoolDown)
+        {
+            return;
+        }
+        lastWander = Time.time;
+        state = EnemyState.wander;
     }
 
     public void EnemyWanderState()
     {
+        // Animate
+        enemyAnimator.Play("Wander");
+        enemyAnimator.SetFloat("Horizontal", enemyRigidbody2D.position.x);
+        enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
+        transform.position = Vector2.MoveTowards(transform.position, wayPoint, enemyScriptableObject.speed * Time.deltaTime);
+        if (Vector2.Distance(transform.position, wayPoint) < range)
+        {
+            SetNewDsetination();
+        }
+
+        // Transitions
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.aggroRange)
+        {
+            state = EnemyState.chase;
+        }
+
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        {
+            state = EnemyState.attack;
+        }
     }
 
     public void EnemyChaseState()
     {
         // Animate
-        enemyAnimator.Play("Move");
+        enemyAnimator.Play("Chase");
 
         Vector2 target = new Vector2(player.position.x, player.position.y);
         Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, enemyScriptableObject.speed * Time.fixedDeltaTime);
@@ -105,7 +137,8 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
         enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
 
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        // Transitions
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) >= enemyScriptableObject.aggroRange)
         {
             state = EnemyState.idle;
         }
@@ -118,6 +151,12 @@ public class Enemy : MonoBehaviour
 
     public void EnemyAttackState()
     {
+        if (Time.time- lastAttack < enemyScriptableObject.attackCoolDown)
+        {
+            return;
+        }
+        lastAttack = Time.time;
+
         // Animate
         enemyAnimator.Play("Attack");
         enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
@@ -145,7 +184,7 @@ public class Enemy : MonoBehaviour
         enemyAnimator.Play("Death");
 
         // Turn off Healthbar
-        //enemyUI.gameObject.SetActive(false);
+        enemyHealthbar.enemyUI.gameObject.SetActive(false);
 
         // Turn off Enemy Collider
         GetComponent<Collider2D>().enabled = false;
@@ -154,7 +193,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 5f);
 
         // Spawn another enemy
-        //enemySpawner.SpawnEnemy();
+        enemySpawner.SpawnEnemy();
     }
 
     public void AE_AttackAnimationEnd()
@@ -171,5 +210,19 @@ public class Enemy : MonoBehaviour
     {
         // Instantiate Exp Object
         Instantiate(expObject, transform.position, Quaternion.identity);
+    }
+
+    public void SetNewDsetination()
+    {
+        wayPoint = new Vector2(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance));
+        state = EnemyState.idle;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(enemyRigidbody2D.position, enemyScriptableObject.aggroRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(enemyRigidbody2D.position, enemyScriptableObject.attackRange);
     }
 }

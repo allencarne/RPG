@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public GameObject enemySpawner;
-    public Vector3 spawnBox;
-    private float xPos;
-    private float yPos;
+    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] GameObject enemySpawner;
+    [SerializeField] int maxEnemyCount;
+    [SerializeField] Vector3 spawnBox;
     int enemyCount;
-    public int maxEnemyCount;
+    float xPos;
+    float yPos;
 
 
     // Start is called before the first frame update
@@ -34,12 +34,12 @@ public class EnemySpawner : MonoBehaviour
         xPos = Random.Range(-spawnBox.x, spawnBox.x);
         yPos = Random.Range(-spawnBox.y, spawnBox.y);
 
-        Instantiate(enemyPrefab, new Vector3(xPos, yPos, 0) + transform.position, Quaternion.identity);
+        Instantiate(enemyPrefab, new Vector3 (xPos, yPos, 0) + enemySpawner.transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, spawnBox);
+        Gizmos.DrawWireCube(enemySpawner.transform.position, spawnBox);
     }
 }
