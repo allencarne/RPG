@@ -6,6 +6,15 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [Header("Variables")]
+    //public new string name;
+    public float health;
+    public float maxHealth;
+    public float speed;
+    public float attackRange;
+    public float aggroRange;
+
+    public float attackCoolDown;
+
     float damage; // Temporary
     float lastAttack; // Temporary Variable that helps with Attack Cooldown
     float wanderCoolDown = 4f;
@@ -16,7 +25,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Components")]
     [HideInInspector] public EnemySpawner enemySpawner;
-    [SerializeField] EnemyScriptableObject enemyScriptableObject;
+    //[SerializeField] EnemyScriptableObject enemyScriptableObject;
     [SerializeField] GameObject expObject;
     [SerializeField] Animator enemyAnimator;
     [SerializeField] Rigidbody2D enemyRigidbody2D;
@@ -79,12 +88,12 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
         // Transitions
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.aggroRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= aggroRange)
         {
             state = EnemyState.chase;
         }
 
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= attackRange)
         {
             state = EnemyState.attack;
         }
@@ -104,19 +113,19 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetFloat("Horizontal", enemyRigidbody2D.position.x);
         enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
-        transform.position = Vector2.MoveTowards(transform.position, wayPoint, enemyScriptableObject.speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, wayPoint, speed * Time.deltaTime);
         if (Vector2.Distance(transform.position, wayPoint) < range)
         {
             SetNewDsetination();
         }
 
         // Transitions
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.aggroRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= aggroRange)
         {
             state = EnemyState.chase;
         }
 
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= attackRange)
         {
             state = EnemyState.attack;
         }
@@ -128,19 +137,19 @@ public class Enemy : MonoBehaviour
         enemyAnimator.Play("Chase");
 
         Vector2 target = new Vector2(player.position.x, player.position.y);
-        Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, enemyScriptableObject.speed * Time.fixedDeltaTime);
+        Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, speed * Time.fixedDeltaTime);
         enemyRigidbody2D.MovePosition(newPos);
 
         enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
         enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
 
         // Transitions
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) >= enemyScriptableObject.aggroRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) >= aggroRange)
         {
             state = EnemyState.idle;
         }
 
-        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= enemyScriptableObject.attackRange)
+        if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= attackRange)
         {
             state = EnemyState.attack;
         }
@@ -148,7 +157,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemyAttackState()
     {
-        if (Time.time- lastAttack < enemyScriptableObject.attackCoolDown)
+        if (Time.time- lastAttack < attackCoolDown)
         {
             return;
         }
@@ -170,10 +179,10 @@ public class Enemy : MonoBehaviour
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
 
-        enemyScriptableObject.health -= damage;
+        health -= damage;
         enemyHealthbar.lerpTimer = 0f;
 
-        if (enemyScriptableObject.health <= 0)
+        if (health <= 0)
         {
             state = EnemyState.death;
         }
@@ -222,8 +231,8 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(enemyRigidbody2D.position, enemyScriptableObject.aggroRange);
+        Gizmos.DrawWireSphere(enemyRigidbody2D.position, aggroRange);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(enemyRigidbody2D.position, enemyScriptableObject.attackRange);
+        Gizmos.DrawWireSphere(enemyRigidbody2D.position, attackRange);
     }
 }

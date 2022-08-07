@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 public class EnemyHealthbar : MonoBehaviour
 {
-    [SerializeField] EnemyScriptableObject enemyScriptableObject;
+    //[SerializeField] EnemyScriptableObject enemyScriptableObject;
+    Enemy enemy;
 
     [Header("HealthBar")]
     [SerializeField] Image frontHealthBar;
@@ -14,17 +15,22 @@ public class EnemyHealthbar : MonoBehaviour
     [HideInInspector] public float chipSpeed = 2f;
     [HideInInspector] public float lerpTimer;
 
+    public void Awake()
+    {
+        enemy = GetComponent<Enemy>();
+    }
+
     public void Start()
     {
         // Set Current Health to Max Health at the start of the game
-        enemyScriptableObject.health = enemyScriptableObject.maxHealth;
+        enemy.health = enemy.maxHealth;
     }
 
     public void Update()
     {
 
         // Prevents healthbar from being below or 0 or above max health
-        enemyScriptableObject.health = Mathf.Clamp(enemyScriptableObject.health, 0, enemyScriptableObject.maxHealth);
+        enemy.health = Mathf.Clamp(enemy.health, 0, enemy.maxHealth);
 
         UpateHealthUI();
     }
@@ -33,7 +39,7 @@ public class EnemyHealthbar : MonoBehaviour
     {
         float fillFront = frontHealthBar.fillAmount;
         float fillBack = backHealthBar.fillAmount;
-        float healthFraction = enemyScriptableObject.health / enemyScriptableObject.maxHealth;
+        float healthFraction = enemy.health / enemy.maxHealth;
 
         if (fillBack > healthFraction)
         {

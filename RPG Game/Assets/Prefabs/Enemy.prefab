@@ -367,8 +367,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a7a5a89fbc842147be24ea3d41035ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  maxHealth: 3
+  speed: 1
+  attackRange: 0.5
+  aggroRange: 3
+  attackCoolDown: 2
   enemySpawner: {fileID: 0}
-  enemyScriptableObject: {fileID: 11400000, guid: d81e6ed3cad951348b7f812abdf67d56, type: 2}
   expObject: {fileID: 6549391921704182420, guid: 5776c447054334a45bcc0712b95cd3d4, type: 3}
   enemyAnimator: {fileID: 3232918048746041414}
   enemyRigidbody2D: {fileID: 3232918048746041412}
