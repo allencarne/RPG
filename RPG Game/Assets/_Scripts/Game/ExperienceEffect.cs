@@ -8,9 +8,9 @@ public class ExperienceEffect : MonoBehaviour
 
     [SerializeField] private float speed;
 
-    void Start ()
+    void Awake ()
     {
-        target = GameObject.Find("Player Aimer").transform;
+        target = GameObject.Find("PlayerAimer").transform;
     }
 
     private void FixedUpdate()

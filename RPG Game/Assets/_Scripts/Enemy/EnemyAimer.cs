@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EnemyAimer : MonoBehaviour
 {
-    public float offset;
-    public Transform firePoint;
+    [SerializeField] float offset;
+    [SerializeField] Transform firePoint;
 
-    public GameObject player;
+    GameObject player;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        player = GameObject.Find("PlayerAimer");
     }
 
     // Update is called once per frame

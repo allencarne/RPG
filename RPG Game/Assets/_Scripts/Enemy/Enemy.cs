@@ -9,14 +9,14 @@ public class Enemy : MonoBehaviour
     float damage; // Temporary
     float lastAttack; // Temporary Variable that helps with Attack Cooldown
     float wanderCoolDown = 4f;
-    float lastWander;
-    Vector2 wayPoint;
-    float maxDistance = 5;
-    float range = 1;
+    float lastWander; // Temprary Variable that helps with Wander Cooldown
+    Vector2 wayPoint; // Wander Waypoint
+    float maxDistance = 5; // Wander Max Distance
+    float range = 1; // Max Wander Range
 
     [Header("Components")]
+    [HideInInspector] public EnemySpawner enemySpawner;
     [SerializeField] EnemyScriptableObject enemyScriptableObject;
-    [SerializeField] public EnemySpawner enemySpawner;
     [SerializeField] GameObject expObject;
     [SerializeField] Animator enemyAnimator;
     [SerializeField] Rigidbody2D enemyRigidbody2D;
@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         enemyHealthbar = GetComponent<EnemyHealthbar>();
+        player = FindObjectOfType<Player>().transform;
+        enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     enum EnemyState
@@ -41,13 +43,6 @@ public class Enemy : MonoBehaviour
     }
 
     EnemyState state = EnemyState.idle;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Locate Enemy spawner Class
-        enemySpawner = FindObjectOfType<EnemySpawner>();
-    }
 
     private void Update()
     {
