@@ -203,7 +203,8 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 5f);
 
         // Spawn another enemy
-        enemySpawner.SpawnEnemy();
+        //enemySpawner.enemyCount--;
+        //enemySpawner.SpawnEnemy();
     }
 
     public void AE_AttackAnimationEnd()
@@ -220,6 +221,7 @@ public class Enemy : MonoBehaviour
     {
         // Instantiate Exp Object
         Instantiate(expObject, transform.position, Quaternion.identity);
+        enemySpawner.SpawnEnemy();
     }
 
     public void SetNewDsetination()

@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject enemySpawner;
     [SerializeField] int maxEnemyCount;
     [SerializeField] Vector3 spawnBox;
-    int enemyCount;
+    public int enemyCount;
     float xPos;
     float yPos;
 
@@ -16,25 +16,24 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(EnemySpawn());
+        SpawnEnemy();
     }
 
-    IEnumerator EnemySpawn()
+    private void Update()
     {
-        while (enemyCount < maxEnemyCount)
-        {
-            SpawnEnemy();
-            yield return new WaitForSeconds(0.01f);
-            enemyCount += 1;
-        }
+        //if (enemyCount < maxEnemyCount)
+        //{
+        //    SpawnEnemy();
+        //}
     }
 
     public void SpawnEnemy()
     {
+        //enemyCount += 1;
         xPos = Random.Range(-spawnBox.x, spawnBox.x);
         yPos = Random.Range(-spawnBox.y, spawnBox.y);
 
-        Instantiate(enemyPrefab, new Vector3 (xPos, yPos, 0) + enemySpawner.transform.position, Quaternion.identity);
+        Instantiate(enemyPrefab, new Vector3(xPos, yPos, 0) + enemySpawner.transform.position, Quaternion.identity);
     }
 
     private void OnDrawGizmos()
