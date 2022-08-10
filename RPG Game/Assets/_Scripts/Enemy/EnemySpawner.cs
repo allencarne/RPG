@@ -16,20 +16,20 @@ public class EnemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpawnEnemy();
+        //SpawnEnemy();
     }
 
     private void Update()
     {
-        //if (enemyCount < maxEnemyCount)
-        //{
-        //    SpawnEnemy();
-        //}
+        if (enemyCount < maxEnemyCount)
+        {
+            SpawnEnemy();
+        }
     }
 
     public void SpawnEnemy()
     {
-        //enemyCount += 1;
+        enemyCount += 1;
         xPos = Random.Range(-spawnBox.x, spawnBox.x);
         yPos = Random.Range(-spawnBox.y, spawnBox.y);
 
