@@ -43,6 +43,7 @@ public class Enemy : MonoBehaviour
 
     enum EnemyState
     {
+        spawn,
         idle,
         wander,
         chase,
@@ -51,14 +52,17 @@ public class Enemy : MonoBehaviour
         death
     }
 
-    EnemyState state = EnemyState.idle;
+    EnemyState state = EnemyState.spawn;
 
     private void Update()
     {
         Debug.Log(state);
 
         switch (state)
-        {   
+        {
+            case EnemyState.spawn:
+                EnemySpawnState();
+                break;
             case EnemyState.idle:
                 EnemyIdleState();
                 break;
@@ -78,6 +82,11 @@ public class Enemy : MonoBehaviour
                 EnemyDeathtate();
                 break;
         }
+    }
+
+    public void EnemySpawnState()
+    {
+        enemyAnimator.Play("Spawn");
     }
 
     public void EnemyIdleState()
@@ -185,6 +194,8 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             state = EnemyState.death;
+
+            // Spawn Another Enemy
             enemySpawner.enemyCount--;
         }
     }
@@ -202,9 +213,11 @@ public class Enemy : MonoBehaviour
 
         // Destroy Enemy after a delay
         Destroy(gameObject, 5f);
+    }
 
-        // Spawn another enemy
-        //enemySpawner.SpawnEnemy();
+    public void AE_SpwanAnimationEnd()
+    {
+        state = EnemyState.idle;
     }
 
     public void AE_AttackAnimationEnd()
