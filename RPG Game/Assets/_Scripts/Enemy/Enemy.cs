@@ -185,6 +185,7 @@ public class Enemy : MonoBehaviour
         if (health <= 0)
         {
             state = EnemyState.death;
+            enemySpawner.enemyCount--;
         }
     }
 
