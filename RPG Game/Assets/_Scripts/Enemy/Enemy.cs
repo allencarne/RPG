@@ -16,9 +16,9 @@ public class Enemy : MonoBehaviour
     public float attackCoolDown;
 
     float damage; // Temporary
-    float lastAttack; // Temporary Variable that helps with Attack Cooldown
-    float wanderCoolDown = 4f;
-    float lastWander; // Temprary Variable that helps with Wander Cooldown
+    float lastAttack; // Variable that helps with Attack Cooldown
+    float wanderCoolDown = 10f;
+    float lastWander; // Variable that helps with Wander Cooldown
     Vector2 wayPoint; // Wander Waypoint
     float maxDistance = 5; // Wander Max Distance
     float range = 1; // Max Wander Range
@@ -107,12 +107,31 @@ public class Enemy : MonoBehaviour
             state = EnemyState.attack;
         }
 
+        
+        if (Time.time - lastWander < wanderCoolDown)
+        {
+            return;
+        }
+        int change = Random.Range(0, 1);
+        switch (change)
+        {
+            case 0:
+                state = EnemyState.wander;
+                lastWander = Time.time;
+                break;
+            case 1:
+                lastWander = Time.time;
+                break;
+        }
+        
+        /*
         if (Time.time - lastWander < wanderCoolDown)
         {
             return;
         }
         lastWander = Time.time;
         state = EnemyState.wander;
+        */
     }
 
     public void EnemyWanderState()
