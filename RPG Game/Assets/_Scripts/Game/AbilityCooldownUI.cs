@@ -10,8 +10,8 @@ public class AbilityCooldownUI : MonoBehaviour
     [SerializeField] TMP_Text abilityTextCooldown;
     [SerializeField] PlayerScriptableObject playerScriptableObject;
 
-    [SerializeField] bool isCooldown = false;
-    [SerializeField] float cooldownTimer = 0.0f;
+    [HideInInspector] bool isCooldown = false;
+    [HideInInspector] float cooldownTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
-    public void ApplyCoolDown()
+    void ApplyCoolDown()
     {
         cooldownTimer -= Time.deltaTime;
 

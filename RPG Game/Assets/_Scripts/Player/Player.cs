@@ -18,9 +18,9 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform firePoint;
+    [SerializeField] GameObject abilities;
     PlayerHealthbar playerHealthbar;
     AbilityCooldownUI abilityCooldownUI;
-    [SerializeField] GameObject abilities;
     Camera cam;
 
     enum PlayerState
@@ -96,23 +96,7 @@ public class Player : MonoBehaviour
             state = PlayerState.dash;
         }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (Time.time - lastAttack < playerScriptableObject.weapon.leftMouse1CoolDown)
-            {
-                return;
-            }
-            lastAttack = Time.time;
-            state = PlayerState.attack;
-        }
-
-        /*
-        // State Transition - Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            state = PlayerState.attack;
-        }
-        */
+        AttackKeyPressed();
     }
 
     public void PlayerMoveState()
@@ -142,17 +126,13 @@ public class Player : MonoBehaviour
             state = PlayerState.idle;
         }
 
-        // State Transition - Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            state = PlayerState.attack;
-        }
-
         // State Transition - Dash
         if (Input.GetKey(KeyCode.Space))
         {
             state = PlayerState.dash;
         }
+
+        AttackKeyPressed();
     }
 
     public void PlayerAttackState()
@@ -306,5 +286,19 @@ public class Player : MonoBehaviour
     {
         playerScriptableObject.maxHealth += (playerScriptableObject.health * 0.01f) * ((100 - level) * 0.01f);
         playerScriptableObject.health = playerScriptableObject.maxHealth;
+    }
+
+    // Input
+    public void AttackKeyPressed()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time - lastAttack < playerScriptableObject.weapon.leftMouse1CoolDown)
+            {
+                return;
+            }
+            lastAttack = Time.time;
+            state = PlayerState.attack;
+        }
     }
 }
