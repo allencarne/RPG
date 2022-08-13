@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float damage; // Temporary
     Vector2 movement;
     bool isAttacking;
+    bool canAttack2 = false;
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
 
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
         idle,
         move,
         attack,
+        attack2,
         dash,
         hit,
         death
@@ -57,6 +59,9 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.attack:
                 PlayerAttackState();
+                break;
+            case PlayerState.attack2:
+                PlayerAttack2State();
                 break;
             case PlayerState.dash:
                 PlayerDashState();
@@ -125,8 +130,21 @@ public class Player : MonoBehaviour
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
-                LeftMouse1Ability();
+                BasicAttackAbility();
                 abilityCooldownUI.UseBasicAttackAbility();
+                break;
+            case 1:
+                break;
+        }
+    }
+    
+    public void PlayerAttack2State()
+    {
+        switch (playerScriptableObject.weapon.weaponIndex)
+        {
+            case 0:
+                BasicAttackAbility2();
+                //abilityCooldownUI.UseBasicAttackAbility();
                 break;
             case 1:
                 break;
@@ -204,7 +222,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void LeftMouse1Ability()
+    public void BasicAttackAbility()
     {
         // Animate
         animator.Play("Attack");
@@ -245,17 +263,75 @@ public class Player : MonoBehaviour
             // Reset isAttacking Bool;
             isAttacking = false;
         }
+
+        // Transition
+        if (canAttack2)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                attackAnglePaused = false;
+                state = PlayerState.attack2;
+            }
+        }
     }
 
-    public void AttackAnimationEnd() // Animation Event
+    public void BasicAttackAbility2()
     {
-        attackAnglePaused = false;
-        state = PlayerState.idle;
+        animator.Play("Attack 2");
+
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            // Normalize movement vector and times it by attack move distance
+            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1SlideVelocity;
+            // Slide in Attack Direction
+            rb.AddForce(difference, ForceMode2D.Impulse);
+
+            // Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
+        if (isAttacking)
+        {
+            // Instantiate Slash prefab
+            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
+
+            // Get the Rigid Body of the Slash prefab
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+            // Add Force to Slash prefab
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
+
+            // Reset isAttacking Bool;
+            isAttacking = false;
+        }
     }
 
     public void Attack() // Animation Event
     {
         isAttacking = true;
+    }
+
+    public void AE_Attack2()
+    {
+        canAttack2 = true;
+    }
+
+    public void AttackAnimationEnd() // Animation Event
+    {
+        attackAnglePaused = false;
+        canAttack2 = false;
+        state = PlayerState.idle;
     }
 
     public void HitAnimationEnd()
