@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 BasicAttackAbility2();
-                //abilityCooldownUI.UseBasicAttackAbility();
+                abilityCooldownUI.UseBasicAttackAbility();
                 break;
             case 1:
                 break;
@@ -317,7 +317,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Attack() // Animation Event
+    public void AE_Attack()
     {
         isAttacking = true;
     }
@@ -327,14 +327,14 @@ public class Player : MonoBehaviour
         canAttack2 = true;
     }
 
-    public void AttackAnimationEnd() // Animation Event
+    public void AE_AttackAnimationEnd()
     {
         attackAnglePaused = false;
         canAttack2 = false;
         state = PlayerState.idle;
     }
 
-    public void HitAnimationEnd()
+    public void AE_HitAnimationEnd()
     {
         state = PlayerState.idle;
     }
