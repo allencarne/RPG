@@ -23,6 +23,8 @@ public class Enemy : MonoBehaviour
     float maxDistance = 5; // Wander Max Distance
     float range = 1; // Max Wander Range
 
+    private Vector3 EnemyStartingPosition;
+
     [Header("Components")]
     [HideInInspector] public EnemySpawner enemySpawner;
     //[SerializeField] EnemyScriptableObject enemyScriptableObject;
@@ -33,13 +35,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyHealthbar enemyHealthbar;
     [SerializeField] GameObject hitInidcator;
     [SerializeField] Transform firePoint;
-
-    private void Awake()
-    {
-        enemyHealthbar = GetComponent<EnemyHealthbar>();
-        player = FindObjectOfType<Player>().transform;
-        enemySpawner = FindObjectOfType<EnemySpawner>();
-    }
 
     enum EnemyState
     {
@@ -54,9 +49,21 @@ public class Enemy : MonoBehaviour
 
     EnemyState state = EnemyState.spawn;
 
+    private void Awake()
+    {
+        enemyHealthbar = GetComponent<EnemyHealthbar>();
+        player = FindObjectOfType<Player>().transform;
+        enemySpawner = FindObjectOfType<EnemySpawner>();
+    }
+
+    private void Start()
+    {
+        EnemyStartingPosition = transform.position;
+    }
+
     private void Update()
     {
-        Debug.Log(state);
+        //Debug.Log(state);
 
         switch (state)
         {
@@ -86,6 +93,7 @@ public class Enemy : MonoBehaviour
 
     public void EnemySpawnState()
     {
+        //Animate
         enemyAnimator.Play("Spawn");
     }
 
@@ -107,7 +115,7 @@ public class Enemy : MonoBehaviour
             state = EnemyState.attack;
         }
 
-        
+        // Behaviour
         if (Time.time - lastWander < wanderCoolDown)
         {
             return;
@@ -123,15 +131,6 @@ public class Enemy : MonoBehaviour
                 lastWander = Time.time;
                 break;
         }
-        
-        /*
-        if (Time.time - lastWander < wanderCoolDown)
-        {
-            return;
-        }
-        lastWander = Time.time;
-        state = EnemyState.wander;
-        */
     }
 
     public void EnemyWanderState()
@@ -141,11 +140,15 @@ public class Enemy : MonoBehaviour
         enemyAnimator.SetFloat("Horizontal", enemyRigidbody2D.position.x);
         enemyAnimator.SetFloat("Vertical", enemyRigidbody2D.position.y);
 
+        // Behaviour
+
+        
         transform.position = Vector2.MoveTowards(transform.position, wayPoint, speed * Time.deltaTime);
         if (Vector2.Distance(transform.position, wayPoint) < range)
         {
-            SetNewDsetination();
+            SetNewWanderDsetination();
         }
+        
 
         // Transitions
         if (Vector2.Distance(player.position, enemyRigidbody2D.position) <= aggroRange)
@@ -164,13 +167,6 @@ public class Enemy : MonoBehaviour
         // Animate
         enemyAnimator.Play("Chase");
 
-        Vector2 target = new Vector2(player.position.x, player.position.y);
-        Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, speed * Time.fixedDeltaTime);
-        enemyRigidbody2D.MovePosition(newPos);
-
-        enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
-        enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
-
         // Transitions
         if (Vector2.Distance(player.position, enemyRigidbody2D.position) >= aggroRange)
         {
@@ -181,6 +177,14 @@ public class Enemy : MonoBehaviour
         {
             state = EnemyState.attack;
         }
+
+        // Behaviour
+        Vector2 target = new Vector2(player.position.x, player.position.y);
+        Vector2 newPos = Vector2.MoveTowards(enemyRigidbody2D.position, target, speed * Time.fixedDeltaTime);
+        enemyRigidbody2D.MovePosition(newPos);
+
+        enemyAnimator.SetFloat("Horizontal", (player.position.x - enemyRigidbody2D.position.x));
+        enemyAnimator.SetFloat("Vertical", (player.position.y - enemyRigidbody2D.position.y));
     }
 
     public void EnemyAttackState()
@@ -207,9 +211,11 @@ public class Enemy : MonoBehaviour
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
 
+        // Behaviour
         health -= damage;
         enemyHealthbar.lerpTimer = 0f;
 
+        // Transition
         if (health <= 0)
         {
             state = EnemyState.death;
@@ -255,10 +261,15 @@ public class Enemy : MonoBehaviour
         Instantiate(expObject, transform.position, Quaternion.identity);
     }
 
-    public void SetNewDsetination()
+    public void SetNewWanderDsetination()
     {
         wayPoint = new Vector2(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance));
         state = EnemyState.idle;
+    }
+
+    public static Vector3 GetRandomWanderDir()
+    {
+        return new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)).normalized;
     }
 
     private void OnDrawGizmos()

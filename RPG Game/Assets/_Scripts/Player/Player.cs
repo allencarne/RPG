@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float damage; // Temporary
     Vector2 movement;
     bool isAttacking;
+    float lastAttack; // Variable to help with Attack Cooldown
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform firePoint;
+    AbilityCooldownUI abilityCooldownUI;
     Camera cam;
 
     enum PlayerState
@@ -35,12 +37,13 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         playerHealthbar = GetComponent<PlayerHealthbar>();
+        abilityCooldownUI = GetComponent<AbilityCooldownUI>();
         cam = Camera.main;
     }
 
      void Update()
     {
-        //Debug.Log(state);
+        Debug.Log(lastAttack);
 
         switch (state)
         {
@@ -86,21 +89,35 @@ public class Player : MonoBehaviour
             state = PlayerState.move;
         }
 
-        // State Transition - Attack
-        if (Input.GetMouseButtonDown(0))
-        {
-            state = PlayerState.attack;
-        }
-
         // State Transition - Dash
         if (Input.GetKey(KeyCode.Space))
         {
             state = PlayerState.dash;
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time - lastAttack < playerScriptableObject.weapon.leftMouse1CoolDown)
+            {
+                return;
+            }
+            lastAttack = Time.time;
+            state = PlayerState.attack;
+            abilityCooldownUI.UseAbility();
+        }
+
+        /*
+        // State Transition - Attack
+        if (Input.GetMouseButtonDown(0))
+        {
+            state = PlayerState.attack;
+        }
+        */
     }
 
     public void PlayerMoveState()
     {
+
         // Animate
         animator.Play("Move");
 

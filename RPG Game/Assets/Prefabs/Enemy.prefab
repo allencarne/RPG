@@ -393,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8480c19b31904f2439277e78750c2382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyScriptableObject: {fileID: 11400000, guid: d81e6ed3cad951348b7f812abdf67d56, type: 2}
   frontHealthBar: {fileID: 3232918048593577807}
   backHealthBar: {fileID: 3232918049055457493}
   enemyUI: {fileID: 3232918050121708157}
@@ -575,7 +574,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3232918049888176076}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIndex: 0
   attackDamage: 1
+  leftMouse1CoolDown: 3
   leftMouse1SlideVelocity: 400
   leftMouse1Prefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   leftMouse1HitEffect: {fileID: 5076571333579909779, guid: ef5741b23b5f310468da96f0485271be, type: 3}

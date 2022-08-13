@@ -18,7 +18,7 @@ public class WeaponScriptableObject : ScriptableObject
     public int attackDamage;
 
     [Header("LeftMouse1 Ability")]
-    //public float leftMouse1CoolDown;
+    public float leftMouse1CoolDown;
     public float leftMouse1SlideVelocity;
     public GameObject leftMouse1Prefab;
     public GameObject leftMouse1HitEffect;
