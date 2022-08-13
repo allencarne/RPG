@@ -28,8 +28,8 @@ public class WeaponScriptableObject : ScriptableObject
     [Header("Dash Ability")]
     public float dashCoolDown;
     public float dashVelocity;
-    public GameObject spacePrefab;
-    public float spaceprojectileForce;
+    public GameObject dashPrefab;
+    public float dashProjectileForce;
 
     // Particles
 

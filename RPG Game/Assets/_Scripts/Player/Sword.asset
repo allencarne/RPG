@@ -22,5 +22,5 @@ MonoBehaviour:
   basicAttackProjectileForce: 1
   dashCoolDown: 3
   dashVelocity: 1700
-  spacePrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
-  spaceprojectileForce: 1
+  dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+  dashProjectileForce: 1

@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 BasicAttackAbility2();
-                abilityCooldownUI.UseBasicAttackAbility();
+                abilityCooldownUI.UseBasicAttack2Ability();
                 break;
             case 1:
                 break;
@@ -182,13 +182,13 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.spacePrefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.dashPrefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.spaceprojectileForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.dashProjectileForce, ForceMode2D.Impulse);
 
             // Reset isAttacking Bool;
             isAttacking = false;
