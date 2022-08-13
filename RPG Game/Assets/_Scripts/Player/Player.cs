@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
             animator.SetFloat("Vertical", difference.y);
 
             //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.spaceVelocity;
+            difference = difference.normalized * playerScriptableObject.weapon.dashVelocity;
             // Slide in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
@@ -222,6 +222,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // Abilities
     public void BasicAttackAbility()
     {
         // Animate
@@ -241,7 +242,7 @@ public class Player : MonoBehaviour
             animator.SetFloat("Vertical", difference.y);
 
             // Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1SlideVelocity;
+            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
             // Slide in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
@@ -252,13 +253,13 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttackPrefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.basicAttackProjectileForce, ForceMode2D.Impulse);
 
             // Reset isAttacking Bool;
             isAttacking = false;
@@ -293,7 +294,7 @@ public class Player : MonoBehaviour
             animator.SetFloat("Vertical", difference.y);
 
             // Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1SlideVelocity;
+            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
             // Slide in Attack Direction
             rb.AddForce(difference, ForceMode2D.Impulse);
 
@@ -304,19 +305,20 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.leftMouse1Prefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttackPrefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.leftMouse1projectileForce, ForceMode2D.Impulse);
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.basicAttackProjectileForce, ForceMode2D.Impulse);
 
             // Reset isAttacking Bool;
             isAttacking = false;
         }
     }
 
+    // Animation Events
     public void AE_Attack()
     {
         isAttacking = true;
@@ -339,6 +341,7 @@ public class Player : MonoBehaviour
         state = PlayerState.idle;
     }
 
+    // Health
     public void RestoreHealth (float healAmount)
     {
         playerScriptableObject.health += healAmount;
@@ -372,7 +375,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            if (Time.time - lastAttack < playerScriptableObject.weapon.leftMouse1CoolDown)
+            if (Time.time - lastAttack < playerScriptableObject.weapon.basicAttackCoolDown)
             {
                 return;
             }

@@ -11,7 +11,7 @@ public class Slash : MonoBehaviour
         if (other.tag == "Enemy")
         {
             // Hit Effect
-            GameObject effect = Instantiate(playerScriptableObject.weapon.leftMouse1HitEffect, other.transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(playerScriptableObject.weapon.basicAttackHitEffect, other.transform.position, Quaternion.identity);
             Destroy(effect, .3f);
 
             // Deal Damage
@@ -20,7 +20,7 @@ public class Slash : MonoBehaviour
             // Apply Knockback
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Vector2 difference = enemy.transform.position - transform.position;
-            difference = difference.normalized * playerScriptableObject.weapon.leftMouse1KnockBackForce;
+            difference = difference.normalized * playerScriptableObject.weapon.basicAttackKnockBackForce;
             enemy.AddForce(difference, ForceMode2D.Impulse);
         }
     }

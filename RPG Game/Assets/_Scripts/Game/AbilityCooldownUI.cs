@@ -58,7 +58,7 @@ public class AbilityCooldownUI : MonoBehaviour
         {
             //abilityTextCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
             basicAttackAbilityTextCooldown.text = basicAttackCooldownTimer.ToString();
-            basicAttackAbilityImageCooldown.fillAmount = basicAttackCooldownTimer / playerScriptableObject.weapon.leftMouse1CoolDown;
+            basicAttackAbilityImageCooldown.fillAmount = basicAttackCooldownTimer / playerScriptableObject.weapon.basicAttackCoolDown;
         }
     }
 
@@ -89,7 +89,7 @@ public class AbilityCooldownUI : MonoBehaviour
         {
             basicAttackIsCooldown = true;
             basicAttackAbilityTextCooldown.gameObject.SetActive(true);
-            basicAttackCooldownTimer = playerScriptableObject.weapon.leftMouse1CoolDown;
+            basicAttackCooldownTimer = playerScriptableObject.weapon.basicAttackCoolDown;
         }
     }
 
