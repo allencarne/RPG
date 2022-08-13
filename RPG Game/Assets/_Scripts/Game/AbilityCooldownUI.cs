@@ -41,7 +41,8 @@ public class AbilityCooldownUI : MonoBehaviour
         }
         else
         {
-            abilityTextCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            //abilityTextCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            abilityTextCooldown.text = cooldownTimer.ToString();
             abilityImageCooldown.fillAmount = cooldownTimer / playerScriptableObject.weapon.leftMouse1CoolDown;
         }
     }

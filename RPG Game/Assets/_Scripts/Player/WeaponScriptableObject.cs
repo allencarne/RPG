@@ -17,7 +17,7 @@ public class WeaponScriptableObject : ScriptableObject
     public int weaponIndex;
     public int attackDamage;
 
-    [Header("LeftMouse1 Ability")]
+    [Header("Basic Attack Ability")]
     public float leftMouse1CoolDown;
     public float leftMouse1SlideVelocity;
     public GameObject leftMouse1Prefab;
@@ -25,8 +25,8 @@ public class WeaponScriptableObject : ScriptableObject
     public float leftMouse1KnockBackForce;
     public float leftMouse1projectileForce;
 
-    [Header("Space Ability")]
-    //public float spaceCoolDown;
+    [Header("Dash Ability")]
+    public float dashCoolDown;
     public float spaceVelocity;
     public GameObject spacePrefab;
     public float spaceprojectileForce;

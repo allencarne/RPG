@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Vector2 movement;
     bool isAttacking;
     float lastAttack; // Variable to help with Attack Cooldown
+    float lastDash; // Variable to help with Dash Cooldown
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -44,7 +45,7 @@ public class Player : MonoBehaviour
 
      void Update()
     {
-        Debug.Log(lastAttack);
+        Debug.Log(state);
 
         switch (state)
         {
@@ -90,11 +91,7 @@ public class Player : MonoBehaviour
             state = PlayerState.move;
         }
 
-        // State Transition - Dash
-        if (Input.GetKey(KeyCode.Space))
-        {
-            state = PlayerState.dash;
-        }
+        DashKeyPressed();
 
         AttackKeyPressed();
     }
@@ -126,11 +123,7 @@ public class Player : MonoBehaviour
             state = PlayerState.idle;
         }
 
-        // State Transition - Dash
-        if (Input.GetKey(KeyCode.Space))
-        {
-            state = PlayerState.dash;
-        }
+        DashKeyPressed();
 
         AttackKeyPressed();
     }
@@ -299,6 +292,19 @@ public class Player : MonoBehaviour
             }
             lastAttack = Time.time;
             state = PlayerState.attack;
+        }
+    }
+
+    public void DashKeyPressed()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if (Time.time - lastDash < playerScriptableObject.weapon.dashCoolDown)
+            {
+                return;
+            }
+            lastDash = Time.time;
+            state = PlayerState.dash;
         }
     }
 }
