@@ -6,12 +6,12 @@ using TMPro;
 
 public class AbilityCooldownUI : MonoBehaviour
 {
-    [SerializeField] private Image abilityImageCooldown;
-    [SerializeField] private TMP_Text abilityTextCooldown;
+    [SerializeField] Image abilityImageCooldown;
+    [SerializeField] TMP_Text abilityTextCooldown;
     [SerializeField] PlayerScriptableObject playerScriptableObject;
 
-    private bool isCooldown = false;
-    private float cooldownTimer = 0.0f;
+    [SerializeField] bool isCooldown = false;
+    [SerializeField] float cooldownTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -29,7 +29,7 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
-    void ApplyCoolDown()
+    public void ApplyCoolDown()
     {
         cooldownTimer -= Time.deltaTime;
 

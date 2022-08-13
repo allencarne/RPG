@@ -15,11 +15,12 @@ public class Player : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
-    PlayerHealthbar playerHealthbar;
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform firePoint;
+    PlayerHealthbar playerHealthbar;
     AbilityCooldownUI abilityCooldownUI;
+    [SerializeField] GameObject abilities;
     Camera cam;
 
     enum PlayerState
@@ -36,9 +37,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerHealthbar = GetComponent<PlayerHealthbar>();
-        abilityCooldownUI = GetComponent<AbilityCooldownUI>();
+        abilityCooldownUI = abilities.GetComponent<AbilityCooldownUI>();
         cam = Camera.main;
+        playerHealthbar = GetComponent<PlayerHealthbar>();
     }
 
      void Update()
@@ -103,7 +104,6 @@ public class Player : MonoBehaviour
             }
             lastAttack = Time.time;
             state = PlayerState.attack;
-            abilityCooldownUI.UseAbility();
         }
 
         /*
@@ -161,6 +161,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 LeftMouse1Ability();
+                abilityCooldownUI.UseAbility();
                 break;
             case 1:
                 break;
