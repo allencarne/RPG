@@ -85,11 +85,7 @@ public class Player : MonoBehaviour
         // Animate
         animator.Play("Idle");
 
-        // State Transition - Move
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-        {
-            state = PlayerState.move;
-        }
+        MoveKeyPressed();
 
         DashKeyPressed();
 
@@ -117,11 +113,7 @@ public class Player : MonoBehaviour
         // Movement
         rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
 
-        // State Transition - Idle
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
-        {
-            state = PlayerState.idle;
-        }
+        NoMoveKeyPressed();
 
         DashKeyPressed();
 
@@ -134,7 +126,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 LeftMouse1Ability();
-                abilityCooldownUI.UseAbility();
+                abilityCooldownUI.UseBasicAttackAbility();
                 break;
             case 1:
                 break;
@@ -143,6 +135,8 @@ public class Player : MonoBehaviour
 
     public void PlayerDashState()
     {
+        abilityCooldownUI.UseDashAbility();
+
         // Animate
         animator.Play("Dash");
 
@@ -282,6 +276,22 @@ public class Player : MonoBehaviour
     }
 
     // Input
+    public void MoveKeyPressed()
+    {
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
+            state = PlayerState.move;
+        }
+    }
+
+    public void NoMoveKeyPressed()
+    {
+        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            state = PlayerState.idle;
+        }
+    }
+
     public void AttackKeyPressed()
     {
         if (Input.GetMouseButtonDown(0))
