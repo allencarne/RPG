@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Vector2 movement;
     bool isAttacking;
     bool canAttack2 = false;
+    bool canAttack3 = false;
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
 
@@ -31,6 +32,7 @@ public class Player : MonoBehaviour
         move,
         attack,
         attack2,
+        attack3,
         dash,
         hit,
         death
@@ -62,6 +64,9 @@ public class Player : MonoBehaviour
                 break;
             case PlayerState.attack2:
                 PlayerAttack2State();
+                break;
+            case PlayerState.attack3:
+                PlayerAttack3State();
                 break;
             case PlayerState.dash:
                 PlayerDashState();
@@ -145,6 +150,19 @@ public class Player : MonoBehaviour
             case 0:
                 BasicAttackAbility2();
                 abilityCooldownUI.UseBasicAttack2Ability();
+                break;
+            case 1:
+                break;
+        }
+    }
+
+    public void PlayerAttack3State()
+    {
+        switch (playerScriptableObject.weapon.weaponIndex)
+        {
+            case 0:
+                BasicAttackAbility3();
+                //abilityCooldownUI.UseBasicAttack2Ability();
                 break;
             case 1:
                 break;
@@ -316,6 +334,58 @@ public class Player : MonoBehaviour
             // Reset isAttacking Bool;
             isAttacking = false;
         }
+
+        // Transition
+        if (canAttack3)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                attackAnglePaused = false;
+                state = PlayerState.attack3;
+            }
+        }
+    }
+
+    public void BasicAttackAbility3()
+    {
+        animator.Play("Attack 3");
+
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            // Normalize movement vector and times it by attack move distance
+            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
+            // Slide in Attack Direction
+            rb.AddForce(difference, ForceMode2D.Impulse);
+
+            // Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
+        if (isAttacking)
+        {
+            // Instantiate Slash prefab
+            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttackPrefab, firePoint.position, firePoint.rotation);
+
+            // Get the Rigid Body of the Slash prefab
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+            // Add Force to Slash prefab
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.basicAttackProjectileForce, ForceMode2D.Impulse);
+
+            // Reset isAttacking Bool;
+            isAttacking = false;
+        }
     }
 
     // Animation Events
@@ -329,10 +399,16 @@ public class Player : MonoBehaviour
         canAttack2 = true;
     }
 
+    public void AE_Attack3()
+    {
+        canAttack3 = true;
+    }
+
     public void AE_AttackAnimationEnd()
     {
         attackAnglePaused = false;
         canAttack2 = false;
+        canAttack3 = false;
         state = PlayerState.idle;
     }
 
