@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIndex: 0
   attackDamage: 1
+  attackRange: 11
   basicAttackCoolDown: 0.8
   basicAttackSlideVelocity: 300
   basicAttackPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}

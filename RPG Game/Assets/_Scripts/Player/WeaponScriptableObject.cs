@@ -16,6 +16,7 @@ public class WeaponScriptableObject : ScriptableObject
     [Header("Weapon")]
     public int weaponIndex;
     public int attackDamage;
+    public int attackRange;
 
     [Header("Basic Attack Ability")]
     public float basicAttackCoolDown;

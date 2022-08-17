@@ -259,10 +259,13 @@ public class Player : MonoBehaviour
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            // Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
-            // Slide in Attack Direction
-            rb.AddForce(difference, ForceMode2D.Impulse);
+            if (Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
+            {
+                // Normalize movement vector and times it by attack move distance
+                difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
+                // Slide in Attack Direction
+                rb.AddForce(difference, ForceMode2D.Impulse);
+            }
 
             // Set AttackAnglePause Bool to True
             attackAnglePaused = true;
@@ -471,5 +474,11 @@ public class Player : MonoBehaviour
             lastDash = Time.time;
             state = PlayerState.dash;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(rb.position, playerScriptableObject.weapon.attackRange);
     }
 }
