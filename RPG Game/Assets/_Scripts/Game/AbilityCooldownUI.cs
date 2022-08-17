@@ -15,12 +15,19 @@ public class AbilityCooldownUI : MonoBehaviour
     [HideInInspector] bool basicAttackIsCooldown = false;
     [HideInInspector] float basicAttackCooldownTimer = 0.0f;
 
-    [Header("Basic Attack")]
+    [Header("Basic Attack 2")]
     [SerializeField] Button basicAttack2AbilityImage;
     [SerializeField] Image basicAttack2AbilityImageCooldown;
     [SerializeField] TMP_Text basicAttack2AbilityTextCooldown;
     [HideInInspector] bool basicAttack2IsCooldown = false;
     [HideInInspector] float basicAttack2CooldownTimer = 0.0f;
+
+    [Header("Basic Attack 3")]
+    [SerializeField] Button basicAttack3AbilityImage;
+    [SerializeField] Image basicAttack3AbilityImageCooldown;
+    [SerializeField] TMP_Text basicAttack3AbilityTextCooldown;
+    [HideInInspector] bool basicAttack3IsCooldown = false;
+    [HideInInspector] float basicAttack3CooldownTimer = 0.0f;
 
     [Header("Dash")]
     [SerializeField] Image dashAbilityImageCooldown;
@@ -39,6 +46,10 @@ public class AbilityCooldownUI : MonoBehaviour
         basicAttack2AbilityTextCooldown.gameObject.SetActive(false);
         basicAttack2AbilityImageCooldown.fillAmount = 0.0f;
 
+        // Basic Attack cooldown false
+        basicAttack3AbilityTextCooldown.gameObject.SetActive(false);
+        basicAttack3AbilityImageCooldown.fillAmount = 0.0f;
+
         // Dash cooldown false
         dashAbilityTextCooldown.gameObject.SetActive(false);
         dashAbilityImageCooldown.fillAmount = 0.0f;
@@ -55,6 +66,11 @@ public class AbilityCooldownUI : MonoBehaviour
         if (basicAttack2IsCooldown)
         {
             ApplyBasicAttack2CoolDown();
+        }
+
+        if (basicAttack3IsCooldown)
+        {
+            ApplyBasicAttack3CoolDown();
         }
 
         if (dashIsCooldown)
@@ -96,6 +112,26 @@ public class AbilityCooldownUI : MonoBehaviour
             //abilityTextCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
             basicAttack2AbilityTextCooldown.text = basicAttack2CooldownTimer.ToString();
             basicAttack2AbilityImageCooldown.fillAmount = basicAttack2CooldownTimer / playerScriptableObject.weapon.basicAttackCoolDown;
+        }
+    }
+
+    void ApplyBasicAttack3CoolDown()
+    {
+        basicAttack3CooldownTimer -= Time.deltaTime;
+
+        if (basicAttack3CooldownTimer < 0.0f)
+        {
+            basicAttack3IsCooldown = false;
+            basicAttack3AbilityTextCooldown.gameObject.SetActive(false);
+            basicAttack3AbilityImageCooldown.fillAmount = 0.0f;
+            basicAttack3AbilityImage.gameObject.SetActive(false);
+            basicAttackAbilityImage.gameObject.SetActive(true);
+        }
+        else
+        {
+            //abilityTextCooldown.text = Mathf.RoundToInt(cooldownTimer).ToString();
+            basicAttack3AbilityTextCooldown.text = basicAttack3CooldownTimer.ToString();
+            basicAttack3AbilityImageCooldown.fillAmount = basicAttack3CooldownTimer / playerScriptableObject.weapon.basicAttackCoolDown;
         }
     }
 
@@ -146,6 +182,23 @@ public class AbilityCooldownUI : MonoBehaviour
             basicAttack2AbilityImage.gameObject.SetActive(true);
             basicAttack2AbilityTextCooldown.gameObject.SetActive(true);
             basicAttack2CooldownTimer = playerScriptableObject.weapon.basicAttackCoolDown;
+        }
+    }
+
+    public void UseBasicAttack3Ability()
+    {
+
+        if (basicAttack3IsCooldown)
+        {
+            // User has click ability while in use
+        }
+        else
+        {
+            basicAttack3IsCooldown = true;
+            basicAttack2AbilityImage.gameObject.SetActive(false);
+            basicAttack3AbilityImage.gameObject.SetActive(true);
+            basicAttack3AbilityTextCooldown.gameObject.SetActive(true);
+            basicAttack3CooldownTimer = playerScriptableObject.weapon.basicAttackCoolDown;
         }
     }
 

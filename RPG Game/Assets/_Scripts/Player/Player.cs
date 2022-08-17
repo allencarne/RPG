@@ -162,7 +162,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 BasicAttackAbility3();
-                //abilityCooldownUI.UseBasicAttack2Ability();
+                abilityCooldownUI.UseBasicAttack3Ability();
                 break;
             case 1:
                 break;
