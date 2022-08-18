@@ -17,7 +17,7 @@ MonoBehaviour:
   attackRange: 11
   basicAttackCoolDown: 0.8
   basicAttackSlideVelocity: 300
-  basicAttackPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+  basicAttackPrefab: {fileID: 7697412983350428846, guid: 1c30a9e2a6ebf0b4086e41d0b7fd32e1, type: 3}
   basicAttackHitEffect: {fileID: 5076571333579909779, guid: ef5741b23b5f310468da96f0485271be, type: 3}
   basicAttackKnockBackForce: 3
   basicAttackProjectileForce: 1
