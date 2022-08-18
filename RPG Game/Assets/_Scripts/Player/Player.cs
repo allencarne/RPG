@@ -50,6 +50,9 @@ public class Player : MonoBehaviour
      void Update()
     {
         Debug.Log(state);
+        var dist = Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition));
+
+        Debug.Log(dist);
 
         switch (state)
         {
@@ -90,6 +93,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //===== States =====\\
     public void PlayerIdleState()
     {
         // Animate
@@ -240,7 +244,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    // Abilities
+    //===== Abilities =====\\
     public void BasicAttackAbility()
     {
         // Animate
@@ -259,7 +263,8 @@ public class Player : MonoBehaviour
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            if (Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
+            // If mouse is outside attackrange - Slide Forward
+            if (Vector3.Distance(rb.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
             {
                 // Normalize movement vector and times it by attack move distance
                 difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
@@ -314,10 +319,14 @@ public class Player : MonoBehaviour
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            // Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
-            // Slide in Attack Direction
-            rb.AddForce(difference, ForceMode2D.Impulse);
+            // If mouse is outside attackrange - Slide Forward
+            if (Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
+            {
+                // Normalize movement vector and times it by attack move distance
+                difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
+                // Slide in Attack Direction
+                rb.AddForce(difference, ForceMode2D.Impulse);
+            }
 
             // Set AttackAnglePause Bool to True
             attackAnglePaused = true;
@@ -366,10 +375,14 @@ public class Player : MonoBehaviour
             animator.SetFloat("Horizontal", difference.x);
             animator.SetFloat("Vertical", difference.y);
 
-            // Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
-            // Slide in Attack Direction
-            rb.AddForce(difference, ForceMode2D.Impulse);
+            // If mouse is outside attackrange - Slide Forward
+            if (Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
+            {
+                // Normalize movement vector and times it by attack move distance
+                difference = difference.normalized * playerScriptableObject.weapon.basicAttackSlideVelocity;
+                // Slide in Attack Direction
+                rb.AddForce(difference, ForceMode2D.Impulse);
+            }
 
             // Set AttackAnglePause Bool to True
             attackAnglePaused = true;
@@ -391,7 +404,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Animation Events
+    //===== Animation Events =====\\
     public void AE_Attack()
     {
         isAttacking = true;
@@ -420,7 +433,7 @@ public class Player : MonoBehaviour
         state = PlayerState.idle;
     }
 
-    // Health
+    //===== Health =====\\
     public void RestoreHealth (float healAmount)
     {
         playerScriptableObject.health += healAmount;
@@ -433,7 +446,7 @@ public class Player : MonoBehaviour
         playerScriptableObject.health = playerScriptableObject.maxHealth;
     }
 
-    // Input
+    //===== Input =====\\
     public void MoveKeyPressed()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
@@ -476,6 +489,7 @@ public class Player : MonoBehaviour
         }
     }
 
+    //===== Gizmos =====\\
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.black;
