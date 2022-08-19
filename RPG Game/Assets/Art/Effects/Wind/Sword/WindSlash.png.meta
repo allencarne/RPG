@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: d061114466532e8428e00d0ccb1f7ee7
+guid: 263550b805c48d044b27496770c18928
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7310501140982945409
-    second: SwordSlash_0
+      213: -6555063161761115363
+    second: WindSlash_0
   - first:
-      213: 3783221312971738316
-    second: SwordSlash_1
+      213: 5166680215788345892
+    second: WindSlash_1
   - first:
-      213: -5611522186530120944
-    second: SwordSlash_2
+      213: -3646103528139531359
+    second: WindSlash_2
   - first:
-      213: -4575220476500469995
-    second: SwordSlash_3
+      213: 852515646204156036
+    second: WindSlash_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SwordSlash_0
+      name: WindSlash_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f79af99e1f1eb8a90800000000000000
-      internalID: -7310501140982945409
+      spriteID: d13dafad8ccb705a0800000000000000
+      internalID: -6555063161761115363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordSlash_1
+      name: WindSlash_1
       rect:
         serializedVersion: 2
         x: 128
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ccc0e526db3b08430800000000000000
-      internalID: 3783221312971738316
+      spriteID: 42a5a12384cb3b740800000000000000
+      internalID: 5166680215788345892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordSlash_2
+      name: WindSlash_2
       rect:
         serializedVersion: 2
         x: 256
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01b16ae6d4edf12b0800000000000000
-      internalID: -5611522186530120944
+      spriteID: 1abd1f6b820766dc0800000000000000
+      internalID: -3646103528139531359
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SwordSlash_3
+      name: WindSlash_3
       rect:
         serializedVersion: 2
         x: 384
         y: 0
         width: 128
         height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.5, y: 0.2}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5179819973d8180c0800000000000000
-      internalID: -4575220476500469995
+      spriteID: 4881671a67eb4db00800000000000000
+      internalID: 852515646204156036
       vertices: []
       indices: 
       edges: []

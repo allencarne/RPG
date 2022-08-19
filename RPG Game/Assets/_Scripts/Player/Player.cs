@@ -50,9 +50,6 @@ public class Player : MonoBehaviour
      void Update()
     {
         Debug.Log(state);
-        var dist = Vector3.Distance(rb.transform.position, cam.ScreenToWorldPoint(Input.mousePosition));
-
-        Debug.Log(dist);
 
         switch (state)
         {
@@ -335,7 +332,7 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttackPrefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttack2Prefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
@@ -391,7 +388,7 @@ public class Player : MonoBehaviour
         if (isAttacking)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttackPrefab, firePoint.position, firePoint.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.basicAttack3Prefab, firePoint.position, firePoint.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
@@ -487,12 +484,5 @@ public class Player : MonoBehaviour
             lastDash = Time.time;
             state = PlayerState.dash;
         }
-    }
-
-    //===== Gizmos =====\\
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.black;
-        Gizmos.DrawWireSphere(rb.position, playerScriptableObject.weapon.attackRange);
     }
 }

@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponIndex: 0
   attackDamage: 1
-  attackRange: 11
+  attackRange: 10.1
   basicAttackCoolDown: 0.8
   basicAttackSlideVelocity: 300
-  basicAttackPrefab: {fileID: 7697412983350428846, guid: 1c30a9e2a6ebf0b4086e41d0b7fd32e1, type: 3}
+  basicAttackPrefab: {fileID: 9096168329394871884, guid: cbbf05799181b9e4798bd5c85f4985c0, type: 3}
   basicAttackHitEffect: {fileID: 5076571333579909779, guid: ef5741b23b5f310468da96f0485271be, type: 3}
   basicAttackKnockBackForce: 3
   basicAttackProjectileForce: 1
+  basicAttack2Prefab: {fileID: 4736352390647969516, guid: 7ef6a41ad62655a41b1fa0714f4af413, type: 3}
+  basicAttack3Prefab: {fileID: 7697412983350428846, guid: 1c30a9e2a6ebf0b4086e41d0b7fd32e1, type: 3}
   dashCoolDown: 3
   dashVelocity: 1700
   dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
