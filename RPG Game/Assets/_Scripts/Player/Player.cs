@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public float damage; // Temporary
     Vector2 movement;
     bool isAttacking;
+    bool isDashing;
     bool canAttack2 = false;
     bool canAttack3 = false;
     float lastAttack; // Variable to help with Attack Cooldown
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
         abilityCooldownUI = abilities.GetComponent<AbilityCooldownUI>();
         cam = Camera.main;
         playerHealthbar = GetComponent<PlayerHealthbar>();
+        //animator.speed = 1.5f;
     }
 
      void Update()
@@ -176,6 +178,15 @@ public class Player : MonoBehaviour
 
         // Animate
         animator.Play("Dash");
+
+        if (isDashing)
+        {
+            // Instatiate Particle Effect
+            Instantiate(playerScriptableObject.weapon.dashParticle, rb.transform.position, firePoint.rotation);
+
+            // Reset
+            isDashing = false;
+        }
 
         // Calculate the difference between mouse position and player position
         Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
@@ -428,6 +439,11 @@ public class Player : MonoBehaviour
     public void AE_HitAnimationEnd()
     {
         state = PlayerState.idle;
+    }
+
+    public void AE_DashParticle()
+    {
+        isDashing = true;
     }
 
     //===== Health =====\\
