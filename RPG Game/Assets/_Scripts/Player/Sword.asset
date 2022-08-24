@@ -15,16 +15,17 @@ MonoBehaviour:
   weaponIndex: 0
   attackDamage: 1
   attackRange: 10.1
-  basicAttackCoolDown: 0.8
-  basicAttackSlideVelocity: 300
   basicAttackPrefab: {fileID: 9096168329394871884, guid: cbbf05799181b9e4798bd5c85f4985c0, type: 3}
   basicAttackHitEffect: {fileID: 5076571333579909779, guid: ef5741b23b5f310468da96f0485271be, type: 3}
+  basicAttackCoolDown: 0.8
+  basicAttackSlideVelocity: 300
   basicAttackKnockBackForce: 3
   basicAttackProjectileForce: 1
   basicAttack2Prefab: {fileID: 4736352390647969516, guid: 7ef6a41ad62655a41b1fa0714f4af413, type: 3}
   basicAttack3Prefab: {fileID: 5753616516818657137, guid: 9831753cca0e1fa4d9a217942f36a444, type: 3}
+  dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   dashParticle: {fileID: 7055635658205671504, guid: 6f79cee89fcf92d4c8de740d329d99d6, type: 3}
   dashCoolDown: 3
   dashVelocity: 1700
-  dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   dashProjectileForce: 1
+  abilityPrefab: {fileID: 207941455730229968, guid: 9bda4004df3cd03489d9831d14cfbd99, type: 3}
