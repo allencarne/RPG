@@ -29,3 +29,7 @@ MonoBehaviour:
   dashVelocity: 1700
   dashProjectileForce: 1
   abilityPrefab: {fileID: 207941455730229968, guid: 9bda4004df3cd03489d9831d14cfbd99, type: 3}
+  abilityBasePrefab: {fileID: 924607119547585524, guid: 29bd066ddb8816341a0fd56cdc6c4c38, type: 3}
+  abilityCoolDown: 2
+  abilityProjectileForce: 4
+  abilityKnockBackForce: 8

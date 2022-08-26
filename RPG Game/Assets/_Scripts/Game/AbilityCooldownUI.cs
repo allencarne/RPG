@@ -35,6 +35,12 @@ public class AbilityCooldownUI : MonoBehaviour
     [HideInInspector] bool dashIsCooldown = false;
     [HideInInspector] float dashCooldownTimer = 0.0f;
 
+    [Header("Ability")]
+    [SerializeField] Image abilityImageCooldown;
+    [SerializeField] TMP_Text abilityTextCooldown;
+    [HideInInspector] bool abilityIsCooldown = false;
+    [HideInInspector] float abilityCooldownTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +59,10 @@ public class AbilityCooldownUI : MonoBehaviour
         // Dash cooldown false
         dashAbilityTextCooldown.gameObject.SetActive(false);
         dashAbilityImageCooldown.fillAmount = 0.0f;
+
+        // Ability cooldown false
+        abilityTextCooldown.gameObject.SetActive(false);
+        abilityImageCooldown.fillAmount = 0.0f;
     }
 
     // Update is called once per frame
@@ -76,6 +86,11 @@ public class AbilityCooldownUI : MonoBehaviour
         if (dashIsCooldown)
         {
             ApplyDashCoolDown();
+        }
+
+        if (abilityIsCooldown)
+        {
+            ApplyAbilityCoolDown();
         }
     }
 
@@ -152,6 +167,23 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
+    void ApplyAbilityCoolDown()
+    {
+        abilityCooldownTimer -= Time.deltaTime;
+
+        if (abilityCooldownTimer < 0.0f)
+        {
+            abilityIsCooldown = false;
+            abilityTextCooldown.gameObject.SetActive(false);
+            abilityImageCooldown.fillAmount = 0.0f;
+        }
+        else
+        {
+            abilityTextCooldown.text = abilityCooldownTimer.ToString();
+            abilityImageCooldown.fillAmount = abilityCooldownTimer / playerScriptableObject.weapon.abilityCoolDown;
+        }
+    }
+
     public void UseBasicAttackAbility()
     {
         if (basicAttackIsCooldown)
@@ -213,6 +245,20 @@ public class AbilityCooldownUI : MonoBehaviour
             dashIsCooldown = true;
             dashAbilityTextCooldown.gameObject.SetActive(true);
             dashCooldownTimer = playerScriptableObject.weapon.dashCoolDown;
+        }
+    }
+
+    public void UseAbility()
+    {
+        if (abilityIsCooldown)
+        {
+            // User has click ability while in use
+        }
+        else
+        {
+            abilityIsCooldown = true;
+            abilityTextCooldown.gameObject.SetActive(true);
+            abilityCooldownTimer = playerScriptableObject.weapon.abilityCoolDown;
         }
     }
 }

@@ -13,10 +13,12 @@ public class Player : MonoBehaviour
     bool isAttacking;
     bool isDashing;
     bool isAbilityActive;
+    bool isWindPullBaseActive;
     bool canAttack2 = false;
     bool canAttack3 = false;
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
+    float lastAbility; // Variable to help with Ability Cooldown
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -49,12 +51,12 @@ public class Player : MonoBehaviour
         abilityCooldownUI = abilitiesUI.GetComponent<AbilityCooldownUI>();
         cam = Camera.main;
         playerHealthbar = GetComponent<PlayerHealthbar>();
-        //animator.speed = 1.5f;
+        //animator.speed = 1.3f;
     }
 
      void Update()
     {
-        Debug.Log(state);
+        Debug.Log(isAbilityActive);
 
         switch (state)
         {
@@ -139,6 +141,8 @@ public class Player : MonoBehaviour
         DashKeyPressed();
 
         AttackKeyPressed();
+
+        AbilityKeyPressed();
     }
 
     public void PlayerAttackState()
@@ -235,39 +239,14 @@ public class Player : MonoBehaviour
 
     public void PlayerAbilityState()
     {
-        //Animate
-        animator.Play("Attack");
-
-        // Calculate the difference between mouse position and player position
-        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
-        if (!attackAnglePaused)
+        switch (playerScriptableObject.weapon.weaponIndex)
         {
-            // Set Attack Animation Depending on Mouse Position
-            animator.SetFloat("Aim Horizontal", difference.x);
-            animator.SetFloat("Aim Vertical", difference.y);
-            // Set Idle to last attack position
-            animator.SetFloat("Horizontal", difference.x);
-            animator.SetFloat("Vertical", difference.y);
-
-            // Set AttackAnglePause Bool to True
-            attackAnglePaused = true;
-
-            if (!isAbilityActive)
-            {
-                // Instantiate Slash prefab
-                GameObject slash = Instantiate(playerScriptableObject.weapon.abilityPrefab, firePointRanged.position, firePointRanged.rotation);
-
-                // Get the Rigid Body of the Slash prefab
-                Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-
-                // Add Force to Slash prefab
-                slashRB.AddForce(-firePoint.up * playerScriptableObject.weapon.abilityProjectileForce, ForceMode2D.Impulse);
-
-                // Reset isAttacking Bool;
-                //isAbilityActive = false;
-            }
+            case 0:
+                WindPull();
+                abilityCooldownUI.UseAbility();
+                break;
+            case 1:
+                break;
         }
     }
 
@@ -458,6 +437,51 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void WindPull()
+    {
+        //Animate
+        animator.Play("Wind Pull");
+
+        if (isWindPullBaseActive)
+        {
+            Instantiate(playerScriptableObject.weapon.abilityBasePrefab, firePoint.position, firePoint.rotation);
+
+            isWindPullBaseActive = false;
+        }
+
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            // Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
+        if (isAbilityActive)
+        {
+            // Instantiate Slash prefab
+            GameObject slash = Instantiate(playerScriptableObject.weapon.abilityPrefab, firePointRanged.position, firePointRanged.rotation);
+
+            // Get the Rigid Body of the Slash prefab
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+            // Add Force to Slash prefab
+            slashRB.AddForce(-firePoint.up * playerScriptableObject.weapon.abilityProjectileForce, ForceMode2D.Impulse);
+
+            // Reset isAttacking Bool;
+            isAbilityActive = false;
+        }
+    }
+
     //===== Animation Events =====\\
     public void AE_Attack()
     {
@@ -472,6 +496,16 @@ public class Player : MonoBehaviour
     public void AE_Attack3()
     {
         canAttack3 = true;
+    }
+
+    public void AE_WindPull()
+    {
+        isAbilityActive = true;
+    }
+
+    public void AE_WindPullBase()
+    {
+        isWindPullBaseActive = true;
     }
 
     public void AE_AttackAnimationEnd()
@@ -552,11 +586,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if (Time.time - lastAttack < playerScriptableObject.weapon.basicAttackCoolDown)
+            if (Time.time - lastAbility < playerScriptableObject.weapon.abilityCoolDown)
             {
                 return;
             }
-            lastAttack = Time.time;
+            lastAbility = Time.time;
             state = PlayerState.ability;
         }
     }

@@ -16,12 +16,13 @@ public class WindPull : MonoBehaviour
 
             // Deal Damage
             other.GetComponent<Enemy>().EnemyHitState(playerScriptableObject.weapon.attackDamage);
-
+            /*
             // Apply Knockback
             Rigidbody2D enemy = other.GetComponent<Rigidbody2D>();
             Vector2 difference = enemy.transform.position - transform.position;
             difference = difference.normalized * playerScriptableObject.weapon.abilityKnockBackForce;
             enemy.AddForce(difference, ForceMode2D.Impulse);
+            */
         }
     }
 
