@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
     float lastAbility; // Variable to help with Ability Cooldown
+    float lastAbility2;
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -40,6 +41,7 @@ public class Player : MonoBehaviour
         attack3,
         dash,
         ability,
+        ability2,
         hit,
         death
     }
@@ -81,6 +83,9 @@ public class Player : MonoBehaviour
             case PlayerState.ability:
                 PlayerAbilityState();
                 break;
+            case PlayerState.ability2:
+                PlayerAbility2State();
+                break;
             case PlayerState.hit:
                 PlayerHitState(damage);
                 break;
@@ -113,6 +118,8 @@ public class Player : MonoBehaviour
         AttackKeyPressed();
 
         AbilityKeyPressed();
+
+        Ability2KeyPressed();
     }
 
     public void PlayerMoveState()
@@ -143,6 +150,8 @@ public class Player : MonoBehaviour
         AttackKeyPressed();
 
         AbilityKeyPressed();
+
+        Ability2KeyPressed();
     }
 
     public void PlayerAttackState()
@@ -244,6 +253,19 @@ public class Player : MonoBehaviour
             case 0:
                 WindPull();
                 abilityCooldownUI.UseAbility();
+                break;
+            case 1:
+                break;
+        }
+    }
+
+    public void PlayerAbility2State()
+    {
+        switch (playerScriptableObject.weapon.weaponIndex)
+        {
+            case 0:
+                Whirlwind();
+                //abilityCooldownUI.UseAbility();
                 break;
             case 1:
                 break;
@@ -482,6 +504,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Whirlwind()
+    {
+        //Animate
+        animator.Play("Whirlwind");
+    }
+
     //===== Animation Events =====\\
     public void AE_Attack()
     {
@@ -506,6 +534,11 @@ public class Player : MonoBehaviour
     public void AE_WindPullBase()
     {
         isWindPullBaseActive = true;
+    }
+
+    public void AE_WhirlwindAnimationEnd()
+    {
+        state = PlayerState.idle;
     }
 
     public void AE_AttackAnimationEnd()
@@ -592,6 +625,19 @@ public class Player : MonoBehaviour
             }
             lastAbility = Time.time;
             state = PlayerState.ability;
+        }
+    }
+
+    public void Ability2KeyPressed()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (Time.time - lastAbility2 < playerScriptableObject.weapon.ability2CoolDown)
+            {
+                return;
+            }
+            lastAbility2 = Time.time;
+            state = PlayerState.ability2;
         }
     }
 }

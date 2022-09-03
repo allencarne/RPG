@@ -18,7 +18,7 @@ public class WeaponScriptableObject : ScriptableObject
     public int attackDamage;
     public float attackRange;
 
-    [Header("Basic Attack Ability")]
+    [Header("Basic Attack")]
     public GameObject basicAttackPrefab;
     public GameObject basicAttackHitEffect;
     public float basicAttackCoolDown;
@@ -26,7 +26,7 @@ public class WeaponScriptableObject : ScriptableObject
     public float basicAttackKnockBackForce;
     public float basicAttackProjectileForce;
 
-    [Header("Basic Attack 2 Ability")]
+    [Header("Basic Attack 2")]
     public GameObject basicAttack2Prefab;
     //public float basicAttack2CoolDown;
     //public float basicAttack2SlideVelocity;
@@ -34,7 +34,7 @@ public class WeaponScriptableObject : ScriptableObject
     //public float basicAttack2KnockBackForce;
     //public float basicAttack2ProjectileForce;
 
-    [Header("Basic Attack 3 Ability")]
+    [Header("Basic Attack 3")]
     public GameObject basicAttack3Prefab;
     //public float basicAttack3CoolDown;
     //public float basicAttack3SlideVelocity;
@@ -55,6 +55,13 @@ public class WeaponScriptableObject : ScriptableObject
     public float abilityCoolDown;
     public float abilityProjectileForce;
     public float abilityKnockBackForce;
+
+    [Header("Ability2")]
+    //public GameObject ability2Prefab;
+    //public GameObject ability2BasePrefab;
+    public float ability2CoolDown;
+    //public float ability2ProjectileForce;
+    //public float ability2KnockBackForce;
 
     // Particles
 
