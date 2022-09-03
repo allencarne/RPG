@@ -137,13 +137,9 @@ public class Player : MonoBehaviour
         }
         animator.SetFloat("Speed", movement.sqrMagnitude);
 
-        // Input
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        movement = moveInput.normalized * playerScriptableObject.speed;
+        MovePlayer();
 
-        // Movement
-        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
-
+        // Transitions
         NoMoveKeyPressed();
 
         DashKeyPressed();
@@ -510,6 +506,32 @@ public class Player : MonoBehaviour
         //Animate
         animator.Play("Whirlwind");
 
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        // if attack angle is not paused - Pause Attack Angle and Animate in that direction - And slide forward
+        if (!attackAnglePaused)
+        {
+            // Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Aim Horizontal", difference.x);
+            animator.SetFloat("Aim Vertical", difference.y);
+            // Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            // If mouse is outside attackrange - Slide Forward
+            if (Vector3.Distance(rb.position, cam.ScreenToWorldPoint(Input.mousePosition)) > playerScriptableObject.weapon.attackRange)
+            {
+                // Normalize movement vector and times it by attack move distance
+                difference = difference.normalized * playerScriptableObject.weapon.ability2SlideVelocity;
+                // Slide in Attack Direction
+                rb.AddForce(difference, ForceMode2D.Impulse);
+            }
+
+            // Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
         if (isAbility2Active)
         {
             Instantiate(playerScriptableObject.weapon.ability2Prefab, transform.position, Quaternion.identity);
@@ -551,6 +573,7 @@ public class Player : MonoBehaviour
 
     public void AE_WhirlwindAnimationEnd()
     {
+        attackAnglePaused = false;
         state = PlayerState.idle;
     }
 
@@ -586,6 +609,16 @@ public class Player : MonoBehaviour
     }
 
     //===== Input =====\\
+    public void MovePlayer()
+    {
+        // Input
+        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        movement = moveInput.normalized * playerScriptableObject.speed;
+
+        // Movement
+        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
+    }
+
     public void MoveKeyPressed()
     {
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))

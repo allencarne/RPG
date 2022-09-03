@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 357996520418219022}
   - component: {fileID: 8606692842596687527}
   - component: {fileID: 4491706847430220053}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WindDashLeapParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

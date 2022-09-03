@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 609838294988003259}
   - component: {fileID: 3723721817322804360}
   - component: {fileID: 8402482249608175181}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WindPullBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}

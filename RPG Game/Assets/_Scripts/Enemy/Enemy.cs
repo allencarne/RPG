@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
 
-        ShowDamage(damage.ToString());
+        //ShowDamage(damage.ToString());
 
         // Behaviour
         health -= damage;

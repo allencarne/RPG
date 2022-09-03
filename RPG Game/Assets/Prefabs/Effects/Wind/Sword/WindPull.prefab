@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3045194629823058823}
   - component: {fileID: -7207492185829839346}
   - component: {fileID: 6850597702631644476}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WindPull
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ AreaEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   m_UseGlobalAngle: 0
   m_ForceAngle: 270
   m_ForceMagnitude: 35

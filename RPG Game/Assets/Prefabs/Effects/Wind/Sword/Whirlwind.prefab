@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1314612841662080296}
   - component: {fileID: -2892400461124960012}
   - component: {fileID: -1490300195776939421}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Whirlwind
   m_TagString: Untagged
   m_Icon: {fileID: 0}

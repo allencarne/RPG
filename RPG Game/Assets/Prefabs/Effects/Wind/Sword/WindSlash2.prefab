@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4736352390647969518}
   - component: {fileID: 4736352390647969517}
   - component: {fileID: -3323448469929216492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WindSlash2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

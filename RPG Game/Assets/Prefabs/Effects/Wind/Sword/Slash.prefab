@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4177376353466725689}
   - component: {fileID: 7455914785384211637}
   - component: {fileID: -7094999492986019129}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04137a27cb4e4774888c5d9cf1377424, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 1283847226239369567, guid: ec5906272687106429814c6bdfcd97a5, type: 3}
+  playerScriptableObject: {fileID: 0}
 --- !u!95 &7455914785384211637
 Animator:
   serializedVersion: 3

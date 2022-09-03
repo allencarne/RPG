@@ -62,6 +62,7 @@ public class WeaponScriptableObject : ScriptableObject
     public float ability2CoolDown;
     //public float ability2ProjectileForce;
     //public float ability2KnockBackForce;
+    public float ability2SlideVelocity;
 
     // Particles
 

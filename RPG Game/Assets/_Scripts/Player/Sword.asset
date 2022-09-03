@@ -33,3 +33,6 @@ MonoBehaviour:
   abilityCoolDown: 2
   abilityProjectileForce: 4
   abilityKnockBackForce: 8
+  ability2Prefab: {fileID: 6641188995086164244, guid: d6739bb2d05ab6f4a9cd326c6d6f3550, type: 3}
+  ability2CoolDown: 1
+  ability2SlideVelocity: 600
