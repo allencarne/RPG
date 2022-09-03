@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     bool isAttacking;
     bool isDashing;
     bool isAbilityActive;
+    bool isAbility2Active;
     bool isWindPullBaseActive;
     bool canAttack2 = false;
     bool canAttack3 = false;
@@ -508,6 +509,13 @@ public class Player : MonoBehaviour
     {
         //Animate
         animator.Play("Whirlwind");
+
+        if (isAbility2Active)
+        {
+            Instantiate(playerScriptableObject.weapon.ability2Prefab, transform.position, Quaternion.identity);
+
+            isAbility2Active = false;
+        }
     }
 
     //===== Animation Events =====\\
@@ -534,6 +542,11 @@ public class Player : MonoBehaviour
     public void AE_WindPullBase()
     {
         isWindPullBaseActive = true;
+    }
+
+    public void AE_Whirlwind()
+    {
+        isAbility2Active = true;
     }
 
     public void AE_WhirlwindAnimationEnd()

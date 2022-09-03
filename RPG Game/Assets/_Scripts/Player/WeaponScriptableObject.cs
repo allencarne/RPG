@@ -57,7 +57,7 @@ public class WeaponScriptableObject : ScriptableObject
     public float abilityKnockBackForce;
 
     [Header("Ability2")]
-    //public GameObject ability2Prefab;
+    public GameObject ability2Prefab;
     //public GameObject ability2BasePrefab;
     public float ability2CoolDown;
     //public float ability2ProjectileForce;
