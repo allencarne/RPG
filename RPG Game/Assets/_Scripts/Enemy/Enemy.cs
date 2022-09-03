@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,22 +13,20 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float attackRange;
     public float aggroRange;
-
     public float attackCoolDown;
-
-    float damage; // Temporary
+    public bool canDamageText = true;
+    int damage; // Temporary
     float lastAttack; // Variable that helps with Attack Cooldown
     float wanderCoolDown = 10f;
     float lastWander; // Variable that helps with Wander Cooldown
-    Vector2 wayPoint; // Wander Waypoint
     float maxDistance = 5; // Wander Max Distance
     float range = 1; // Max Wander Range
 
+    Vector2 wayPoint; // Wander Waypoint
     private Vector3 EnemyStartingPosition;
 
     [Header("Components")]
     [HideInInspector] public EnemySpawner enemySpawner;
-    //[SerializeField] EnemyScriptableObject enemyScriptableObject;
     [SerializeField] GameObject expObject;
     [SerializeField] Animator enemyAnimator;
     [SerializeField] Rigidbody2D enemyRigidbody2D;
@@ -35,6 +34,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] EnemyHealthbar enemyHealthbar;
     [SerializeField] GameObject hitInidcator;
     [SerializeField] Transform firePoint;
+    [SerializeField] GameObject floatingTextPrefab;
 
     enum EnemyState
     {
@@ -63,8 +63,6 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log(state);
-
         switch (state)
         {
             case EnemyState.spawn:
@@ -91,6 +89,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    //===== States =====\\
     public void EnemySpawnState()
     {
         //Animate
@@ -205,11 +204,13 @@ public class Enemy : MonoBehaviour
         Instantiate(hitInidcator, firePoint.position, firePoint.rotation);
     }
 
-    public void EnemyHitState(float damage)
+    public void EnemyHitState(int damage)
     {
         // Animate
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
+
+        ShowDamage(damage.ToString());
 
         // Behaviour
         health -= damage;
@@ -240,6 +241,7 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
+    //===== Animation Events =====\\
     public void AE_SpwanAnimationEnd()
     {
         state = EnemyState.idle;
@@ -261,6 +263,7 @@ public class Enemy : MonoBehaviour
         Instantiate(expObject, transform.position, Quaternion.identity);
     }
 
+    //===== Methods =====\\
     public void SetNewWanderDsetination()
     {
         wayPoint = new Vector2(Random.Range(-maxDistance, maxDistance), Random.Range(-maxDistance, maxDistance));
@@ -270,6 +273,15 @@ public class Enemy : MonoBehaviour
     public static Vector3 GetRandomWanderDir()
     {
         return new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)).normalized;
+    }
+
+    void ShowDamage(string text)
+    {
+        if (floatingTextPrefab)
+        {
+            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+            prefab.GetComponentInChildren<TextMeshPro>().text = text;
+        }
     }
 
     private void OnDrawGizmos()

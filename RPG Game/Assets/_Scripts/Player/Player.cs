@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
      void Update()
     {
-        Debug.Log(isAbilityActive);
+        //Debug.Log(isAbilityActive);
 
         switch (state)
         {
