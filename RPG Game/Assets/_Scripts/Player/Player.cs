@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("Variables")]
     [HideInInspector] public bool attackAnglePaused = false;
     [HideInInspector] public float damage; // Temporary
-    [SerializeField] Vector2 movement;
+    [HideInInspector] Vector2 movement;
 
     bool isAttacking;
     bool isDashing;
