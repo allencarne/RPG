@@ -9,7 +9,8 @@ public class Player : MonoBehaviour
     [Header("Variables")]
     [HideInInspector] public bool attackAnglePaused = false;
     [HideInInspector] public float damage; // Temporary
-    Vector2 movement;
+    [SerializeField] private Vector2 movement;
+
     bool isAttacking;
     bool isDashing;
     bool isAbilityActive;
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour
     bool isWindPullBaseActive;
     bool canAttack2 = false;
     bool canAttack3 = false;
+
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
     float lastAbility; // Variable to help with Ability Cooldown
@@ -40,8 +42,8 @@ public class Player : MonoBehaviour
         attack,
         attack2,
         attack3,
+        ability1,
         dash,
-        ability,
         ability2,
         hit,
         death
@@ -78,11 +80,11 @@ public class Player : MonoBehaviour
             case PlayerState.attack3:
                 PlayerAttack3State();
                 break;
+            case PlayerState.ability1:
+                PlayerAbility1State();
+                break;
             case PlayerState.dash:
                 PlayerDashState();
-                break;
-            case PlayerState.ability:
-                PlayerAbilityState();
                 break;
             case PlayerState.ability2:
                 PlayerAbility2State();
@@ -95,6 +97,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
+        // Testing
         if (Input.GetKeyDown(KeyCode.X))
         {
             PlayerHitState(5f);
@@ -118,7 +121,7 @@ public class Player : MonoBehaviour
 
         AttackKeyPressed();
 
-        AbilityKeyPressed();
+        Ability1KeyPressed();
 
         Ability2KeyPressed();
     }
@@ -146,7 +149,7 @@ public class Player : MonoBehaviour
 
         AttackKeyPressed();
 
-        AbilityKeyPressed();
+        Ability1KeyPressed();
 
         Ability2KeyPressed();
     }
@@ -156,7 +159,7 @@ public class Player : MonoBehaviour
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
-                BasicAttackAbility();
+                WindSlash();
                 abilityCooldownUI.UseBasicAttackAbility();
                 break;
             case 1:
@@ -169,7 +172,7 @@ public class Player : MonoBehaviour
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
-                BasicAttackAbility2();
+                WindSlash2();
                 abilityCooldownUI.UseBasicAttack2Ability();
                 break;
             case 1:
@@ -182,8 +185,21 @@ public class Player : MonoBehaviour
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
-                BasicAttackAbility3();
+                WindSlash3();
                 abilityCooldownUI.UseBasicAttack3Ability();
+                break;
+            case 1:
+                break;
+        }
+    }
+
+    public void PlayerAbility1State()
+    {
+        switch (playerScriptableObject.weapon.weaponIndex)
+        {
+            case 0:
+                WindPull();
+                abilityCooldownUI.UseAbility1();
                 break;
             case 1:
                 break;
@@ -192,64 +208,11 @@ public class Player : MonoBehaviour
 
     public void PlayerDashState()
     {
-        abilityCooldownUI.UseDashAbility();
-
-        // Animate
-        animator.Play("Dash");
-
-        if (isDashing)
-        {
-            // Instatiate Particle Effect
-            Instantiate(playerScriptableObject.weapon.dashParticle, rb.transform.position, firePoint.rotation);
-
-            // Reset
-            isDashing = false;
-        }
-
-        // Calculate the difference between mouse position and player position
-        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-        if (!attackAnglePaused)
-        {
-            //Set Attack Animation Depending on Mouse Position
-            animator.SetFloat("Horizontal", difference.x);
-            animator.SetFloat("Vertical", difference.y);
-            //Set Idle to last attack position
-            animator.SetFloat("Horizontal", difference.x);
-            animator.SetFloat("Vertical", difference.y);
-
-            //Normalize movement vector and times it by attack move distance
-            difference = difference.normalized * playerScriptableObject.weapon.dashVelocity;
-            // Slide in Attack Direction
-            rb.AddForce(difference, ForceMode2D.Impulse);
-
-            // Set AttackAnglePause Bool to True
-            attackAnglePaused = true;
-        }
-
-        if (isAttacking)
-        {
-            // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.dashPrefab, firePoint.position, firePoint.rotation);
-
-            // Get the Rigid Body of the Slash prefab
-            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
-
-            // Add Force to Slash prefab
-            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.dashProjectileForce, ForceMode2D.Impulse);
-
-            // Reset isAttacking Bool;
-            isAttacking = false;
-        }
-    }
-
-    public void PlayerAbilityState()
-    {
         switch (playerScriptableObject.weapon.weaponIndex)
         {
             case 0:
-                WindPull();
-                abilityCooldownUI.UseAbility();
+                WindDash();
+                abilityCooldownUI.UseDashAbility();
                 break;
             case 1:
                 break;
@@ -262,7 +225,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 Whirlwind();
-                //abilityCooldownUI.UseAbility();
+                abilityCooldownUI.UseAbility2();
                 break;
             case 1:
                 break;
@@ -297,7 +260,7 @@ public class Player : MonoBehaviour
     }
 
     //===== Abilities =====\\
-    public void BasicAttackAbility()
+    public void WindSlash()
     {
         // Animate
         animator.Play("Attack");
@@ -354,7 +317,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void BasicAttackAbility2()
+    public void WindSlash2()
     {
         animator.Play("Attack 2");
 
@@ -410,7 +373,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void BasicAttackAbility3()
+    public void WindSlash3()
     {
         animator.Play("Attack 3");
 
@@ -463,7 +426,7 @@ public class Player : MonoBehaviour
 
         if (isWindPullBaseActive)
         {
-            Instantiate(playerScriptableObject.weapon.abilityBasePrefab, firePoint.position, firePoint.rotation);
+            Instantiate(playerScriptableObject.weapon.ability1BasePrefab, firePoint.position, firePoint.rotation);
 
             isWindPullBaseActive = false;
         }
@@ -488,16 +451,67 @@ public class Player : MonoBehaviour
         if (isAbilityActive)
         {
             // Instantiate Slash prefab
-            GameObject slash = Instantiate(playerScriptableObject.weapon.abilityPrefab, firePointRanged.position, firePointRanged.rotation);
+            GameObject slash = Instantiate(playerScriptableObject.weapon.ability1Prefab, firePointRanged.position, firePointRanged.rotation);
 
             // Get the Rigid Body of the Slash prefab
             Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
 
             // Add Force to Slash prefab
-            slashRB.AddForce(-firePoint.up * playerScriptableObject.weapon.abilityProjectileForce, ForceMode2D.Impulse);
+            slashRB.AddForce(-firePoint.up * playerScriptableObject.weapon.ability1ProjectileForce, ForceMode2D.Impulse);
 
             // Reset isAttacking Bool;
             isAbilityActive = false;
+        }
+    }
+
+    public void WindDash()
+    {
+        // Animate
+        animator.Play("Dash");
+
+        if (isDashing)
+        {
+            // Instatiate Particle Effect
+            Instantiate(playerScriptableObject.weapon.dashParticle, rb.transform.position, firePoint.rotation);
+
+            // Reset
+            isDashing = false;
+        }
+
+        // Calculate the difference between mouse position and player position
+        Vector2 difference = cam.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
+        if (!attackAnglePaused)
+        {
+            //Set Attack Animation Depending on Mouse Position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+            //Set Idle to last attack position
+            animator.SetFloat("Horizontal", difference.x);
+            animator.SetFloat("Vertical", difference.y);
+
+            //Normalize movement vector and times it by attack move distance
+            difference = difference.normalized * playerScriptableObject.weapon.dashVelocity;
+            // Slide in Attack Direction
+            rb.AddForce(difference, ForceMode2D.Impulse);
+
+            // Set AttackAnglePause Bool to True
+            attackAnglePaused = true;
+        }
+
+        if (isAttacking)
+        {
+            // Instantiate Slash prefab
+            GameObject slash = Instantiate(playerScriptableObject.weapon.dashPrefab, firePoint.position, firePoint.rotation);
+
+            // Get the Rigid Body of the Slash prefab
+            Rigidbody2D slashRB = slash.GetComponent<Rigidbody2D>();
+
+            // Add Force to Slash prefab
+            slashRB.AddForce(firePoint.up * playerScriptableObject.weapon.dashProjectileForce, ForceMode2D.Impulse);
+
+            // Reset isAttacking Bool;
+            isAttacking = false;
         }
     }
 
@@ -595,19 +609,6 @@ public class Player : MonoBehaviour
         isDashing = true;
     }
 
-    //===== Health =====\\
-    public void RestoreHealth (float healAmount)
-    {
-        playerScriptableObject.health += healAmount;
-        playerHealthbar.lerpTimer = 0f;
-    }
-
-    public void IncreaseHealth(int level)
-    {
-        playerScriptableObject.maxHealth += (playerScriptableObject.health * 0.01f) * ((100 - level) * 0.01f);
-        playerScriptableObject.health = playerScriptableObject.maxHealth;
-    }
-
     //===== Input =====\\
     public void MovePlayer()
     {
@@ -648,6 +649,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Ability1KeyPressed()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (Time.time - lastAbility < playerScriptableObject.weapon.ability1CoolDown)
+            {
+                return;
+            }
+            lastAbility = Time.time;
+            state = PlayerState.ability1;
+        }
+    }
+
     public void DashKeyPressed()
     {
         if (Input.GetKey(KeyCode.Space))
@@ -658,19 +672,6 @@ public class Player : MonoBehaviour
             }
             lastDash = Time.time;
             state = PlayerState.dash;
-        }
-    }
-
-    public void AbilityKeyPressed()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (Time.time - lastAbility < playerScriptableObject.weapon.abilityCoolDown)
-            {
-                return;
-            }
-            lastAbility = Time.time;
-            state = PlayerState.ability;
         }
     }
 
@@ -685,5 +686,18 @@ public class Player : MonoBehaviour
             lastAbility2 = Time.time;
             state = PlayerState.ability2;
         }
+    }
+
+    //===== Health =====\\
+    public void RestoreHealth(float healAmount)
+    {
+        playerScriptableObject.health += healAmount;
+        playerHealthbar.lerpTimer = 0f;
+    }
+
+    public void IncreaseHealth(int level)
+    {
+        playerScriptableObject.maxHealth += (playerScriptableObject.health * 0.01f) * ((100 - level) * 0.01f);
+        playerScriptableObject.health = playerScriptableObject.maxHealth;
     }
 }

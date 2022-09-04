@@ -29,40 +29,50 @@ public class AbilityCooldownUI : MonoBehaviour
     [HideInInspector] bool basicAttack3IsCooldown = false;
     [HideInInspector] float basicAttack3CooldownTimer = 0.0f;
 
+    [Header("Ability 1")]
+    [SerializeField] Image ability1ImageCooldown;
+    [SerializeField] TMP_Text ability1TextCooldown;
+    [HideInInspector] bool ability1IsCooldown = false;
+    [HideInInspector] float ability1CooldownTimer = 0.0f;
+
     [Header("Dash")]
     [SerializeField] Image dashAbilityImageCooldown;
     [SerializeField] TMP_Text dashAbilityTextCooldown;
     [HideInInspector] bool dashIsCooldown = false;
     [HideInInspector] float dashCooldownTimer = 0.0f;
 
-    [Header("Ability")]
-    [SerializeField] Image abilityImageCooldown;
-    [SerializeField] TMP_Text abilityTextCooldown;
-    [HideInInspector] bool abilityIsCooldown = false;
-    [HideInInspector] float abilityCooldownTimer = 0.0f;
+    [Header("Ability 2")]
+    [SerializeField] Image ability2ImageCooldown;
+    [SerializeField] TMP_Text ability2TextCooldown;
+    [HideInInspector] bool ability2IsCooldown = false;
+    [HideInInspector] float ability2CooldownTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Basic Attack cooldown false
+        // Basic Attack 1 cooldown false
         basicAttackAbilityTextCooldown.gameObject.SetActive(false);
         basicAttackAbilityImageCooldown.fillAmount = 0.0f;
 
-        // Basic Attack cooldown false
+        // Basic Attack 2 cooldown false
         basicAttack2AbilityTextCooldown.gameObject.SetActive(false);
         basicAttack2AbilityImageCooldown.fillAmount = 0.0f;
 
-        // Basic Attack cooldown false
+        // Basic Attack 3 cooldown false
         basicAttack3AbilityTextCooldown.gameObject.SetActive(false);
         basicAttack3AbilityImageCooldown.fillAmount = 0.0f;
+
+        // Ability1 cooldown false
+        ability1TextCooldown.gameObject.SetActive(false);
+        ability1ImageCooldown.fillAmount = 0.0f;
 
         // Dash cooldown false
         dashAbilityTextCooldown.gameObject.SetActive(false);
         dashAbilityImageCooldown.fillAmount = 0.0f;
 
-        // Ability cooldown false
-        abilityTextCooldown.gameObject.SetActive(false);
-        abilityImageCooldown.fillAmount = 0.0f;
+        // Ability2 cooldown false
+        ability2TextCooldown.gameObject.SetActive(false);
+        ability2ImageCooldown.fillAmount = 0.0f;
     }
 
     // Update is called once per frame
@@ -83,14 +93,19 @@ public class AbilityCooldownUI : MonoBehaviour
             ApplyBasicAttack3CoolDown();
         }
 
+        if (ability1IsCooldown)
+        {
+            ApplyAbility1CoolDown();
+        }
+
         if (dashIsCooldown)
         {
             ApplyDashCoolDown();
         }
 
-        if (abilityIsCooldown)
+        if (ability2IsCooldown)
         {
-            ApplyAbilityCoolDown();
+            ApplyAbility2CoolDown();
         }
     }
 
@@ -150,6 +165,23 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
+    void ApplyAbility1CoolDown()
+    {
+        ability1CooldownTimer -= Time.deltaTime;
+
+        if (ability1CooldownTimer < 0.0f)
+        {
+            ability1IsCooldown = false;
+            ability1TextCooldown.gameObject.SetActive(false);
+            ability1ImageCooldown.fillAmount = 0.0f;
+        }
+        else
+        {
+            ability1TextCooldown.text = ability1CooldownTimer.ToString();
+            ability1ImageCooldown.fillAmount = ability1CooldownTimer / playerScriptableObject.weapon.ability1CoolDown;
+        }
+    }
+
     void ApplyDashCoolDown()
     {
         dashCooldownTimer -= Time.deltaTime;
@@ -167,22 +199,24 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
-    void ApplyAbilityCoolDown()
+    void ApplyAbility2CoolDown()
     {
-        abilityCooldownTimer -= Time.deltaTime;
+        ability2CooldownTimer -= Time.deltaTime;
 
-        if (abilityCooldownTimer < 0.0f)
+        if (ability2CooldownTimer < 0.0f)
         {
-            abilityIsCooldown = false;
-            abilityTextCooldown.gameObject.SetActive(false);
-            abilityImageCooldown.fillAmount = 0.0f;
+            ability2IsCooldown = false;
+            ability2TextCooldown.gameObject.SetActive(false);
+            ability2ImageCooldown.fillAmount = 0.0f;
         }
         else
         {
-            abilityTextCooldown.text = abilityCooldownTimer.ToString();
-            abilityImageCooldown.fillAmount = abilityCooldownTimer / playerScriptableObject.weapon.abilityCoolDown;
+            ability2TextCooldown.text = ability1CooldownTimer.ToString();
+            ability2ImageCooldown.fillAmount = ability2CooldownTimer / playerScriptableObject.weapon.ability2CoolDown;
         }
     }
+
+    // Use
 
     public void UseBasicAttackAbility()
     {
@@ -234,6 +268,20 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
+    public void UseAbility1()
+    {
+        if (ability1IsCooldown)
+        {
+            // User has click ability while in use
+        }
+        else
+        {
+            ability1IsCooldown = true;
+            ability1TextCooldown.gameObject.SetActive(true);
+            ability1CooldownTimer = playerScriptableObject.weapon.ability1CoolDown;
+        }
+    }
+
     public void UseDashAbility()
     {
         if (dashIsCooldown)
@@ -248,17 +296,17 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
-    public void UseAbility()
+    public void UseAbility2()
     {
-        if (abilityIsCooldown)
+        if (ability2IsCooldown)
         {
             // User has click ability while in use
         }
         else
         {
-            abilityIsCooldown = true;
-            abilityTextCooldown.gameObject.SetActive(true);
-            abilityCooldownTimer = playerScriptableObject.weapon.abilityCoolDown;
+            ability2IsCooldown = true;
+            ability2TextCooldown.gameObject.SetActive(true);
+            ability2CooldownTimer = playerScriptableObject.weapon.ability2CoolDown;
         }
     }
 }

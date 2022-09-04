@@ -42,19 +42,19 @@ public class WeaponScriptableObject : ScriptableObject
     //public float basicAttack3KnockBackForce;
     //public float basicAttack3ProjectileForce;
 
+    [Header("Ability 1")]
+    public GameObject ability1Prefab;
+    public GameObject ability1BasePrefab;
+    public float ability1CoolDown;
+    public float ability1ProjectileForce;
+    public float ability1KnockBackForce;
+
     [Header("Dash Ability")]
     public GameObject dashPrefab;
     public GameObject dashParticle;
     public float dashCoolDown;
     public float dashVelocity;
     public float dashProjectileForce;
-
-    [Header("Ability")]
-    public GameObject abilityPrefab;
-    public GameObject abilityBasePrefab;
-    public float abilityCoolDown;
-    public float abilityProjectileForce;
-    public float abilityKnockBackForce;
 
     [Header("Ability2")]
     public GameObject ability2Prefab;

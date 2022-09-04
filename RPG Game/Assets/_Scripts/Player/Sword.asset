@@ -23,16 +23,16 @@ MonoBehaviour:
   basicAttackProjectileForce: 1
   basicAttack2Prefab: {fileID: 4736352390647969516, guid: 7ef6a41ad62655a41b1fa0714f4af413, type: 3}
   basicAttack3Prefab: {fileID: 5753616516818657137, guid: 9831753cca0e1fa4d9a217942f36a444, type: 3}
+  ability1Prefab: {fileID: 207941455730229968, guid: 9bda4004df3cd03489d9831d14cfbd99, type: 3}
+  ability1BasePrefab: {fileID: 924607119547585524, guid: 29bd066ddb8816341a0fd56cdc6c4c38, type: 3}
+  ability1CoolDown: 3
+  ability1ProjectileForce: 4
+  ability1KnockBackForce: 3
   dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
   dashParticle: {fileID: 7055635658205671504, guid: 6f79cee89fcf92d4c8de740d329d99d6, type: 3}
   dashCoolDown: 3
   dashVelocity: 1700
   dashProjectileForce: 1
-  abilityPrefab: {fileID: 207941455730229968, guid: 9bda4004df3cd03489d9831d14cfbd99, type: 3}
-  abilityBasePrefab: {fileID: 924607119547585524, guid: 29bd066ddb8816341a0fd56cdc6c4c38, type: 3}
-  abilityCoolDown: 2
-  abilityProjectileForce: 4
-  abilityKnockBackForce: 8
   ability2Prefab: {fileID: 6641188995086164244, guid: d6739bb2d05ab6f4a9cd326c6d6f3550, type: 3}
-  ability2CoolDown: 1
+  ability2CoolDown: 2
   ability2SlideVelocity: 600
