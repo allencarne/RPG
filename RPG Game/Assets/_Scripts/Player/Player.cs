@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("Variables")]
     [HideInInspector] public bool attackAnglePaused = false;
     [HideInInspector] public float damage; // Temporary
-    [SerializeField] private Vector2 movement;
+    [SerializeField] Vector2 movement;
 
     bool isAttacking;
     bool isDashing;
@@ -34,6 +34,19 @@ public class Player : MonoBehaviour
     PlayerHealthbar playerHealthbar;
     AbilityCooldownUI abilityCooldownUI;
     Camera cam;
+
+    [Header("Keys")]
+    public KeyCode moveUpKey;
+    public KeyCode moveDownKey;
+    public KeyCode moveLeftKey;
+    public KeyCode moveRightKey;
+
+    public KeyCode basicAttackKey;
+    public KeyCode ability1Key;
+    public KeyCode dashKey;
+    public KeyCode ability2Key;
+    public KeyCode UltimateKey;
+    
 
     enum PlayerState
     {
@@ -622,7 +635,7 @@ public class Player : MonoBehaviour
 
     public void MoveKeyPressed()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (Input.GetKey(moveUpKey) || Input.GetKey(moveLeftKey) || Input.GetKey(moveDownKey) || Input.GetKey(moveRightKey))
         {
             state = PlayerState.move;
         }
@@ -630,7 +643,7 @@ public class Player : MonoBehaviour
 
     public void NoMoveKeyPressed()
     {
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        if (!Input.GetKey(moveUpKey) && !Input.GetKey(moveLeftKey) && !Input.GetKey(moveDownKey) && !Input.GetKey(moveRightKey))
         {
             state = PlayerState.idle;
         }
@@ -638,7 +651,7 @@ public class Player : MonoBehaviour
 
     public void AttackKeyPressed()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKey(basicAttackKey))
         {
             if (Time.time - lastAttack < playerScriptableObject.weapon.basicAttackCoolDown)
             {
@@ -651,7 +664,7 @@ public class Player : MonoBehaviour
 
     public void Ability1KeyPressed()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKey(ability1Key))
         {
             if (Time.time - lastAbility < playerScriptableObject.weapon.ability1CoolDown)
             {
@@ -664,7 +677,7 @@ public class Player : MonoBehaviour
 
     public void DashKeyPressed()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(dashKey))
         {
             if (Time.time - lastDash < playerScriptableObject.weapon.dashCoolDown)
             {
@@ -677,7 +690,7 @@ public class Player : MonoBehaviour
 
     public void Ability2KeyPressed()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(ability2Key))
         {
             if (Time.time - lastAbility2 < playerScriptableObject.weapon.ability2CoolDown)
             {
