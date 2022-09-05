@@ -64,6 +64,10 @@ public class WeaponScriptableObject : ScriptableObject
     //public float ability2KnockBackForce;
     public float ability2SlideVelocity;
 
+    [Header("Ability2")]
+    //public GameObject ultimatePrefab;
+    public float ultimateCoolDown;
+
     // Particles
 
     // Sound

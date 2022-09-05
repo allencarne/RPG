@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     bool isAbilityActive;
     bool isAbility2Active;
     bool isWindPullBaseActive;
+    bool isUltimateActive;
     bool canAttack2 = false;
     bool canAttack3 = false;
 
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     float lastDash; // Variable to help with Dash Cooldown
     float lastAbility; // Variable to help with Ability Cooldown
     float lastAbility2;
+    float lastUltimate;
 
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
@@ -34,6 +36,9 @@ public class Player : MonoBehaviour
     PlayerHealthbar playerHealthbar;
     AbilityCooldownUI abilityCooldownUI;
     Camera cam;
+
+    //Buff
+    [SerializeField] GameObject tempestsFuryBuff;
 
     [Header("Keys")]
     public KeyCode moveUpKey;
@@ -58,6 +63,7 @@ public class Player : MonoBehaviour
         ability1,
         dash,
         ability2,
+        ultimate,
         hit,
         death
     }
@@ -102,6 +108,9 @@ public class Player : MonoBehaviour
             case PlayerState.ability2:
                 PlayerAbility2State();
                 break;
+            case PlayerState.ultimate:
+                PlayerUltimateState();
+                break;
             case PlayerState.hit:
                 PlayerHitState(damage);
                 break;
@@ -137,6 +146,8 @@ public class Player : MonoBehaviour
         Ability1KeyPressed();
 
         Ability2KeyPressed();
+
+        UltimateKeyPressed();
     }
 
     public void PlayerMoveState()
@@ -165,6 +176,8 @@ public class Player : MonoBehaviour
         Ability1KeyPressed();
 
         Ability2KeyPressed();
+
+        UltimateKeyPressed();
     }
 
     public void PlayerAttackState()
@@ -239,6 +252,19 @@ public class Player : MonoBehaviour
             case 0:
                 Whirlwind();
                 abilityCooldownUI.UseAbility2();
+                break;
+            case 1:
+                break;
+        }
+    }
+
+    public void PlayerUltimateState()
+    {
+        switch (playerScriptableObject.weapon.weaponIndex)
+        {
+            case 0:
+                TempestsFury();
+                //abilityCooldownUI.UseAbility2();
                 break;
             case 1:
                 break;
@@ -567,10 +593,47 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void TempestsFury()
+    {
+        //Animate
+        animator.Play("Tempest's Fury");
+
+        if (isUltimateActive)
+        {
+            StartCoroutine(UltimateDuration());
+
+            //tempestsFuryBuff.SetActive(true);
+
+            //playerScriptableObject.speed += 5;
+            //Instantiate(playerScriptableObject.weapon.ultimatePrefab, transform.position, transform.rotation);
+
+            isUltimateActive = false;
+        }
+    }
+
+    IEnumerator UltimateDuration()
+    {
+        tempestsFuryBuff.SetActive(true);
+        playerScriptableObject.speed += 5;
+
+        yield return new WaitForSeconds(5);
+
+        tempestsFuryBuff.SetActive(false);
+        playerScriptableObject.speed -= 5;
+    }
+
     //===== Animation Events =====\\
     public void AE_Attack()
     {
         isAttacking = true;
+    }
+
+    public void AE_AttackAnimationEnd()
+    {
+        attackAnglePaused = false;
+        canAttack2 = false;
+        canAttack3 = false;
+        state = PlayerState.idle;
     }
 
     public void AE_Attack2()
@@ -593,6 +656,11 @@ public class Player : MonoBehaviour
         isWindPullBaseActive = true;
     }
 
+    public void AE_DashParticle()
+    {
+        isDashing = true;
+    }
+
     public void AE_Whirlwind()
     {
         isAbility2Active = true;
@@ -604,22 +672,19 @@ public class Player : MonoBehaviour
         state = PlayerState.idle;
     }
 
-    public void AE_AttackAnimationEnd()
-    {
-        attackAnglePaused = false;
-        canAttack2 = false;
-        canAttack3 = false;
-        state = PlayerState.idle;
-    }
-
     public void AE_HitAnimationEnd()
     {
         state = PlayerState.idle;
     }
 
-    public void AE_DashParticle()
+    public void AE_TempestsFury()
     {
-        isDashing = true;
+        isUltimateActive = true;
+    }
+
+    public void AE_TempestsFuryAnimationEnd()
+    {
+        state = PlayerState.idle;
     }
 
     //===== Input =====\\
@@ -698,6 +763,19 @@ public class Player : MonoBehaviour
             }
             lastAbility2 = Time.time;
             state = PlayerState.ability2;
+        }
+    }
+
+    public void UltimateKeyPressed()
+    {
+        if (Input.GetKey(UltimateKey))
+        {
+            if (Time.time - lastUltimate < playerScriptableObject.weapon.ultimateCoolDown)
+            {
+                return;
+            }
+            lastUltimate = Time.time;
+            state = PlayerState.ultimate;
         }
     }
 
