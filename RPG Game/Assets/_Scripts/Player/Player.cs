@@ -264,7 +264,7 @@ public class Player : MonoBehaviour
         {
             case 0:
                 TempestsFury();
-                //abilityCooldownUI.UseAbility2();
+                abilityCooldownUI.UseUltimate();
                 break;
             case 1:
                 break;

@@ -47,6 +47,12 @@ public class AbilityCooldownUI : MonoBehaviour
     [HideInInspector] bool ability2IsCooldown = false;
     [HideInInspector] float ability2CooldownTimer = 0.0f;
 
+    [Header("Ultimate")]
+    [SerializeField] Image ultimateImageCooldown;
+    [SerializeField] TMP_Text ultimateTextCooldown;
+    [HideInInspector] bool ultimateIsCooldown = false;
+    [HideInInspector] float ultimateCooldownTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +79,10 @@ public class AbilityCooldownUI : MonoBehaviour
         // Ability2 cooldown false
         ability2TextCooldown.gameObject.SetActive(false);
         ability2ImageCooldown.fillAmount = 0.0f;
+
+        // Ultimate cooldown false
+        ultimateTextCooldown.gameObject.SetActive(false);
+        ultimateImageCooldown.fillAmount = 0.0f;
     }
 
     // Update is called once per frame
@@ -106,6 +116,11 @@ public class AbilityCooldownUI : MonoBehaviour
         if (ability2IsCooldown)
         {
             ApplyAbility2CoolDown();
+        }
+
+        if (ultimateIsCooldown)
+        {
+            ApplyUltimateCoolDown();
         }
     }
 
@@ -216,6 +231,23 @@ public class AbilityCooldownUI : MonoBehaviour
         }
     }
 
+    void ApplyUltimateCoolDown()
+    {
+        ultimateCooldownTimer -= Time.deltaTime;
+
+        if (ultimateCooldownTimer < 0.0f)
+        {
+            ultimateIsCooldown = false;
+            ultimateTextCooldown.gameObject.SetActive(false);
+            ultimateImageCooldown.fillAmount = 0.0f;
+        }
+        else
+        {
+            ultimateTextCooldown.text = ultimateCooldownTimer.ToString();
+            ultimateImageCooldown.fillAmount = ultimateCooldownTimer / playerScriptableObject.weapon.ultimateCoolDown;
+        }
+    }
+
     // Use
 
     public void UseBasicAttackAbility()
@@ -307,6 +339,20 @@ public class AbilityCooldownUI : MonoBehaviour
             ability2IsCooldown = true;
             ability2TextCooldown.gameObject.SetActive(true);
             ability2CooldownTimer = playerScriptableObject.weapon.ability2CoolDown;
+        }
+    }
+
+    public void UseUltimate()
+    {
+        if (ultimateIsCooldown)
+        {
+            // User has click ability while in use
+        }
+        else
+        {
+            ultimateIsCooldown = true;
+            ultimateTextCooldown.gameObject.SetActive(true);
+            ultimateCooldownTimer = playerScriptableObject.weapon.ultimateCoolDown;
         }
     }
 }

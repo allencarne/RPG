@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AllenRene
   m_EditorClassIdentifier: 
   name: AllenRene
-  health: 137.7128
-  maxHealth: 137.7128
+  health: 139.53421
+  maxHealth: 140.53421
   speed: 5
-  level: 26
-  currentExperience: 46
-  requiredExperience: 116
+  level: 29
+  currentExperience: 11
+  requiredExperience: 149
   weapon: {fileID: 11400000, guid: fae32442dde05ac44b305cdc1371a4bc, type: 2}

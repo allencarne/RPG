@@ -36,5 +36,5 @@ MonoBehaviour:
   ability2Prefab: {fileID: 6641188995086164244, guid: d6739bb2d05ab6f4a9cd326c6d6f3550, type: 3}
   ability2CoolDown: 2
   ability2SlideVelocity: 600
-  ultimatePrefab: {fileID: 3025209417550344386, guid: c87736b95ccf19342b4041ecf07a5860, type: 3}
-  ultimateCoolDown: 1
+  ultimateCoolDown: 20
+  ultimateDuration: 10
