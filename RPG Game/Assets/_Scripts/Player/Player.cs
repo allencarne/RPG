@@ -615,11 +615,13 @@ public class Player : MonoBehaviour
     {
         tempestsFuryBuff.SetActive(true);
         playerScriptableObject.speed += 5;
+        animator.speed = 1.3f;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(playerScriptableObject.weapon.ultimateDuration);
 
         tempestsFuryBuff.SetActive(false);
         playerScriptableObject.speed -= 5;
+        animator.speed = 1f;
     }
 
     //===== Animation Events =====\\
