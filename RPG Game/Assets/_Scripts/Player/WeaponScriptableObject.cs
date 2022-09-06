@@ -68,6 +68,7 @@ public class WeaponScriptableObject : ScriptableObject
     //public GameObject ultimatePrefab;
     public float ultimateCoolDown;
     public float ultimateDuration;
+    public float ultimateMoveSpeedIncrease;
 
     // Particles
 

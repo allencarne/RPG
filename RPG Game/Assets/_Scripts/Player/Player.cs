@@ -72,10 +72,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        abilityCooldownUI = abilitiesUI.GetComponent<AbilityCooldownUI>();
         cam = Camera.main;
+        abilityCooldownUI = abilitiesUI.GetComponent<AbilityCooldownUI>();
         playerHealthbar = GetComponent<PlayerHealthbar>();
-        //animator.speed = 1.3f;
     }
 
      void Update()
@@ -602,11 +601,6 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(UltimateDuration());
 
-            //tempestsFuryBuff.SetActive(true);
-
-            //playerScriptableObject.speed += 5;
-            //Instantiate(playerScriptableObject.weapon.ultimatePrefab, transform.position, transform.rotation);
-
             isUltimateActive = false;
         }
     }
@@ -614,13 +608,13 @@ public class Player : MonoBehaviour
     IEnumerator UltimateDuration()
     {
         tempestsFuryBuff.SetActive(true);
-        playerScriptableObject.speed += 5;
+        playerScriptableObject.speed += playerScriptableObject.weapon.ultimateMoveSpeedIncrease;
         animator.speed = 1.3f;
 
         yield return new WaitForSeconds(playerScriptableObject.weapon.ultimateDuration);
 
         tempestsFuryBuff.SetActive(false);
-        playerScriptableObject.speed -= 5;
+        playerScriptableObject.speed -= playerScriptableObject.weapon.ultimateMoveSpeedIncrease;
         animator.speed = 1f;
     }
 

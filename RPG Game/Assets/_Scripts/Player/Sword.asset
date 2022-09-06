@@ -38,3 +38,4 @@ MonoBehaviour:
   ability2SlideVelocity: 600
   ultimateCoolDown: 20
   ultimateDuration: 10
+  ultimateMoveSpeedIncrease: 3
