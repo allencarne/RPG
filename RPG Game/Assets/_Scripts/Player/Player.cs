@@ -26,12 +26,6 @@ public class Player : MonoBehaviour
     bool canAbility2 = true;
     bool canUltimate = true;
 
-    float lastAttack; // Variable to help with Attack Cooldown
-    float lastDash; // Variable to help with Dash Cooldown
-    float lastAbility; // Variable to help with Ability Cooldown
-    float lastAbility2;
-    float lastUltimate;
-
     [Header("Components")]
     [SerializeField] PlayerScriptableObject playerScriptableObject;
     [SerializeField] Animator animator;
