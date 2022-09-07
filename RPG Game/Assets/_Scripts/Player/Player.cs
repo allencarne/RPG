@@ -17,8 +17,14 @@ public class Player : MonoBehaviour
     bool isAbility2Active;
     bool isWindPullBaseActive;
     bool isUltimateActive;
+
+    bool canAttack = true;
     bool canAttack2 = false;
     bool canAttack3 = false;
+    bool canAbility1 = true;
+    bool canDash = true;
+    bool canAbility2 = true;
+    bool canUltimate = true;
 
     float lastAttack; // Variable to help with Attack Cooldown
     float lastDash; // Variable to help with Dash Cooldown
@@ -712,67 +718,83 @@ public class Player : MonoBehaviour
 
     public void AttackKeyPressed()
     {
-        if (Input.GetKey(basicAttackKey))
+        if (Input.GetKey(basicAttackKey) && canAttack)
         {
-            if (Time.time - lastAttack < playerScriptableObject.weapon.basicAttackCoolDown)
-            {
-                return;
-            }
-            lastAttack = Time.time;
+            canAttack = false;
             state = PlayerState.attack;
+            StartCoroutine(AttackCoolDown());
         }
+    }
+
+    IEnumerator AttackCoolDown()
+    {
+        yield return new WaitForSeconds(playerScriptableObject.weapon.basicAttackCoolDown);
+
+        canAttack = true;
     }
 
     public void Ability1KeyPressed()
     {
-        if (Input.GetKey(ability1Key))
+        if (Input.GetKey(ability1Key) && canAbility1)
         {
-            if (Time.time - lastAbility < playerScriptableObject.weapon.ability1CoolDown)
-            {
-                return;
-            }
-            lastAbility = Time.time;
+            canAbility1 = false;
             state = PlayerState.ability1;
+            StartCoroutine(Ability1CoolDown());
         }
+    }
+
+    IEnumerator Ability1CoolDown()
+    {
+        yield return new WaitForSeconds(playerScriptableObject.weapon.ability1CoolDown);
+        canAbility1 = true;
     }
 
     public void DashKeyPressed()
     {
-        if (Input.GetKey(dashKey))
+        if (Input.GetKey(dashKey) && canDash)
         {
-            if (Time.time - lastDash < playerScriptableObject.weapon.dashCoolDown)
-            {
-                return;
-            }
-            lastDash = Time.time;
+            canDash = false;
             state = PlayerState.dash;
+            StartCoroutine(DashCoolDown());
         }
+    }
+
+    IEnumerator DashCoolDown()
+    {
+        yield return new WaitForSeconds(playerScriptableObject.weapon.dashCoolDown);
+        canDash = true;
     }
 
     public void Ability2KeyPressed()
     {
-        if (Input.GetKey(ability2Key))
+        if (Input.GetKey(ability2Key) && canAbility2)
         {
-            if (Time.time - lastAbility2 < playerScriptableObject.weapon.ability2CoolDown)
-            {
-                return;
-            }
-            lastAbility2 = Time.time;
+            canAbility2 = false;
             state = PlayerState.ability2;
+            StartCoroutine(Ability2CoolDown());
         }
+    }
+
+    IEnumerator Ability2CoolDown()
+    {
+        yield return new WaitForSeconds(playerScriptableObject.weapon.ability2CoolDown);
+        canAbility2 = true;
     }
 
     public void UltimateKeyPressed()
     {
-        if (Input.GetKey(UltimateKey))
+        if (Input.GetKey(UltimateKey) && canUltimate)
         {
-            if (Time.time - lastUltimate < playerScriptableObject.weapon.ultimateCoolDown)
-            {
-                return;
-            }
-            lastUltimate = Time.time;
+            canUltimate = false;
             state = PlayerState.ultimate;
+            StartCoroutine(UltimateCoolDown());
         }
+    }
+
+    IEnumerator UltimateCoolDown()
+    {
+        yield return new WaitForSeconds(playerScriptableObject.weapon.ultimateCoolDown);
+        canUltimate = true;
     }
 
     //===== Health =====\\
