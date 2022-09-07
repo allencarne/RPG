@@ -210,11 +210,15 @@ public class Enemy : MonoBehaviour
         state = EnemyState.hit;
         enemyAnimator.Play("Hit");
 
-        //ShowDamage(damage.ToString());
-
         // Behaviour
         health -= damage;
         enemyHealthbar.lerpTimer = 0f;
+
+        if (canDamageText)
+        {
+            canDamageText = false;
+            StartCoroutine(ShowDamage(damage.ToString()));
+        }
 
         // Transition
         if (health <= 0)
@@ -275,13 +279,17 @@ public class Enemy : MonoBehaviour
         return new Vector3(Random.Range(-1, 1), Random.Range(-1, 1)).normalized;
     }
 
-    void ShowDamage(string text)
+    IEnumerator ShowDamage(string text)
     {
         if (floatingTextPrefab)
         {
             GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
             prefab.GetComponentInChildren<TextMeshPro>().text = text;
         }
+
+        yield return new WaitForSeconds(.5f);
+
+        canDamageText = true;
     }
 
     private void OnDrawGizmos()
