@@ -1224,6 +1224,14 @@ PrefabInstance:
       propertyPath: m_text
       value: 100/100
       objectReference: {fileID: 0}
+    - target: {fileID: 2143432503, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+    - target: {fileID: 2143432503, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 7388813305273751378, guid: 0976de26502b4ac4893b323cdd490e9a, type: 3}
       propertyPath: m_Name
       value: Player

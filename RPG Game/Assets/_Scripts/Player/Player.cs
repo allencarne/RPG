@@ -79,8 +79,6 @@ public class Player : MonoBehaviour
 
      void Update()
     {
-        //Debug.Log(isAbilityActive);
-
         switch (state)
         {
             case PlayerState.idle:
