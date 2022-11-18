@@ -271,10 +271,10 @@ public class Player : MonoBehaviour
     public void PlayerHitState(float damage)
     {
         // Transition
-        state = PlayerState.hit;
+        //state = PlayerState.hit;
 
         // Animate
-        animator.Play("Hit");
+        //animator.Play("Hit");
 
         // Prevents Bug - Makes sure that dash and attack always allows direction change and slide
         attackAnglePaused = false;

@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: fe1cd3fc7ff21d145895a0a424165e3f
+guid: 8fe4a8cee1805bf42a5a35d1de06d66a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7753834493450827634
-    second: WindSlash2_0
+      213: 3546624062454320265
+    second: Training Dummy Hit-sheet_0
   - first:
-      213: -267495142745646984
-    second: WindSlash2_1
+      213: 7473312582283448247
+    second: Training Dummy Hit-sheet_1
   - first:
-      213: -5614064468503556010
-    second: WindSlash2_2
+      213: 3123339195076373448
+    second: Training Dummy Hit-sheet_2
   - first:
-      213: -5210237128493273645
-    second: WindSlash2_3
+      213: 244449176160526051
+    second: Training Dummy Hit-sheet_3
+  - first:
+      213: -5766714977902722749
+    second: Training Dummy Hit-sheet_4
+  - first:
+      213: -804135189714516423
+    second: Training Dummy Hit-sheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +121,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WindSlash2_0
+      name: Training Dummy Hit-sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 80
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8841ba1c98d46490800000000000000
-      internalID: -7753834493450827634
+      spriteID: 98c41724bc3283130800000000000000
+      internalID: 3546624062454320265
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash2_1
+      name: Training Dummy Hit-sheet_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 80
         y: 0
-        width: 128
-        height: 128
+        width: 80
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 878d08db59aa94cf0800000000000000
-      internalID: -267495142745646984
+      spriteID: 7bf4672c23a86b760800000000000000
+      internalID: 7473312582283448247
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash2_2
+      name: Training Dummy Hit-sheet_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 160
         y: 0
-        width: 128
-        height: 128
+        width: 80
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65014b84c16d612b0800000000000000
-      internalID: -5614064468503556010
+      spriteID: 8cbe4932374585b20800000000000000
+      internalID: 3123339195076373448
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash2_3
+      name: Training Dummy Hit-sheet_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 240
         y: 0
-        width: 128
-        height: 128
+        width: 80
+        height: 80
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3dd6b98cfe481b7b0800000000000000
-      internalID: -5210237128493273645
+      spriteID: 3ee5fa60b35746300800000000000000
+      internalID: 244449176160526051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Hit-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3410f2de74388ffa0800000000000000
+      internalID: -5766714977902722749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Hit-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 0
+        width: 80
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 936cca13e4327d4f0800000000000000
+      internalID: -804135189714516423
       vertices: []
       indices: 
       edges: []
