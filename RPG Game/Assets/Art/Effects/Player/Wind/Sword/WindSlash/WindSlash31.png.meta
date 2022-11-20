@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: a305b0babcde2854891a7a77d125ca42
+guid: 45d03ebe966eace4d9608f7d629e7518
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3439467269781958290
-    second: WindSlash3_0
+      213: 5604406992509080415
+    second: WindSlash31_0
   - first:
-      213: -2470392198860581171
-    second: WindSlash3_1
+      213: -3357475946847537293
+    second: WindSlash31_1
   - first:
-      213: -394551828525084024
-    second: WindSlash3_2
+      213: -7256187634270055283
+    second: WindSlash31_2
   - first:
-      213: 5993468606341846659
-    second: WindSlash3_3
+      213: -7788908779246173783
+    second: WindSlash31_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -115,85 +115,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WindSlash3_0
+      name: WindSlash31_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e615010cdbe8440d0800000000000000
-      internalID: -3439467269781958290
+      spriteID: f53183d577ad6cd40800000000000000
+      internalID: 5604406992509080415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash3_1
+      name: WindSlash31_1
       rect:
         serializedVersion: 2
-        x: 128
+        x: 320
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dc6d403426767bdd0800000000000000
-      internalID: -2470392198860581171
+      spriteID: 377fb3e3a69d761d0800000000000000
+      internalID: -3357475946847537293
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash3_2
+      name: WindSlash31_2
       rect:
         serializedVersion: 2
-        x: 256
+        x: 640
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 882184fc335468af0800000000000000
-      internalID: -394551828525084024
+      spriteID: d8450c3aac7dc4b90800000000000000
+      internalID: -7256187634270055283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: WindSlash3_3
+      name: WindSlash31_3
       rect:
         serializedVersion: 2
-        x: 384
+        x: 960
         y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 386167551f31d2350800000000000000
-      internalID: 5993468606341846659
+      spriteID: 9a14c119bbc38e390800000000000000
+      internalID: -7788908779246173783
       vertices: []
       indices: 
       edges: []

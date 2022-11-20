@@ -28,7 +28,7 @@ MonoBehaviour:
   ability1CoolDown: 3
   ability1ProjectileForce: 4
   ability1KnockBackForce: 3
-  dashPrefab: {fileID: 6179397368997523129, guid: 2016f0b70dad7674093b1106f6a25189, type: 3}
+  dashPrefab: {fileID: 4496386737861240721, guid: 7214bc990e92aba4687bdee10c1337f7, type: 3}
   dashParticle: {fileID: 7055635658205671504, guid: 6f79cee89fcf92d4c8de740d329d99d6, type: 3}
   dashCoolDown: 3
   dashVelocity: 1700

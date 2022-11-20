@@ -6,25 +6,41 @@ public class TrainingDummy : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    // Start is called before the first frame update
-    void Start()
+    enum DummyState
     {
-        
+        idle,
+        hit
     }
 
-    // Update is called once per frame
+    DummyState state = DummyState.idle;
+
     void Update()
     {
-        
+        switch (state)
+        {
+            case DummyState.idle:
+                TrainingDummyIdleState();
+                break;
+            case DummyState.hit:
+                TrainingDummyHitState();
+                break;
+        }
+    }
+
+    public void TrainingDummyIdleState()
+    {
+        //state = DummyState.idle;
+        animator.Play("TrainingDummyIdle");
     }
 
     public void TrainingDummyHitState()
     {
+        state = DummyState.hit;
         animator.Play("TrainingDummyHit");
     }
 
     public void AE_TrainingDummyHitStateEnd()
     {
-        animator.Play("TrainingDummyIdle");
+        state = DummyState.idle;
     }
 }

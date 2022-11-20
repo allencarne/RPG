@@ -12,10 +12,9 @@ GameObject:
   - component: {fileID: 6009890526180611805}
   - component: {fileID: 5314598700781367415}
   - component: {fileID: 3098635187054589450}
-  - component: {fileID: 5517423103843058233}
   - component: {fileID: 4266045928541204769}
   - component: {fileID: 2663957798876795308}
-  - component: {fileID: 2484882400759295566}
+  - component: {fileID: 7980669445023819869}
   m_Layer: 3
   m_Name: WindSlash3
   m_TagString: Untagged
@@ -31,8 +30,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5753616516818657137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3338366, y: -25.34232, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -121,32 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sortingOrderBase: 5000
   offset: 0
---- !u!61 &5517423103843058233
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5753616516818657137}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.5123515, y: 0.71162176}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 2, y: 2}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4892521, y: 0.9166403}
-  m_EdgeRadius: 0
 --- !u!50 &4266045928541204769
 Rigidbody2D:
   serializedVersion: 4
@@ -181,8 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScriptableObject: {fileID: 11400000, guid: 02927aeac34037943863729d85fa0a70, type: 2}
---- !u!60 &2484882400759295566
-PolygonCollider2D:
+--- !u!61 &7980669445023819869
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -197,38 +170,13 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.2}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2, y: 2}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1, y: 0.31875002}
-      - {x: 1, y: 0.865625}
-      - {x: 0.96875, y: 0.959375}
-      - {x: 0.90625, y: 1.178125}
-      - {x: 0.578125, y: 1.490625}
-      - {x: 0.375, y: 1.56875}
-      - {x: 0.28125, y: 1.6}
-      - {x: -0.3125, y: 1.6}
-      - {x: -0.578125, y: 1.50625}
-      - {x: -0.90625, y: 1.178125}
-      - {x: -1, y: 0.88125}
-      - {x: -1, y: 0.56875}
-      - {x: -0.46875, y: 0.553125}
-      - {x: -0.421875, y: 0.6625}
-      - {x: -0.265625, y: 0.959375}
-      - {x: 0.140625, y: 1.021875}
-      - {x: 0.359375, y: 0.865625}
-      - {x: 0.421875, y: 0.45937502}
-      - {x: 0.15625, y: 0.19375002}
-      - {x: -0.015625, y: 0.16250002}
-      - {x: -0.03125, y: 0.115625024}
-      - {x: -0.03125, y: -0.39999998}
-      - {x: 0.3125, y: -0.39999998}
-      - {x: 0.5625, y: -0.29062498}
-      - {x: 0.84375, y: -0.024999976}
-      - {x: 0.9375, y: 0.115625024}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0

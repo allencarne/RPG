@@ -30,7 +30,7 @@ public class Slash : MonoBehaviour
             GameObject effect = Instantiate(playerScriptableObject.weapon.basicAttackHitEffect, other.transform.position, Quaternion.identity);
             Destroy(effect, .3f);
 
-            //
+            // Deal Damage
             other.GetComponent<TrainingDummy>().TrainingDummyHitState();
 
             // Apply Knockback
