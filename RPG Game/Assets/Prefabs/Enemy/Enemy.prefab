@@ -302,7 +302,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -373,6 +373,7 @@ MonoBehaviour:
   attackRange: 0.5
   aggroRange: 3
   attackCoolDown: 2
+  canDamageText: 1
   enemySpawner: {fileID: 0}
   expObject: {fileID: 6549391921704182420, guid: 5776c447054334a45bcc0712b95cd3d4, type: 3}
   enemyAnimator: {fileID: 3232918048746041414}
@@ -587,7 +588,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
